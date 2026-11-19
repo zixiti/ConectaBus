@@ -491,6 +491,43 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 :root.no-animations .cb-tap{animation:none!important}
 @media (prefers-reduced-motion:reduce){.cb-tap,.view.on{animation:none!important}button,a.tile,nav a{transition:none!important}}
 
+
+/* Inicio: accesos principales y paneles inferiores ordenados */
+#lobby .menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:stretch}
+#lobby .menu .tile{min-height:112px;padding:14px;justify-content:flex-start}
+#lobby .menu .tile.emerg,
+#lobby .menu .tile.tutorial-tile{grid-column:1 / -1;min-height:78px;flex-direction:row;align-items:center;gap:13px;padding:12px 15px}
+#lobby .menu .tile.emerg .ic,
+#lobby .menu .tile.tutorial-tile .ic{width:46px;height:46px;flex:none}
+#lobby .menu .tile.tutorial-tile{border-color:var(--violet);background:var(--surface)}
+#lobby .menu .tile.tutorial-tile b{color:var(--violet)}
+#lobby .menu .tile.emerg span:last-child,
+#lobby .menu .tile.tutorial-tile span:last-child{min-width:0}
+#lobby .menu .tile.emerg small,
+#lobby .menu .tile.tutorial-tile small{display:block}
+#lobby>.mi,#lobby>.dashboard-panel{padding:17px 16px;border-radius:18px}
+#lobby .dashboard-panel{margin-top:12px}
+.cb-home-layout{gap:19px;margin-top:18px}
+.cb-home-group{padding:0 0 3px}
+.cb-home-group-title{padding:0 2px 11px;margin-bottom:2px;border-bottom:1px solid var(--line)}
+.cb-home-group-title>span{width:34px;height:34px;border-radius:11px}
+.cb-home-group-title b{font-size:1.02rem;letter-spacing:-.01em}
+.cb-home-group-title small{font-size:.78rem}
+.cb-home-group .cb-home-module{margin:10px 0 0;padding:16px;border-radius:17px;box-shadow:0 3px 13px rgba(25,18,44,.04)}
+.cb-home-module .cb-section-head{margin-bottom:13px}
+.cb-home-module .cb-section-head h2{font-size:1.08rem}
+.cb-home-module .note{line-height:1.45}
+.cb-home-module .btn{min-height:42px}
+#lobby>.card:not(.mi):not(.dashboard-panel){border-radius:17px}
+@media(max-width:390px){
+ #lobby .menu{gap:8px}
+ #lobby .menu .tile{min-height:104px;padding:11px}
+ #lobby .menu .tile.emerg,#lobby .menu .tile.tutorial-tile{min-height:76px;padding:11px 13px}
+ .cb-home-group .cb-home-module{padding:14px}
+}
+
+.cb-panel-tutorial{display:inline-flex;width:100%;justify-content:center;margin-top:12px;font-size:.84rem}
+#v-tutorial .cb-tutorial-step{scroll-margin-top:24px}
 </style>
 
 
@@ -526,127 +563,62 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 </style>
 
 <style id="cb-mega-features">
-.cb-home-layout{display:flex;flex-direction:column;gap:0}.cb-home-module[hidden]{display:none!important}.cb-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.cb-section-head h2{margin:2px 0 0}.cb-kicker{display:block;font-size:.66rem;letter-spacing:.13em;font-weight:900;color:var(--violet)}.cb-module-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:var(--violet-soft);color:var(--violet);font-size:1.35rem;font-weight:900;flex:none}.cb-progress-track{height:9px;border-radius:99px;background:var(--line);overflow:hidden;margin:12px 0}.cb-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--violet),#26b8c9);border-radius:99px;transition:width .35s ease}.cb-progress-stops{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:.78rem}.cb-progress-current{padding:12px;border-radius:13px;background:var(--violet-soft);font-weight:750}.cb-progress-actions,.cb-inline-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.cb-progress-actions .btn,.cb-inline-actions .btn{flex:1 1 auto}.cb-weather-main{display:flex;align-items:center;gap:16px;padding:12px 0}.cb-weather-temp{font-size:2.5rem;line-height:1;font-weight:850;letter-spacing:-.06em}.cb-weather-icon{font-size:2.5rem}.cb-weather-detail{color:var(--muted);font-size:.88rem}.cb-weather-grid,.cb-stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.cb-weather-stat,.cb-stat{padding:10px;border-radius:12px;background:var(--bg);border:1px solid var(--line);min-width:0}.cb-weather-stat b,.cb-stat b{display:block;font-size:1.08rem}.cb-weather-stat small,.cb-stat small{color:var(--muted);font-size:.72rem}.cb-notice-item{padding:10px 0;border-bottom:1px solid var(--line)}.cb-notice-item:last-child{border-bottom:0}.cb-notice-item b{display:block;font-size:.9rem}.cb-notice-item small{color:var(--muted)}.cb-notice-item.unread{border-left:3px solid var(--violet);padding-left:10px}.cb-achievements{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.cb-achievement{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 10px;font-size:.76rem}.cb-achievement.locked{opacity:.45;filter:grayscale(1)}.cb-connection-status{padding:11px 12px;border-radius:12px;background:var(--ok-soft,var(--violet-soft));font-weight:750}.cb-connection-status.offline{background:var(--warn-soft);color:var(--warn)}.cb-planner-results{margin-top:12px}.cb-route-option{border:1px solid var(--line);border-radius:13px;padding:12px;margin-top:9px;background:var(--bg)}.cb-route-option h3{font-size:.93rem;margin:0 0 5px}.cb-route-option p{font-size:.83rem;color:var(--muted);margin:4px 0}.cb-route-option .btn{margin-top:8px}.cb-compare-points{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 12px}.cb-compare-points>div{min-width:0}.cb-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cb-compare-grid>div{min-width:0}.cb-compare-shared{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.cb-compare-shared span{border-radius:99px;background:var(--violet-soft);padding:5px 8px;font-size:.78rem}.cb-home-toggles{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cb-home-toggle{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:11px;padding:9px;font-size:.82rem}.cb-home-toggle input{width:18px;height:18px;accent-color:var(--violet)}.cb-safe-status{padding:13px;border:1px solid var(--line);border-radius:12px;margin:10px 0;font-weight:800}.cb-safe-status.active{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}.cb-safe-status.expired{background:var(--danger-soft);border-color:var(--danger);color:var(--danger)}.cb-safe-status.done{background:var(--violet-soft);color:var(--ok)}.cb-home-layout[data-order="weather"] #cbHomeWeather{order:-2}.cb-home-layout[data-order="safety"] #cbHomeNotifications{order:-3}.cb-home-layout[data-order="safety"] #cbHomeProgress{order:-2}.cb-home-layout[data-order="activity"] #cbHomeNotifications{order:-3}.cb-home-layout[data-order="activity"] #cbHomeStats{order:-2}.cb-home-layout[data-order="activity"] #cbHomeProgress{order:-1}.cb-home-layout[data-order="default"] .cb-home-module{order:0}.cb-touch-large button,.cb-touch-large .chip,.cb-touch-large .tile{min-height:52px}.cb-touch-large .btn{padding-top:14px;padding-bottom:14px}.cb-hud .card{border-radius:8px;border-width:1px;box-shadow:0 0 0 1px var(--violet-soft),0 0 22px color-mix(in srgb,var(--violet) 13%,transparent)}.cb-hud .card h2,.cb-hud .cb-kicker{text-shadow:0 0 12px color-mix(in srgb,var(--violet) 35%,transparent)}.cb-hud .btn,.cb-hud .tile{border-radius:9px}.cb-hud .cb-module-icon{border-radius:8px;box-shadow:inset 0 0 0 1px var(--violet)}.cb-home-module,.cb-feature-card,.cb-safe-arrival-card,.cb-settings-advanced{animation:cb-card-enter .38s ease both}@keyframes cb-card-enter{from{opacity:.6;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}.cb-route-option .btn{width:100%}.cb-compare-grid .sel{font-size:.86rem}.cb-notification-badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border-radius:99px;background:var(--danger);color:#fff;font-size:.7rem;padding:0 5px;margin-left:5px}@media(max-width:390px){.cb-compare-grid{grid-template-columns:1fr}.cb-weather-grid,.cb-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cb-home-toggles{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.cb-home-module,.cb-feature-card,.cb-safe-arrival-card,.cb-settings-advanced{animation:none}.cb-progress-fill{transition:none}}
+.cb-home-layout{display:flex;flex-direction:column;gap:0}.cb-home-module[hidden]{display:none!important}.cb-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}.cb-section-head h2{margin:2px 0 0}.cb-kicker{display:block;font-size:.66rem;letter-spacing:.13em;font-weight:900;color:var(--violet)}.cb-module-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:14px;background:var(--violet-soft);color:var(--violet);font-size:1.35rem;font-weight:900;flex:none}.cb-progress-track{height:9px;border-radius:99px;background:var(--line);overflow:hidden;margin:12px 0}.cb-progress-fill{height:100%;width:0;background:linear-gradient(90deg,var(--violet),#26b8c9);border-radius:99px;transition:width .35s ease}.cb-progress-stops{display:flex;justify-content:space-between;gap:8px;color:var(--muted);font-size:.78rem}.cb-progress-current{padding:12px;border-radius:13px;background:var(--violet-soft);font-weight:750}.cb-progress-actions,.cb-inline-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.cb-progress-actions .btn,.cb-inline-actions .btn{flex:1 1 auto}.cb-weather-main{display:flex;align-items:center;gap:16px;padding:12px 0}.cb-weather-temp{font-size:2.5rem;line-height:1;font-weight:850;letter-spacing:-.06em}.cb-weather-icon{font-size:2.5rem}.cb-weather-detail{color:var(--muted);font-size:.88rem}.cb-weather-grid,.cb-stats-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.cb-weather-stat,.cb-stat{padding:10px;border-radius:12px;background:var(--bg);border:1px solid var(--line);min-width:0}.cb-weather-stat b,.cb-stat b{display:block;font-size:1.08rem}.cb-weather-stat small,.cb-stat small{color:var(--muted);font-size:.72rem}.cb-notice-item{padding:10px 0;border-bottom:1px solid var(--line)}.cb-notice-item:last-child{border-bottom:0}.cb-notice-item b{display:block;font-size:.9rem}.cb-notice-item small{color:var(--muted)}.cb-notice-item.unread{border-left:3px solid var(--violet);padding-left:10px}.cb-achievements{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}.cb-achievement{border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:7px 10px;font-size:.76rem}.cb-achievement.locked{opacity:.45;filter:grayscale(1)}.cb-connection-status{padding:11px 12px;border-radius:12px;background:var(--ok-soft,var(--violet-soft));font-weight:750}.cb-connection-status.offline{background:var(--warn-soft);color:var(--warn)}.cb-planner-results{margin-top:12px}.cb-route-option{border:1px solid var(--line);border-radius:13px;padding:12px;margin-top:9px;background:var(--bg)}.cb-route-option h3{font-size:.93rem;margin:0 0 5px}.cb-route-option p{font-size:.83rem;color:var(--muted);margin:4px 0}.cb-route-option .btn{margin-top:8px}.cb-compare-points{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 12px}.cb-compare-points>div{min-width:0}.cb-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cb-compare-grid>div{min-width:0}.cb-compare-shared{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.cb-compare-shared span{border-radius:99px;background:var(--violet-soft);padding:5px 8px;font-size:.78rem}.cb-home-toggles{display:grid;grid-template-columns:1fr 1fr;gap:8px}.cb-home-toggle{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:11px;padding:9px;font-size:.82rem}.cb-home-toggle input{width:18px;height:18px;accent-color:var(--violet)}.cb-safe-status{padding:13px;border:1px solid var(--line);border-radius:12px;margin:10px 0;font-weight:800}.cb-safe-status.active{background:var(--warn-soft);border-color:var(--warn);color:var(--warn)}.cb-safe-status.expired{background:var(--danger-soft);border-color:var(--danger);color:var(--danger)}.cb-safe-status.done{background:var(--violet-soft);color:var(--ok)}.cb-touch-large button,.cb-touch-large .chip,.cb-touch-large .tile{min-height:52px}.cb-touch-large .btn{padding-top:14px;padding-bottom:14px}.cb-hud .card{border-radius:8px;border-width:1px;box-shadow:0 0 0 1px var(--violet-soft),0 0 22px color-mix(in srgb,var(--violet) 13%,transparent)}.cb-hud .card h2,.cb-hud .cb-kicker{text-shadow:0 0 12px color-mix(in srgb,var(--violet) 35%,transparent)}.cb-hud .btn,.cb-hud .tile{border-radius:9px}.cb-hud .cb-module-icon{border-radius:8px;box-shadow:inset 0 0 0 1px var(--violet)}.cb-home-module,.cb-feature-card,.cb-safe-arrival-card,.cb-settings-advanced{animation:cb-card-enter .38s ease both}@keyframes cb-card-enter{from{opacity:.6;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}.cb-route-option .btn{width:100%}.cb-compare-grid .sel{font-size:.86rem}.cb-notification-badge{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border-radius:99px;background:var(--danger);color:#fff;font-size:.7rem;padding:0 5px;margin-left:5px}@media(max-width:390px){.cb-compare-grid{grid-template-columns:1fr}.cb-weather-grid,.cb-stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cb-home-toggles{grid-template-columns:1fr}}@media(prefers-reduced-motion:reduce){.cb-home-module,.cb-feature-card,.cb-safe-arrival-card,.cb-settings-advanced{animation:none}.cb-progress-fill{transition:none}}
 
 /* Ajustes de estadísticas y recomendación del comparador */
 .cb-stats-lines{display:grid;gap:6px;margin:10px 0}.cb-stats-lines>span{display:flex;justify-content:space-between;gap:12px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}.cb-stats-lines small{color:var(--muted)}.cb-recommend-card{border:1.5px solid var(--success,var(--violet));border-radius:14px;padding:13px;margin:10px 0;background:var(--success-soft,var(--violet-soft));}.cb-recommend-card h3{font-size:1rem;margin:6px 0}.cb-recommend-card p{font-size:.84rem;margin:4px 0 0;color:var(--muted)}.cb-recommend-card.neutral{border-color:var(--line);background:var(--bg)}.cb-recommend-badge{display:inline-flex;align-items:center;border-radius:99px;padding:4px 8px;background:var(--success,var(--violet));color:#fff;font-weight:900;font-size:.7rem;letter-spacing:.04em}.cb-compare-winner{outline:2px solid var(--success,var(--violet));outline-offset:1px}.cb-compare-caveat{margin-top:10px}.cb-compare-line{border:1px solid var(--line);border-radius:13px;padding:12px;margin-top:9px;background:var(--bg)}.cb-compare-line.recommended{border:2px solid var(--success,var(--violet));background:var(--success-soft,var(--violet-soft))}.cb-compare-line h4{margin:0 0 5px;font-size:.92rem}.cb-compare-line p{margin:4px 0;font-size:.82rem;color:var(--muted)}.cb-compare-path{font-weight:750;color:var(--text)!important;line-height:1.5}.cb-compare-status{display:inline-flex;border-radius:99px;padding:4px 8px;font-size:.7rem;font-weight:900;background:var(--violet-soft);margin-bottom:6px}.cb-trip-completed{margin:12px 0;padding:14px;border-radius:14px;border:2px solid var(--ok,#16865b);background:var(--ok-soft,#e6f7ef);color:var(--text)}.cb-trip-completed strong{display:block;font-size:1.02rem;margin:2px 0}.cb-trip-completed small{display:block;color:var(--muted);margin-top:4px}.cb-trip-completed .cb-done-label{font-size:.72rem;font-weight:950;letter-spacing:.06em;color:var(--ok,#16865b)}@media(max-width:420px){.cb-compare-points{grid-template-columns:1fr}}
 </style>
 
-<style id="cb-layout-refresh">
-/* ConectaBus · organización visual y jerarquía de navegación */
-:root{--cb-space:16px;--cb-radius:18px}
-html{scroll-behavior:smooth}
-body{line-height:1.48}
-.wrap{max-width:980px;padding:18px 20px calc(28px + env(safe-area-inset-bottom,0px))}
-.wrap.inner{max-width:1120px;padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))}
-.card{border-radius:var(--cb-radius);padding:clamp(15px,2vw,21px);margin-top:0;box-shadow:0 5px 20px rgba(25,18,44,.045)}
-h2{font-size:1.08rem;letter-spacing:-.015em;line-height:1.25;margin-bottom:9px}
-.home-intro{margin-top:8px;background:linear-gradient(135deg,var(--surface),var(--violet-soft));border-color:color-mix(in srgb,var(--violet) 18%,var(--line))}
-.home-intro-heading{display:flex;justify-content:space-between;align-items:center;gap:14px}
-.home-intro-heading h2{font-size:1.25rem;margin:3px 0 7px}
-.home-intro-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:var(--violet);color:#fff;font-size:1.65rem;flex:none}
-.home-intro>p{max-width:680px;color:var(--muted);margin:0 0 10px}
-.home-service-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-.home-service-row .prox{min-width:0;margin:0!important;font-size:.82rem}
-.home-service-row .prox span:last-child{overflow-wrap:anywhere}
-.hero{padding:15px 4px 12px;display:grid;grid-template-columns:56px minmax(0,1fr);column-gap:14px;align-items:center}
-.hero .logo{grid-row:1 / span 3;width:56px;height:56px}
-.hero h1{font-size:clamp(2rem,5vw,2.7rem);margin:0 52px 1px 0}
-.hero .sub{font-size:.94rem}
-.hero #fecha{font-size:.78rem;color:var(--muted);margin:5px 0 0}
-.hero #reloj{font-size:.8rem;font-weight:800;color:var(--violet);font-variant-numeric:tabular-nums}
-.gear{top:8px;right:4px}
-.home-section-label{margin:20px 2px 9px}
-.home-section-label h2,.home-section-label h3{margin:3px 0 0;font-size:1.12rem}
-.home-section-label-inner{margin:18px 0 8px}
-.home-activity-heading{margin-top:24px}
-.dashboard-panel{margin-top:0;background:var(--surface);border-color:color-mix(in srgb,var(--violet) 22%,var(--line))}
-.dash-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:13px}
-.dash-heading h2{font-size:1.3rem;margin:3px 0 0}
-.dash-trip[hidden],#quickTripStatus[hidden]{display:none!important}
-.cb-trip-area{padding:13px;border:1px solid var(--line);background:var(--bg);border-radius:15px}
-.cb-trip-area-heading{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;margin-bottom:8px}
-.cb-trip-area-caption{color:var(--muted);font-size:.78rem}
-.cb-trip-area .my-selection{background:var(--surface);border-radius:13px}
-.cb-trip-area .trip-controls{margin-top:9px}
-.cb-trip-area .empty-selection{background:var(--surface)}
-.dash-actions{grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
-.dash-action{min-height:105px;padding:12px;border-radius:14px;justify-content:flex-start}
-.dash-action b{font-size:.82rem;line-height:1.2}
-.dash-action small{font-size:.7rem}
-.dash-action-emergency{border-color:color-mix(in srgb,var(--danger) 45%,var(--line))}
-.dash-action-emergency>span{background:var(--danger-soft);color:var(--danger)}
-.cb-home-layout{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start;margin-top:0}
-.cb-home-layout>.cb-home-module{margin:0;min-width:0;height:100%}
-#cbHomeProgress{grid-column:1/-1}
-.cb-home-module .btn{margin-top:8px}
-.cb-home-module .cb-section-head{margin-bottom:12px}
-.cb-credits{margin-top:20px}
-.autores{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 20px;padding-left:20px;margin-bottom:0;color:var(--muted);font-size:.88rem}
-#lobby>.note:last-child{margin:14px 2px 0;text-align:center}
-/* Navegación inferior: etiquetas cortas, áreas táctiles iguales y orden estable. */
-nav{gap:4px;padding:7px 8px calc(7px + env(safe-area-inset-bottom,0px));backdrop-filter:blur(18px);background:color-mix(in srgb,var(--surface) 93%,transparent)}
-nav a{min-height:54px;gap:3px;font-size:.69rem;letter-spacing:-.01em}
-nav a svg{width:21px;height:21px}
-.top{min-height:48px;padding:0 2px 10px;margin-bottom:4px;border-bottom:1px solid var(--line)}
-.top span{flex:1;font-size:.82rem;font-weight:750;color:var(--ink)}
-.top-settings{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--line);border-radius:12px;color:var(--violet);text-decoration:none;background:var(--surface);font-size:1.1rem}
-.view.on{padding-top:14px;animation:cbViewIn .22s ease both}
-.view.on>.card{margin:0 0 14px}
-.view.on>.card:last-child{margin-bottom:0}
-/* Dos columnas solo en pantallas amplias; en móvil queda una secuencia simple. */
+<style id="cb-safe-organization">
+/* Organización visual conservadora: no cambia la estructura ni los identificadores de la app. */
+.wrap{max-width:760px;margin-left:auto;margin-right:auto}
+.wrap.inner{max-width:920px}
+.card{border-radius:17px;box-shadow:0 4px 16px rgba(25,18,44,.045)}
+.view.on>.card{margin-bottom:14px}
+.view h2{line-height:1.25;letter-spacing:-.01em}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.top span{flex:1;min-width:120px}
+#lobby>.card{margin-top:14px}
+#lobby .menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+#lobby .tile{min-width:0;border-radius:15px}
+#lobby .tile small{line-height:1.3}
+#v-lineas .card,#v-ajustes .card,#v-emergencia .card{margin-bottom:14px}
+#v-lineas .card:last-child,#v-ajustes .card:last-child,#v-emergencia .card:last-child{margin-bottom:0}
+#v-ajustes .cb-settings-advanced,#v-emergencia .cb-emergency-guide,#v-emergencia .cb-emergency-contact{border-color:var(--line)}
+#nav{gap:4px;padding-left:6px;padding-right:6px}
+#nav a{min-width:0;flex:1;justify-content:center;gap:3px;font-size:.68rem}
+#nav a svg{width:21px;height:21px;flex:none}
 @media(min-width:760px){
-  #v-lineas.view.on{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
-  #v-lineas.view.on>.card{margin:0;min-width:0}
-  #v-lineas.view.on>.card:first-child{grid-column:1/-1}
-  #v-ajustes.view.on{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
-  #v-ajustes.view.on>.card{margin:0;min-width:0}
-  #v-ajustes.view.on>.card:first-child{grid-column:1/-1}
-  #v-emergencia.view.on{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
-  #v-emergencia.view.on>.card{margin:0;min-width:0}
-  #v-emergencia.view.on>.card:first-child{grid-column:1/-1}
-  #v-emergencia.view.on>.cb-safe-arrival-card{grid-column:1/-1}
+ .wrap{max-width:900px}
+ .wrap.inner{max-width:1100px}
+ #v-lineas.view.on,#v-ajustes.view.on,#v-emergencia.view.on{display:block}
+ #v-lineas.view.on>.card,#v-ajustes.view.on>.card,#v-emergencia.view.on>.card{margin-bottom:14px}
 }
-/* Paneles desplegables para que las herramientas secundarias no saturen las pantallas. */
-.cb-fold{padding:0;overflow:hidden}
-.cb-fold-summary{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:68px;padding:14px 17px;cursor:pointer;list-style:none}
-.cb-fold-summary::-webkit-details-marker{display:none}
-.cb-fold-summary>span:first-child{display:grid;gap:3px;min-width:0}
-.cb-fold-summary b{font-size:1rem;line-height:1.25}
-.cb-fold-summary small{font-size:.78rem;color:var(--muted);font-weight:500}
-.cb-fold-chevron{width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:var(--violet-soft);color:var(--violet);font-size:1.2rem;transition:transform .2s ease;flex:none}
-.cb-fold[open]>.cb-fold-summary{border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--violet-soft) 25%,var(--surface))}
-.cb-fold[open]>.cb-fold-summary .cb-fold-chevron{transform:rotate(180deg)}
-.cb-fold>*:not(summary){margin-left:17px;margin-right:17px}
-.cb-fold>*:last-child{margin-bottom:17px}
-.cb-fold .cb-section-head{padding-top:14px}
-.cb-emergency-guide,.cb-emergency-contact{margin-top:0!important}
-#v-emergencia .cb-fold{align-self:start}
-#v-ajustes .cb-fold{align-self:start}
-/* Estética uniforme de filtros, buscadores, selects y títulos de herramienta. */
-.lineas-tools{margin:14px 0 8px;gap:10px}
-.lineas-tools input,.search input{min-height:46px;border-radius:13px}
-.cb-feature-card{padding:17px}
-.cb-feature-card .cb-section-head{padding-bottom:9px;border-bottom:1px solid var(--line)}
-.cb-feature-card .note{line-height:1.45}
-#v-horarios>.card,#v-avisos>.card{max-width:100%}
-#v-avisos .av-filters{position:sticky;top:4px;z-index:5;background:var(--surface);padding:8px 0}
-#v-mapa>.card:first-child{padding:14px}
-.map-route-card{margin-top:14px!important}
-@media(max-width:640px){
-  .wrap{padding-left:14px;padding-right:14px}
-  .wrap.inner{padding-bottom:calc(100px + env(safe-area-inset-bottom,0px))}
-  .home-service-row{grid-template-columns:1fr}
-  .dash-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .dash-action{min-height:88px}
-  .cb-home-layout{grid-template-columns:1fr;gap:12px}
-  #cbHomeProgress{grid-column:auto}
-  .autores{grid-template-columns:1fr 1fr}
-  nav a{font-size:.62rem}
+@media(max-width:520px){
+ .wrap{padding-left:13px;padding-right:13px}
+ #lobby .menu{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #lobby .tile{padding:12px;min-height:92px}
+ #nav a{font-size:.61rem;padding-left:2px;padding-right:2px}
 }
-@media(max-width:370px){nav{gap:1px;padding-left:4px;padding-right:4px}nav a{font-size:.58rem}.dash-actions{gap:7px}}
-@media(max-width:640px){.dash-action-emergency{grid-column:1/-1;min-height:64px;flex-direction:row;align-items:center}.dash-action-emergency>span{margin:0 5px 0 0}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cb-fold-chevron{transition:none}}
+@media(max-width:360px){#nav{gap:1px}#nav a{font-size:.56rem}}
+
+/* Inicio organizado por temas + tutorial */
+.cb-home-layout{display:flex;flex-direction:column;gap:16px}
+.cb-home-group{display:flex;flex-direction:column;gap:0}
+.cb-home-group-title{display:flex;align-items:center;gap:11px;padding:4px 2px 9px}
+.cb-home-group-title>span{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:var(--violet-soft);color:var(--violet);font-weight:900;font-size:.78rem;flex:none}
+.cb-home-group-title b{display:block;font-size:1rem}.cb-home-group-title small{display:block;color:var(--muted);font-size:.76rem;margin-top:2px}
+.cb-home-group .cb-home-module{margin-bottom:10px}.cb-home-group .cb-home-module:last-child{margin-bottom:0}
+.cb-home-layout[data-order="weather"] [data-home-group="info"]{order:-2}
+.cb-home-layout[data-order="safety"] [data-home-group="info"]{order:-3}
+.cb-home-layout[data-order="trip"] [data-home-group="trip"]{order:-2}
+.cb-home-layout[data-order="activity"] [data-home-group="activity"]{order:-3}
+.cb-tutorial-step{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.cb-tutorial-step:last-child{border-bottom:0;padding-bottom:0}
+.cb-tutorial-step>span{width:32px;height:32px;border-radius:11px;background:var(--violet-soft);color:var(--violet);display:grid;place-items:center;font-weight:900;flex:none}
+.cb-tutorial-step>div{min-width:0;flex:1}.cb-tutorial-step p{font-size:.87rem;color:var(--muted);margin:5px 0 9px;line-height:1.5}
+.cb-tutorial-step .btn{display:inline-flex;width:auto;margin:0;padding:8px 12px;font-size:.8rem}
+
 </style>
 
 </head>
@@ -671,60 +643,72 @@ nav a svg{width:21px;height:21px}
     <a class="gear" href="#ajustes" aria-label="Ajustes"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></svg></a>
   </div>
 
-  <section class="card home-intro" aria-labelledby="homeIntroTitle">
-    <div class="home-intro-heading"><div><span class="cb-kicker">TU MOVILIDAD EN SAN RAFAEL</span><h2 id="homeIntroTitle">Todo tu viaje, en un solo lugar</h2></div><span class="home-intro-icon" aria-hidden="true">🚌</span></div>
-    <p>Consultá líneas, recorridos, horarios y avisos. Guardá tu viaje para tener a mano tu parada y los próximos horarios.</p>
-    <div class="home-service-row">
-      <div class="prox"><span class="dot"></span><span id="prox">Buscando colectivos cercanos…</span></div>
-      <div class="prox"><span class="dot"></span><span id="svcT"></span></div>
-    </div>
-  </section>
+  <div class="card">
+    <h2>¿Qué es ConectaBus?</h2>
+    <p>Es una parada de colectivos conectada. Desde tu celular consultás recorridos, paradas y horarios de cada línea, elegís dónde esperar y activás una alarma antes de la salida. También encontrás avisos de la central, como demoras o emergencias.</p>
+    <div class="prox"><span class="dot"></span><span id="prox">Buscando colectivos cercanos…</span></div>
+    <div class="prox" style="margin-top:8px"><span class="dot"></span><span id="svcT"></span></div>
+  </div>
 
-  <div class="home-section-label"><span class="cb-kicker">ACCESOS PRINCIPALES</span><h2>Explorá ConectaBus</h2></div>
-  
+  <div class="menu">
+    <a class="tile" href="#mapa"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-mapa"/></svg></span><b>Mapa</b><small>Calles, lugares y paradas</small></a>
+    <a class="tile" href="#avisos"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-avisos"/></svg></span><b>Avisos</b><small>Mensajes de la central</small><span class="nbadge" id="nAv"></span></a>
+    <a class="tile" href="#horarios"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-horarios"/></svg></span><b>Horarios</b><small>Próximas salidas por línea</small></a>
+    <a class="tile" href="#lineas"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-lineas"/></svg></span><b>Líneas</b><small>Recorridos y estado</small></a>
+    <a class="tile emerg" href="#emergencia"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-emerg"/></svg></span><span><b>Emergencia</b><br><small>Teléfonos útiles y aviso a la central</small></span></a>
+    <a class="tile tutorial-tile" href="#tutorial"><span class="ic"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21z"/><path d="M4 5.5v13A2.5 2.5 0 0 1 6.5 16H20M8 7h8M8 10h8"/></svg></span><span><b>Tutorial</b><br><small>Aprendé a usar ConectaBus paso a paso</small></span></a>
+  </div>
+  <div class="card mi">
+    <h2>Tu colectivo</h2>
+    <div id="miBody"></div>
+  </div>
 
   <section class="card dashboard-panel" aria-labelledby="dashTitle">
-    <div class="dash-heading"><div><span class="dash-kicker">TU ESPACIO PERSONAL</span><h2 id="dashTitle">Mi viaje</h2></div><span class="dash-orbit" aria-hidden="true">✦</span></div>
-    <div class="cb-trip-area">
-      <div class="cb-trip-area-heading"><span class="cb-kicker">TU COLECTIVO GUARDADO</span><span class="cb-trip-area-caption">Línea, parada y próximos horarios</span></div>
-      <div id="miBody"></div>
-    </div>
-    <div class="dash-trip" id="quickTripStatus" aria-live="polite" hidden></div>
-    <div class="home-section-label home-section-label-inner"><span class="cb-kicker">ATAJOS</span><h3>Accesos rápidos</h3></div>
+    <div class="dash-heading"><div><span class="dash-kicker">CENTRO DE CONTROL</span><h2 id="dashTitle">Panel rápido</h2></div><span class="dash-orbit" aria-hidden="true">✦</span></div>
+    <div class="dash-trip" id="quickTripStatus" aria-live="polite">Todavía no hay un viaje guardado. Elegí una línea y una parada para empezar.</div>
     <div class="dash-actions">
       <a href="#lineas" class="dash-action"><span>＋</span><b>Configurar viaje</b><small>Elegir línea y parada</small></a>
       <a href="#mapa" class="dash-action"><span>⌖</span><b>Abrir mapa</b><small>Ver calles y recorrido</small></a>
       <a href="#horarios" class="dash-action"><span>◷</span><b>Consultar horarios</b><small>Buscar próximas salidas</small></a>
       <a href="#avisos" class="dash-action"><span>◉</span><b>Ver avisos</b><small>Demoras y novedades</small></a>
-      <a href="#emergencia" class="dash-action dash-action-emergency"><span>!</span><b>Emergencias</b><small>Ayuda y teléfonos útiles</small></a>
     </div>
     <button class="btn ghost dash-share" id="quickShareTrip" type="button">Compartir datos de mi viaje</button>
     <p id="quickShareStatus" class="note" role="status" aria-live="polite"></p>
   </section>
 
-  <div class="home-section-label home-activity-heading"><span class="cb-kicker">RESUMEN PERSONAL</span><h2>Tu actividad y herramientas</h2></div>
   <div class="cb-home-layout" id="cbHomeLayout">
+    <div class="cb-home-group" data-home-group="trip"><div class="cb-home-group-title"><span>01</span><div><b>Tu viaje</b><small>Seguimiento del colectivo que elegiste</small></div></div>
     <section class="card cb-home-module" id="cbHomeProgress" data-home-module="progress">
       <div class="cb-section-head"><div><span class="cb-kicker">SEGUIMIENTO MANUAL</span><h2>Progreso de tu viaje</h2></div><span class="cb-module-icon">➜</span></div>
       <div id="cbProgressBody" aria-live="polite"><p class="note">Guardá una línea y una parada para iniciar el seguimiento.</p></div>
       <div class="cb-progress-actions"><button class="btn" id="cbAdvanceStop" type="button">Marcar parada pasada</button><button class="btn ghost" id="cbCompleteTrip" type="button">Finalicé mi viaje</button><button class="btn ghost" id="cbResetProgress" type="button">Reiniciar</button></div>
       <p class="note">El avance es manual y usa el orden de paradas cargado. No detecta tu ubicación ni el colectivo por GPS.</p>
+      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-progress">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
     </section>
+    </div>
+    <div class="cb-home-group" data-home-group="info"><div class="cb-home-group-title"><span>02</span><div><b>Información y novedades</b><small>Clima y actividad reciente</small></div></div>
     <section class="card cb-home-module" id="cbHomeWeather" data-home-module="weather">
       <div class="cb-section-head"><div><span class="cb-kicker">SAN RAFAEL · MENDOZA</span><h2>Clima para salir</h2></div><span class="cb-module-icon">☀</span></div>
       <div id="cbWeatherBody" class="cb-weather-body"><p class="note">Consultá las condiciones actuales cuando tengas conexión.</p></div>
       <button class="btn ghost" id="cbWeatherRefresh" type="button">Actualizar clima</button>
       <p class="note">Pronóstico externo de <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>. Puede no coincidir exactamente con tu parada.</p>
+      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-weather">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
     </section>
     <section class="card cb-home-module" id="cbHomeNotifications" data-home-module="notifications">
       <div class="cb-section-head"><div><span class="cb-kicker">CENTRO DE NOTIFICACIONES</span><h2>Tu actividad</h2></div><span class="cb-module-icon">◉</span></div>
       <div id="cbNotificationsList" class="cb-notifications-list"><p class="note">Todavía no hay novedades guardadas.</p></div>
       <div class="cb-inline-actions"><button class="btn ghost" id="cbMarkNotificationsRead" type="button">Marcar todo leído</button><button class="btn ghost" id="cbClearNotifications" type="button">Borrar historial</button></div>
+      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-notifications">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
     </section>
+    </div>
+    <div class="cb-home-group" data-home-group="activity"><div class="cb-home-group-title"><span>03</span><div><b>Tu actividad</b><small>Viajes realizados y logros</small></div></div>
     <section class="card cb-home-module" id="cbHomeStats" data-home-module="stats">
       <div class="cb-section-head"><div><span class="cb-kicker">ESTADÍSTICAS PERSONALES</span><h2>Mis viajes y logros</h2></div><span class="cb-module-icon">✦</span></div>
       <div id="cbStatsBody"></div>
+      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-stats">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
     </section>
+    </div>
+    <div class="cb-home-group" data-home-group="tools"><div class="cb-home-group-title"><span>04</span><div><b>Herramientas</b><small>Conexión y respaldo de tus datos</small></div></div>
     <section class="card cb-home-module" id="cbHomeOffline" data-home-module="offline">
       <div class="cb-section-head"><div><span class="cb-kicker">ESTADO DEL DISPOSITIVO</span><h2>Conexión y datos</h2></div><span class="cb-module-icon">⌁</span></div>
       <p id="cbConnectionStatus" class="cb-connection-status">Comprobando conexión…</p>
@@ -734,12 +718,13 @@ nav a svg{width:21px;height:21px}
       <button class="btn" id="cbInstallApp" type="button" hidden>Instalar ConectaBus</button>
       <input id="cbImportFile" type="file" accept="application/json,.json" hidden>
       <p id="cbBackupStatus" class="note" role="status"></p>
+      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-tools">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
     </section>
+    </div>
   </div>
 
-  <details class="card cb-fold cb-credits">
-    <summary class="cb-fold-summary"><span><b>Equipo creador</b><small>Ver autores de ConectaBus</small></span><span class="cb-fold-chevron">⌄</span></summary>
-    
+  <div class="card">
+    <h2>Autores</h2>
     <ul class="autores">
       <li>Tiziano Aguilar</li>
       <li>Luna Aguilar</li>
@@ -751,13 +736,13 @@ nav a svg{width:21px;height:21px}
       <li>Axel Marquez</li>
       <li>Enzo Salinas</li>
     </ul>
-  </details>
+  </div>
   <p class="note">Datos de demostración. Los recorridos y horarios son de ejemplo.</p>
 </div>
 
 <!-- INTERIOR -->
 <div class="wrap inner" id="inner" hidden>
-  <div class="top"><a class="back" href="#inicio"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>ConectaBus</a><span id="pageContext">Movilidad de San Rafael</span><a class="top-settings" href="#ajustes" aria-label="Abrir ajustes">⚙</a></div>
+  <div class="top"><a class="back" href="#inicio"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>ConectaBus</a><span>Parada Plaza San Martín</span></div>
   <div class="banner" id="banner" role="alert">Emergencia en la zona. Seguí las indicaciones del personal de la central.</div>
 
   <section class="view" id="v-mapa">
@@ -1020,8 +1005,8 @@ nav a svg{width:21px;height:21px}
       <div class="settings-test-row"><button class="btn ghost" type="button" id="aTestAlert">Probar sonido y vibración</button><button class="btn ghost" type="button" id="aResetPrefs">Restaurar ajustes</button></div>
       <p class="note" id="aPrefsStatus" role="status"></p>
     </div>
-    <details class="card cb-settings-advanced cb-fold">
-      <summary class="cb-fold-summary"><span><span class="cb-kicker">CENTRO DE PERSONALIZACIÓN</span><b>Configuración avanzada</b><small>Perfiles, accesibilidad y diseño del Inicio</small></span><span class="cb-fold-chevron">⌄</span></summary>
+    <div class="card cb-settings-advanced">
+      <div class="cb-section-head"><div><span class="cb-kicker">CENTRO DE PERSONALIZACIÓN</span><h2>Configuración avanzada</h2></div><span class="cb-module-icon">⚙</span></div>
       <label class="lab" for="cbProfile">Perfil de uso</label><select class="sel" id="cbProfile"><option value="balanced">Equilibrado</option><option value="student">Estudio / uso diario</option><option value="quiet">Silencioso</option><option value="safety">Seguridad prioritaria</option><option value="saver">Ahorro de batería</option></select>
       <label class="lab" for="cbAlarmTone">Estilo de alarma</label><select class="sel" id="cbAlarmTone"><option value="classic">Clásica</option><option value="soft">Suave</option><option value="urgent">Urgente</option><option value="double">Doble tono</option></select>
       <span class="lab">Interfaz HUD</span><div class="chips" id="cbHudToggle"></div>
@@ -1030,29 +1015,48 @@ nav a svg{width:21px;height:21px}
       <label class="lab" for="cbHomeOrder">Orden de las tarjetas</label><select class="sel" id="cbHomeOrder"><option value="default">Predeterminado</option><option value="weather">Clima primero</option><option value="safety">Seguridad primero</option><option value="activity">Actividad primero</option></select>
       <div class="cb-inline-actions"><button class="btn ghost" id="cbApplyProfile" type="button">Aplicar perfil</button><button class="btn ghost" id="cbResetAdvanced" type="button">Restablecer configuración avanzada</button></div>
       <p class="note" id="cbAdvancedStatus" role="status"></p>
-    </details>
-    <details class="card cb-fold cb-demo-fold">
-      <summary class="cb-fold-summary"><span><b>Modo demostración</b><small>Controles para presentar y probar la app</small></span><span class="cb-fold-chevron">⌄</span></summary>
+    </div>
+    <div class="card">
+      <h2>Modo demostración</h2>
       <p class="note" style="margin:0">Sirve para mostrar el proyecto sin depender de datos reales.</p>
       <button class="btn ghost" id="dDelay"></button>
       <button class="btn ghost" id="dEmerg"></button>
       <button class="btn ghost" id="dAviso">Nuevo aviso de la central</button>
       <button class="btn ghost" id="dFast"></button>
       <button class="btn" id="dReset">Reiniciar demostración</button>
-    </details>
-    <details id="cbLabPanel" class="card cb-settings-advanced cb-fold">
-      <summary class="cb-fold-summary"><span><span class="cb-kicker">ZONA EXPERIMENTAL</span><b>Laboratorio ConectaBus</b><small>Pruebas de herramientas y funciones</small></span><span class="cb-fold-chevron">⌄</span></summary>
+    </div>
+    <div class="card cb-settings-advanced" id="cbLabPanel">
+      <div class="cb-section-head"><div><span class="cb-kicker">ZONA EXPERIMENTAL</span><h2>Laboratorio ConectaBus</h2></div><span class="cb-module-icon">⚗</span></div>
       <p class="note">Probá las herramientas nuevas sin modificar tus datos reales de viaje. Todos los avisos generados desde acá se identifican como pruebas.</p>
       <div class="cb-inline-actions"><button class="btn ghost" id="cbLabNotice" type="button">Probar notificación</button><button class="btn ghost" id="cbLabAlarm" type="button">Probar alarma</button><button class="btn ghost" id="cbLabPlanner" type="button">Abrir planificador</button><button class="btn ghost" id="cbLabProgress" type="button">Ver seguimiento</button><button class="btn ghost" id="cbLabSafety" type="button">Ver seguridad</button></div>
       <p class="note" id="cbLabStatus" role="status"></p>
-    </details>
-    <details class="card cb-fold cb-qr-fold">
-      <summary class="cb-fold-summary"><span><b>Código QR de la parada</b><small>Compartir acceso a ConectaBus</small></span><span class="cb-fold-chevron">⌄</span></summary>
+    </div>
+    <div class="card">
+      <h2>Código QR de la parada</h2>
       <p class="note" style="margin:0">Pegalo en la parada: quien lo escanee abre ConectaBus en el mapa. El enlace solo funciona para quienes tengan acceso a la página.</p>
       <div id="qrBox"></div><br>
       <button class="btn ghost" id="aCopy">Compartir o copiar enlace</button>
       <p class="note" id="aMsg" role="status"></p>
-    </details>
+    </div>
+  </section>
+
+  <section class="view" id="v-tutorial">
+    <div class="card">
+      <span class="cb-kicker">GUÍA PARA EMPEZAR</span><h2>¡Bienvenido a ConectaBus!</h2>
+      <p>Este tutorial te explica de forma simple para qué sirve cada parte. Podés volver a Inicio cuando quieras.</p>
+      <div class="cb-tutorial-step"><span>1</span><div><b>Elegí tu colectivo</b><p>Entrá en <b>Líneas</b>, seleccioná la línea y el sentido del recorrido. Después elegí la parada donde vas a subir y guardá tu viaje.</p><a href="#lineas" class="btn ghost linkbtn">Ir a Líneas</a></div></div>
+      <div class="cb-tutorial-step"><span>2</span><div><b>Consultá los horarios</b><p>En <b>Horarios</b> podés revisar las salidas disponibles para cada línea. Tené en cuenta que los horarios cargados pueden ser de demostración.</p><a href="#horarios" class="btn ghost linkbtn">Ver horarios</a></div></div>
+      <div class="cb-tutorial-step"><span>3</span><div><b>Buscá tu parada en el mapa</b><p>Abrí <b>Mapa</b> para orientarte, buscar calles, lugares y consultar los marcadores de paradas.</p><a href="#mapa" class="btn ghost linkbtn">Abrir mapa</a></div></div>
+      <div class="cb-tutorial-step"><span>4</span><div><b>Revisá los avisos</b><p>En <b>Avisos</b> aparecen mensajes sobre el servicio, demoras y avisos de demostración. Mirá siempre el detalle para saber si un aviso es una prueba.</p><a href="#avisos" class="btn ghost linkbtn">Ver avisos</a></div></div>
+      <div class="cb-tutorial-step" id="tutorial-progress"><span>5</span><div><b>Seguí tu viaje desde Inicio</b><p>En <b>Progreso de tu viaje</b> podés marcar manualmente las paradas que pasaste y tocar <b>Finalicé mi viaje</b> al terminar. No usa GPS para detectar el avance.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></div>
+      <div class="cb-tutorial-step"><span>6</span><div><b>Usá Emergencia si necesitás ayuda</b><p>Encontrás teléfonos útiles, opciones para compartir datos y una guía de seguridad. Las llamadas o mensajes se realizan solo si vos tocás las opciones correspondientes.</p><a href="#emergencia" class="btn danger linkbtn">Abrir Emergencia</a></div></div>
+      <div class="cb-tutorial-step"><span>7</span><div><b>Personalizá la aplicación</b><p>En <b>Ajustes</b> podés cambiar el tema, el tamaño de letra, sonidos y algunas tarjetas que aparecen en Inicio.</p><a href="#ajustes" class="btn ghost linkbtn">Ir a Ajustes</a></div></div>
+      <div class="cb-tutorial-step" id="tutorial-weather"><span>8</span><div><b>Consultá el clima</b><p>El panel <b>Clima para salir</b> muestra temperatura y condiciones actuales de San Rafael. Tocá <b>Actualizar clima</b> para consultar de nuevo. Necesitás Internet; si no hay conexión, puede mostrar el último dato guardado.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></div>
+      <div class="cb-tutorial-step" id="tutorial-notifications"><span>9</span><div><b>Revisá tu actividad y notificaciones</b><p>Este panel reúne novedades y notificaciones guardadas. Podés marcarlas como leídas o borrar el historial con sus botones. Revisá el contenido antes de tomar decisiones: algunos avisos son de demostración.</p><a href="#avisos" class="btn ghost linkbtn">Ir a Avisos</a></div></div>
+      <div class="cb-tutorial-step" id="tutorial-stats"><span>10</span><div><b>Consultá tus viajes y logros</b><p>El panel <b>Mis viajes y logros</b> resume la actividad que ConectaBus registró en este dispositivo. Se actualiza según los viajes que vayas completando desde el seguimiento.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></div>
+      <div class="cb-tutorial-step" id="tutorial-tools"><span>11</span><div><b>Revisá la conexión y guardá tus datos</b><p>El panel indica si tenés Internet. Con <b>Crear copia de seguridad</b> descargás un archivo con tus datos de ConectaBus; con <b>Restaurar copia</b> podés recuperar un respaldo anterior. Guardá el archivo en un lugar seguro.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></div>
+    </div>
+    <div class="card"><h2>Un detalle importante</h2><p class="note">ConectaBus incluye funciones de demostración. La ubicación en vivo de colectivos, las demoras reales y algunos recorridos u horarios no están conectados a un sistema oficial en tiempo real. Para emergencias reales, usá los teléfonos oficiales.</p><a href="#inicio" class="btn linkbtn">Listo, volver a Inicio</a></div>
   </section>
 
   <section class="view" id="v-emergencia">
@@ -1066,23 +1070,23 @@ nav a svg{width:21px;height:21px}
       <div id="ubi" role="status"></div>
       <p class="note">Tu ubicación se usa solo cuando tocás el botón y el navegador te lo permite.</p>
     </div>
-    <details class="card cb-fold cb-emergency-guide">
-      <summary class="cb-fold-summary"><span><b>Guía rápida ante una emergencia</b><small>Pasos y recomendaciones según el incidente</small></span><span class="cb-fold-chevron">⌄</span></summary>
+    <div class="card">
+      <h2>Guía rápida ante una emergencia</h2>
       <div class="emergency-steps"><div><b>1 · Mantené la calma</b><small>Alejáte del peligro si podés hacerlo sin exponerte.</small></div><div><b>2 · Indicá dónde estás</b><small>Compartí calle, esquina, número de línea y sentido del viaje.</small></div><div><b>3 · Pedí ayuda real</b><small>Usá los teléfonos oficiales. ConectaBus no contacta automáticamente a emergencias.</small></div></div>
       <div class="em-guide-panel" aria-live="polite"><b id="emGuideTitle">Qué hacer ahora</b><p id="emGuideText">Buscá un lugar seguro y pedí ayuda si la necesitás.</p><ul id="emGuideList"><li>Identificá tu ubicación.</li><li>Pedí ayuda a una persona cercana o al personal.</li><li>Contactá al servicio correspondiente.</li></ul></div>
       <button class="btn ghost" id="emShare" type="button">Compartir ubicación y datos</button>
       <button class="btn ghost" id="emCopyInfo" type="button">Copiar datos del viaje</button>
       <button class="btn ghost" id="emWhatsApp" type="button">Preparar mensaje por WhatsApp</button>
       <p class="note" id="emExtraStatus" role="status"></p>
-    </details>
-    <details class="card cb-fold cb-emergency-contact">
-      <summary class="cb-fold-summary"><span><b>Contacto de confianza</b><small>Guardar un teléfono para llamar rápidamente</small></span><span class="cb-fold-chevron">⌄</span></summary>
+    </div>
+    <div class="card">
+      <h2>Contacto de confianza</h2>
       <p class="note">Guardá un teléfono al que puedas llamar rápidamente. Queda almacenado solo en este dispositivo.</p>
       <label class="lab" for="emContactName">Nombre (opcional)</label><input class="sel" id="emContactName" type="text" maxlength="40" placeholder="Ej.: familiar o acompañante">
       <label class="lab" for="emContactPhone">Teléfono</label><input class="sel" id="emContactPhone" type="tel" inputmode="tel" maxlength="24" placeholder="Código de área + número">
       <div class="settings-test-row"><button class="btn" type="button" id="emContactSave">Guardar contacto</button><a class="btn ghost linkbtn" id="emContactCall" href="tel:" aria-disabled="true">Llamar contacto</a><a class="btn ghost linkbtn" id="emContactWhatsApp" href="https://wa.me/" target="_blank" rel="noopener" aria-disabled="true">WhatsApp</a></div>
       <p class="note" id="emContactStatus" role="status"></p>
-    </details>
+    </div>
     <div class="card cb-safe-arrival-card">
       <div class="cb-section-head"><div><span class="cb-kicker">SEGURIDAD PERSONAL</span><h2>Avisame cuando llegue</h2></div><span class="cb-module-icon">✓</span></div>
       <p class="note">Iniciá un temporizador para recordar confirmar que llegaste. Si vence, ConectaBus mostrará un aviso al volver a abrirse; no envía mensajes ni llama automáticamente.</p>
@@ -1101,13 +1105,13 @@ nav a svg{width:21px;height:21px}
 </div>
 
 <div id="tripToast" role="alert"></div>
-<nav id="nav" aria-label="Navegación principal">
-  <a href="#inicio"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg><span>Inicio</span></a>
-  <a href="#lineas"><svg viewBox="0 0 24 24"><use href="#i-lineas"/></svg><span>Líneas</span></a>
-  <a href="#mapa"><svg viewBox="0 0 24 24"><use href="#i-mapa"/></svg><span>Mapa</span></a>
-  <a href="#horarios"><svg viewBox="0 0 24 24"><use href="#i-horarios"/></svg><span>Horarios</span></a>
-  <a href="#avisos"><svg viewBox="0 0 24 24"><use href="#i-avisos"/></svg><span>Avisos</span></a>
-  <a class="e" href="#emergencia"><svg viewBox="0 0 24 24"><use href="#i-emerg"/></svg><span>Emergencia</span></a>
+<nav id="nav" aria-label="Secciones">
+  <a href="#inicio"><svg viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg>Inicio</a>
+  <a href="#mapa"><svg viewBox="0 0 24 24"><use href="#i-mapa"/></svg>Mapa</a>
+  <a href="#avisos"><svg viewBox="0 0 24 24"><use href="#i-avisos"/></svg>Avisos</a>
+  <a href="#horarios"><svg viewBox="0 0 24 24"><use href="#i-horarios"/></svg>Horarios</a>
+  <a href="#lineas"><svg viewBox="0 0 24 24"><use href="#i-lineas"/></svg>Líneas</a>
+  <a class="e" href="#emergencia"><svg viewBox="0 0 24 24"><use href="#i-emerg"/></svg>Emergencia</a>
 </nav>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -2113,12 +2117,10 @@ function updateTripAlert(){
 }
 
 /* Navegación por hash */
-var VISTAS=["mapa","avisos","horarios","lineas","emergencia","ajustes"];
+var VISTAS=["mapa","avisos","horarios","lineas","emergencia","ajustes","tutorial"];
 function route(){
   var h=(location.hash||"#inicio").slice(1);
   var inner=VISTAS.indexOf(h)>-1;
-  var pageLabels={mapa:"Mapa y paradas",avisos:"Avisos y novedades",horarios:"Horarios",lineas:"Líneas y recorridos",emergencia:"Seguridad y emergencias",ajustes:"Ajustes y personalización"};
-  var pageContext=$("pageContext");if(pageContext)pageContext.textContent=pageLabels[h]||"Movilidad de San Rafael";
   $("lobby").hidden=inner;
   $("inner").hidden=!inner;
   $("nav").classList.add("on");
@@ -2128,6 +2130,9 @@ function route(){
   if(h==="mapa"){document.body.classList.add("mapa-activo");applyView();}else{document.body.classList.remove("mapa-activo");}
   if(h==="lineas"&&TRIP.mapPoint&&$("mapStopPicker").parentNode!==$("lineaPickHost"))$("lineaPickHost").appendChild($("mapStopPicker"));
 }
+
+/* Accesos contextuales: cada panel de Inicio abre su tema exacto del tutorial. */
+document.addEventListener("click",function(e){var link=e.target.closest("[data-tutorial-target]");if(!link)return;e.preventDefault();var target=link.getAttribute("data-tutorial-target");if(location.hash!=="#tutorial")location.hash="#tutorial";setTimeout(function(){var section=document.getElementById(target);if(section)section.scrollIntoView({behavior:"smooth",block:"start"});},120);});
 window.addEventListener("hashchange",route);
 if(!TRIP.parada||tripCurrentStops().indexOf(TRIP.parada)<0)TRIP.parada=tripCurrentStops()[0]||"";saveTrip();applyPrefs();renderLineas();renderEmTipos();renderMiParada();syncTripStopMarker();renderAjustes();tickFecha();setInterval(tickFecha,1000);route();renderAvisos();renderHorarios();tick();setInterval(tick,1000);
 if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=document.createElement("div");n.className="cb-global-alert";n.id="cbSetupReminder";n.setAttribute("role","alert");n.innerHTML='<div>🚌 ¡Configurá tu viaje!</div><small>Todavía no guardaste tu colectivo y tu parada. Elegilos para consultar horarios y preparar tus avisos.</small><button type="button" id="cbSetupGo">Elegir mi colectivo</button> <button type="button" id="cbSetupClose">Ahora no</button>';document.body.appendChild(n);$("cbSetupGo").addEventListener("click",function(){n.remove();location.hash="#lineas"});$("cbSetupClose").addEventListener("click",function(){n.remove()})},900)}
