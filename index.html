@@ -88,6 +88,27 @@ svg.map{width:100%;height:min(82vh,860px);min-height:560px;display:block;border-
 .cb-global-alert{position:fixed;z-index:99999;left:12px;right:12px;top:calc(12px + env(safe-area-inset-top,0px));max-width:540px;margin:auto;padding:18px 18px;border:3px solid #b42318;border-radius:18px;background:#fff0ed;color:#8f1d16;box-shadow:0 12px 40px rgba(0,0,0,.28);font-weight:900;font-size:1.05rem;text-align:center;animation:cbAlertPop .28s ease-out}
 .cb-global-alert small{display:block;margin-top:6px;font-weight:700;font-size:.85rem}
 .cb-global-alert button{margin-top:10px;border:0;border-radius:10px;padding:9px 16px;background:#8f1d16;color:#fff;font-weight:800}
+
+/* Recordatorio al guardar el viaje sin activar la alarma */
+.cb-alarm-reminder{position:fixed;inset:0;z-index:100001;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(16,12,28,.62);backdrop-filter:blur(3px)}
+.cb-alarm-reminder[hidden]{display:none}
+.cb-alarm-reminder-card{width:min(100%,460px);padding:22px;border:1px solid var(--line);border-radius:22px;background:var(--surface);color:var(--ink);box-shadow:0 22px 70px rgba(0,0,0,.35);animation:cbAlertPop .22s ease-out}
+.cb-alarm-reminder-icon{width:48px;height:48px;display:grid;place-items:center;margin-bottom:12px;border-radius:15px;background:var(--warn-soft);color:var(--warn);font-size:1.55rem}
+.cb-alarm-reminder-card h2{margin:0 0 8px;font-size:1.22rem;line-height:1.25}
+.cb-alarm-reminder-card p{margin:0 0 10px;color:var(--muted)}
+.cb-alarm-reminder-card .cb-alarm-reminder-fine{font-size:.82rem;padding:10px 12px;border-radius:12px;background:var(--violet-soft);color:var(--muted)}
+.cb-alarm-reminder-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
+.cb-alarm-reminder-actions button{min-height:46px;border:0;border-radius:12px;padding:10px 13px;font:inherit;font-weight:800;cursor:pointer}
+.cb-alarm-reminder-actions .primary{grid-column:1/-1;background:var(--violet);color:var(--violet-ink)}
+.cb-alarm-reminder-actions .secondary{background:var(--surface);border:1px solid var(--line);color:var(--ink)}
+ .cb-alarm-reminder-actions .quiet{background:transparent;color:var(--muted);border:1px solid transparent}
+.trip-discover{margin-top:12px;padding:13px 14px;border:1px solid var(--line);border-radius:15px;background:var(--surface-2, var(--surface));}
+.trip-discover strong{display:block;font-size:.96rem;margin-bottom:4px}
+.trip-discover p{margin:0 0 10px;color:var(--muted);font-size:.86rem}
+.trip-discover-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.trip-discover-actions a{display:flex;align-items:center;justify-content:center;text-align:center;text-decoration:none;min-height:42px}
+@media(max-width:380px){.trip-discover-actions{grid-template-columns:1fr}}
+@media(max-width:380px){.cb-alarm-reminder-card{padding:18px}.cb-alarm-reminder-actions{grid-template-columns:1fr}.cb-alarm-reminder-actions .primary{grid-column:auto}}
 @keyframes cbAlertPop{from{transform:translateY(-18px);opacity:.3}to{transform:translateY(0);opacity:1}}
 @keyframes busPulse{50%{box-shadow:0 0 0 5px rgba(198,40,40,.12)}}
 .off-stop .c-stop,.off-f .c-f,.off-h .c-h,.off-s .c-s,.off-m .c-m,.off-o .c-o,.off-p .c-p{display:none}.off-routes .route{display:none}.off-roads .st.av,.off-roads .st{display:none}.off-buses .demo-bus{display:none}.demo-bus rect{fill:#4b2a9e;stroke:#fff;stroke-width:2}.demo-bus text{fill:#fff;font-size:12px;font-weight:900;text-anchor:middle;paint-order:stroke;stroke:#4b2a9e;stroke-width:2px}
@@ -100,7 +121,19 @@ html.big{font-size:120%}
 .gear svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 #fecha{margin:4px 0 0;color:var(--muted);font-size:.9rem}
 #reloj{font-size:2rem;line-height:1.1;font-weight:800;letter-spacing:.02em;font-variant-numeric:tabular-nums;margin-top:6px;color:var(--violet)}
-.trip-controls{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+ .trip-controls{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.trip-editor{margin-top:14px;border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
+.trip-editor>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;cursor:pointer;font-weight:800;color:var(--ink);background:var(--surface-2,var(--surface))}
+.trip-editor>summary::-webkit-details-marker{display:none}
+.trip-editor>summary:after{content:"＋";flex:0 0 30px;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:var(--violet-soft);color:var(--violet);font-size:1.15rem;font-weight:900}
+.trip-editor[open]>summary:after{content:"−"}
+.trip-editor-heading{display:block;min-width:0}
+.trip-editor-heading strong{display:block;font-size:1rem}
+.trip-editor-heading small{display:block;margin-top:3px;color:var(--muted);font-weight:550;font-size:.82rem}
+.trip-editor-body{padding:0 14px 14px}
+.trip-editor-body.trip-controls{margin-top:0;padding-top:12px;border-top:1px solid var(--line)}
+.trip-editor-body .note{margin-top:6px}
+#tripStatus{margin-top:12px}
 .map-pick-panel{margin-top:12px;padding:14px;border:1px solid var(--violet);border-radius:14px;background:var(--violet-soft)}
 .map-pick-panel[hidden]{display:none}
 .map-pick-panel .note{margin:6px 0}
@@ -621,6 +654,258 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 
 </style>
 
+
+<style id="cb-compact-home-refresh">
+/* Descripción plegable para liberar espacio en Inicio */
+.cb-intro-fold{padding:0;overflow:hidden}
+.cb-intro-fold>summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;cursor:pointer;font-weight:850;color:var(--ink)}
+.cb-intro-fold>summary::-webkit-details-marker{display:none}
+.cb-intro-title{font-size:1rem}
+.cb-intro-hint{display:inline-flex;align-items:center;gap:7px;color:var(--violet);font-size:0;font-weight:800;white-space:nowrap}
+.cb-intro-hint:before{content:"Ver descripción";font-size:.82rem}
+.cb-intro-fold[open] .cb-intro-hint:before{content:"Ocultar descripción"}
+.cb-intro-hint>span{width:25px;height:25px;border-radius:8px;background:var(--violet-soft);display:grid;place-items:center;font-size:1rem}
+.cb-intro-fold[open]>summary{border-bottom:1px solid var(--line)}
+.cb-intro-fold[open] .cb-intro-hint>span{font-size:0}
+.cb-intro-fold[open] .cb-intro-hint>span:before{content:"−";font-size:1rem}
+.cb-intro-content{padding:14px 16px 16px}
+.cb-intro-content>p{margin:0 0 10px;color:var(--muted);line-height:1.55}
+.cb-intro-content .prox{margin-top:8px}
+
+/* Paneles inferiores: cuadrícula compacta, similar a los accesos del Panel rápido */
+#cbHomeLayout.cb-home-layout{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:14px;align-items:stretch}
+#cbHomeLayout .cb-home-group{display:contents}
+#cbHomeLayout .cb-home-group-title{display:none}
+#cbHomeLayout .cb-home-module{display:flex;flex-direction:column;min-width:0;min-height:220px;margin:0!important;padding:13px!important;border-radius:17px;align-self:stretch;box-shadow:0 5px 16px rgba(25,18,44,.07)}
+#cbHomeLayout .cb-module-summary{display:flex;flex:1;flex-direction:column;min-width:0;gap:8px}
+#cbHomeLayout .cb-section-head{align-items:flex-start;gap:7px;margin:0}
+#cbHomeLayout .cb-section-head>div{min-width:0}
+#cbHomeLayout .cb-section-head h2{font-size:.98rem;line-height:1.22;margin:3px 0 0;overflow-wrap:anywhere}
+#cbHomeLayout .cb-kicker{font-size:.58rem;letter-spacing:.09em;line-height:1.25}
+#cbHomeLayout .cb-module-icon{width:36px;height:36px;border-radius:11px;font-size:1.15rem;flex:none}
+#cbHomeLayout .cb-module-teaser{color:var(--muted);font-size:.78rem;line-height:1.4;margin:0;min-height:2.8em}
+#cbHomeLayout .cb-module-open{width:100%;min-height:38px;margin: auto 0 0;padding:8px 9px;border-radius:11px;font-size:.82rem;font-weight:800}
+#cbHomeLayout .cb-panel-tutorial{display:flex;width:100%;min-height:40px;align-items:center;justify-content:center;margin:0;padding:8px 7px;border:1px solid var(--violet);border-radius:11px;background:var(--violet);color:var(--violet-ink);font-size:.77rem;font-weight:900;line-height:1.2;text-align:center;text-decoration:none;box-shadow:0 3px 9px color-mix(in srgb,var(--violet) 22%,transparent)}
+#cbHomeLayout .cb-panel-tutorial:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+#cbHomeLayout .cb-module-content[hidden]{display:none!important}
+#cbHomeLayout .cb-module-content:not([hidden]){display:block;margin-top:13px;padding-top:13px;border-top:1px solid var(--line)}
+#cbHomeLayout .cb-home-module.is-expanded{grid-column:1 / -1;min-height:0}
+#cbHomeLayout .cb-home-module.is-expanded .cb-module-summary{flex:none}
+#cbHomeLayout .cb-home-module.is-expanded .cb-module-teaser{min-height:0}
+#cbHomeLayout .cb-home-module.is-expanded .cb-module-content .note{line-height:1.5}
+#cbHomeLayout .cb-progress-actions{margin-top:12px}
+#cbHomeLayout .cb-inline-actions{margin-top:10px}
+#cbHomeLayout .cb-module-content>.btn{margin-top:9px}
+#cbHomeLayout .cb-module-content>.btn:first-of-type{margin-top:0}
+#cbHomeLayout .cb-module-open[aria-expanded="true"]{background:var(--violet-soft);color:var(--violet);border-color:var(--violet)}
+/* Conserva el orden elegido en Ajustes aun con las tarjetas en cuadrícula */
+#cbHomeLayout[data-order="weather"] [data-home-module="weather"],
+#cbHomeLayout[data-order="weather"] [data-home-module="notifications"],
+#cbHomeLayout[data-order="safety"] [data-home-module="weather"],
+#cbHomeLayout[data-order="safety"] [data-home-module="notifications"]{order:-2}
+#cbHomeLayout[data-order="trip"] [data-home-module="progress"]{order:-2}
+#cbHomeLayout[data-order="activity"] [data-home-module="stats"]{order:-3}
+@media(max-width:360px){
+  #cbHomeLayout.cb-home-layout{grid-template-columns:minmax(0,1fr)}
+  #cbHomeLayout .cb-home-module{min-height:0}
+  #cbHomeLayout .cb-module-teaser{min-height:0}
+}
+@media(prefers-reduced-motion:no-preference){
+  #cbHomeLayout .cb-home-module{transition:transform .18s ease,box-shadow .18s ease}
+  #cbHomeLayout .cb-home-module:not(.is-expanded):hover{transform:translateY(-2px)}
+}
+</style>
+
+
+<style id="cb-home-alignment-final">
+/* Alineación final de Inicio: un panel principal horizontal y cuatro tarjetas parejas. */
+#lobby>.dashboard-panel{display:none!important}
+#cbHomeLayout.cb-home-layout{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:minmax(148px,auto) repeat(2,minmax(220px,auto));
+  grid-auto-flow:row;
+  align-items:stretch;
+  gap:11px;
+  margin-top:14px;
+}
+#cbHomeLayout .cb-home-group{display:contents}
+#cbHomeLayout .cb-home-module{
+  display:flex;
+  flex-direction:column;
+  align-self:stretch;
+  width:100%;
+  height:100%;
+  min-width:0;
+  min-height:220px;
+  margin:0!important;
+}
+/* Progreso de tu viaje: formato horizontal como el acceso ancho de Emergencia,
+   conservando su título y sus acciones reales. */
+#cbHomeLayout .cb-home-module[data-home-module="progress"]{
+  grid-column:1/-1;
+  min-height:148px;
+  padding:14px 16px!important;
+  border:2px solid color-mix(in srgb,var(--violet) 46%,var(--line));
+  border-radius:17px;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-module-summary{
+  display:grid;
+  flex:1;
+  grid-template-columns:48px minmax(0,1fr) minmax(0,1fr);
+  grid-template-rows:auto auto auto;
+  align-items:center;
+  gap:7px 10px;
+  min-width:0;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-section-head{display:contents}
+#cbHomeLayout [data-home-module="progress"] .cb-section-head>div{
+  grid-column:2/4;
+  grid-row:1;
+  min-width:0;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-section-head h2{font-size:1.08rem;line-height:1.2}
+#cbHomeLayout [data-home-module="progress"] .cb-kicker{font-size:.62rem}
+#cbHomeLayout [data-home-module="progress"] .cb-module-icon{
+  grid-column:1;
+  grid-row:1/3;
+  width:46px;
+  height:46px;
+  border-radius:13px;
+  font-size:1.35rem;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-module-teaser{
+  grid-column:2/4;
+  grid-row:2;
+  min-height:0;
+  margin:0;
+  font-size:.81rem;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-module-open{
+  grid-column:2;
+  grid-row:3;
+  width:100%;
+  min-height:42px;
+  margin:0;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-panel-tutorial{
+  grid-column:3;
+  grid-row:3;
+  width:100%;
+  min-height:42px;
+  margin:0;
+}
+/* Todas las tarjetas secundarias quedan con la misma altura y acciones alineadas. */
+#cbHomeLayout .cb-home-module:not([data-home-module="progress"]) .cb-module-summary{
+  display:flex;
+  flex:1;
+  flex-direction:column;
+  gap:8px;
+  min-width:0;
+}
+#cbHomeLayout .cb-home-module:not([data-home-module="progress"]) .cb-module-teaser{
+  min-height:2.8em;
+}
+#cbHomeLayout .cb-home-module:not([data-home-module="progress"]) .cb-module-open{margin-top:auto}
+#cbHomeLayout .cb-panel-tutorial{
+  min-height:42px;
+  padding:8px 7px;
+  border:1px solid var(--violet);
+  border-radius:11px;
+  background:var(--violet);
+  color:var(--violet-ink);
+  font-weight:900;
+  box-shadow:0 3px 9px color-mix(in srgb,var(--violet) 22%,transparent);
+}
+#cbHomeLayout .cb-module-content[hidden]{display:none!important}
+#cbHomeLayout .cb-home-module.is-expanded{grid-column:1/-1;height:auto;min-height:0}
+#cbHomeLayout .cb-home-module.is-expanded .cb-module-summary{flex:none}
+#cbHomeLayout .cb-home-module.is-expanded .cb-module-teaser{min-height:0}
+@media(max-width:360px){
+  #cbHomeLayout.cb-home-layout{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;grid-auto-rows:auto}
+  #cbHomeLayout .cb-home-module{height:auto;min-height:205px}
+  #cbHomeLayout .cb-home-module[data-home-module="progress"]{min-height:0}
+  #cbHomeLayout [data-home-module="progress"] .cb-module-summary{
+    grid-template-columns:42px minmax(0,1fr);
+    grid-template-rows:auto auto auto auto;
+    gap:8px;
+  }
+  #cbHomeLayout [data-home-module="progress"] .cb-section-head>div{grid-column:2;grid-row:1}
+  #cbHomeLayout [data-home-module="progress"] .cb-module-icon{grid-column:1;grid-row:1/3;width:40px;height:40px}
+  #cbHomeLayout [data-home-module="progress"] .cb-module-teaser{grid-column:2;grid-row:2}
+  #cbHomeLayout [data-home-module="progress"] .cb-module-open{grid-column:1/3;grid-row:3}
+  #cbHomeLayout [data-home-module="progress"] .cb-panel-tutorial{grid-column:1/3;grid-row:4}
+}
+</style>
+
+
+<style id="cb-home-featured-layout-refinement">
+/* El panel principal imita la proporción horizontal del acceso ancho de Inicio. */
+#cbHomeLayout .cb-home-module[data-home-module="progress"]{
+  order:-10;
+  min-height:112px;
+  padding:12px 15px!important;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-module-summary{
+  grid-template-columns:46px minmax(0,1fr) minmax(124px,148px);
+  grid-template-rows:minmax(38px,auto) minmax(38px,auto);
+  gap:7px 11px;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-section-head>div{grid-column:2;grid-row:1}
+#cbHomeLayout [data-home-module="progress"] .cb-module-icon{
+  grid-column:1;grid-row:1/3;width:46px;height:46px;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-module-teaser{
+  grid-column:2;grid-row:2;align-self:start;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-module-open{
+  grid-column:3;grid-row:1;min-width:0;min-height:40px;padding:7px 8px;font-size:.76rem;
+}
+#cbHomeLayout [data-home-module="progress"] .cb-panel-tutorial{
+  grid-column:3;grid-row:2;min-width:0;min-height:40px;padding:7px 8px;font-size:.72rem;line-height:1.15;
+}
+@media(max-width:390px){
+  #cbHomeLayout [data-home-module="progress"] .cb-module-summary{
+    grid-template-columns:42px minmax(0,1fr);
+    grid-template-rows:auto auto auto auto;
+    gap:7px 9px;
+  }
+  #cbHomeLayout [data-home-module="progress"] .cb-section-head>div{grid-column:2;grid-row:1}
+  #cbHomeLayout [data-home-module="progress"] .cb-module-icon{grid-column:1;grid-row:1/3;width:40px;height:40px}
+  #cbHomeLayout [data-home-module="progress"] .cb-module-teaser{grid-column:2;grid-row:2}
+  #cbHomeLayout [data-home-module="progress"] .cb-module-open{grid-column:1/3;grid-row:3;font-size:.82rem}
+  #cbHomeLayout [data-home-module="progress"] .cb-panel-tutorial{grid-column:1/3;grid-row:4;font-size:.78rem}
+}
+</style>
+
+
+<style id="cb-tutorial-accordion-refresh">
+#v-tutorial .cb-tutorial-intro{margin:8px 0 16px;color:var(--muted);line-height:1.55}
+#v-tutorial .cb-tutorial-step{display:block;overflow:hidden;margin:0 0 10px;padding:0;border:1px solid var(--line);border-radius:15px;background:var(--surface);scroll-margin-top:20px;box-shadow:0 3px 12px rgba(25,18,44,.045)}
+#v-tutorial .cb-tutorial-step:last-of-type{margin-bottom:0}
+#v-tutorial .cb-tutorial-step>summary{display:flex;align-items:center;gap:12px;min-height:68px;padding:12px 14px;cursor:pointer;list-style:none;user-select:none}
+#v-tutorial .cb-tutorial-step>summary::-webkit-details-marker{display:none}
+#v-tutorial .cb-tutorial-step>summary:focus-visible{outline:3px solid var(--violet);outline-offset:-3px;border-radius:14px}
+#v-tutorial .cb-tutorial-number{width:36px;height:36px;display:grid;place-items:center;flex:none;border-radius:11px;background:var(--violet-soft);color:var(--violet);font-weight:950;font-size:.88rem}
+#v-tutorial .cb-tutorial-heading{display:block;min-width:0;flex:1}
+#v-tutorial .cb-tutorial-heading b{display:block;color:var(--ink);font-size:.96rem;line-height:1.25}
+#v-tutorial .cb-tutorial-heading small{display:block;margin-top:4px;color:var(--muted);font-size:.78rem;line-height:1.35}
+#v-tutorial .cb-tutorial-chevron{width:30px;height:30px;display:grid;place-items:center;flex:none;border-radius:9px;background:var(--violet-soft);color:var(--violet)}
+#v-tutorial .cb-tutorial-chevron:before{content:"+";font-size:1.28rem;font-weight:800;line-height:1}
+#v-tutorial .cb-tutorial-step[open]{border-color:color-mix(in srgb,var(--violet) 55%,var(--line));box-shadow:0 5px 16px color-mix(in srgb,var(--violet) 10%,transparent)}
+#v-tutorial .cb-tutorial-step[open]>summary{border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--violet-soft) 28%,var(--surface))}
+#v-tutorial .cb-tutorial-step[open] .cb-tutorial-chevron:before{content:"−"}
+#v-tutorial .cb-tutorial-content{padding:13px 16px 15px 62px}
+#v-tutorial .cb-tutorial-content p{margin:0 0 11px;color:var(--muted);font-size:.88rem;line-height:1.55}
+#v-tutorial .cb-tutorial-content .btn{display:inline-flex;width:auto;min-height:38px;margin:0;padding:8px 13px;font-size:.82rem}
+@media(max-width:390px){
+  #v-tutorial .cb-tutorial-step>summary{gap:9px;padding:11px 10px}
+  #v-tutorial .cb-tutorial-heading b{font-size:.91rem}
+  #v-tutorial .cb-tutorial-heading small{font-size:.74rem}
+  #v-tutorial .cb-tutorial-content{padding:12px 12px 14px 55px}
+}
+</style>
+
 </head>
 <body>
 
@@ -643,12 +928,17 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
     <a class="gear" href="#ajustes" aria-label="Ajustes"><svg viewBox="0 0 24 24"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></svg></a>
   </div>
 
-  <div class="card">
-    <h2>¿Qué es ConectaBus?</h2>
-    <p>Es una parada de colectivos conectada. Desde tu celular consultás recorridos, paradas y horarios de cada línea, elegís dónde esperar y activás una alarma antes de la salida. También encontrás avisos de la central, como demoras o emergencias.</p>
-    <div class="prox"><span class="dot"></span><span id="prox">Buscando colectivos cercanos…</span></div>
-    <div class="prox" style="margin-top:8px"><span class="dot"></span><span id="svcT"></span></div>
-  </div>
+  <details class="card cb-intro-fold">
+    <summary>
+      <span class="cb-intro-title">¿Qué es ConectaBus?</span>
+      <span class="cb-intro-hint">Ver descripción <span aria-hidden="true">＋</span></span>
+    </summary>
+    <div class="cb-intro-content">
+      <p>Es una parada de colectivos conectada. Desde tu celular consultás recorridos, paradas y horarios de cada línea, elegís dónde esperar y activás una alarma antes de la salida. También encontrás avisos de la central, como demoras o emergencias.</p>
+      <div class="prox"><span class="dot"></span><span id="prox">Buscando colectivos cercanos…</span></div>
+      <div class="prox" style="margin-top:8px"><span class="dot"></span><span id="svcT"></span></div>
+    </div>
+  </details>
 
   <div class="menu">
     <a class="tile" href="#mapa"><span class="ic"><svg viewBox="0 0 24 24"><use href="#i-mapa"/></svg></span><b>Mapa</b><small>Calles, lugares y paradas</small></a>
@@ -663,63 +953,86 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
     <div id="miBody"></div>
   </div>
 
-  <section class="card dashboard-panel" aria-labelledby="dashTitle">
-    <div class="dash-heading"><div><span class="dash-kicker">CENTRO DE CONTROL</span><h2 id="dashTitle">Panel rápido</h2></div><span class="dash-orbit" aria-hidden="true">✦</span></div>
-    <div class="dash-trip" id="quickTripStatus" aria-live="polite">Todavía no hay un viaje guardado. Elegí una línea y una parada para empezar.</div>
-    <div class="dash-actions">
-      <a href="#lineas" class="dash-action"><span>＋</span><b>Configurar viaje</b><small>Elegir línea y parada</small></a>
-      <a href="#mapa" class="dash-action"><span>⌖</span><b>Abrir mapa</b><small>Ver calles y recorrido</small></a>
-      <a href="#horarios" class="dash-action"><span>◷</span><b>Consultar horarios</b><small>Buscar próximas salidas</small></a>
-      <a href="#avisos" class="dash-action"><span>◉</span><b>Ver avisos</b><small>Demoras y novedades</small></a>
-    </div>
-    <button class="btn ghost dash-share" id="quickShareTrip" type="button">Compartir datos de mi viaje</button>
-    <p id="quickShareStatus" class="note" role="status" aria-live="polite"></p>
-  </section>
+
 
   <div class="cb-home-layout" id="cbHomeLayout">
-    <div class="cb-home-group" data-home-group="trip"><div class="cb-home-group-title"><span>01</span><div><b>Tu viaje</b><small>Seguimiento del colectivo que elegiste</small></div></div>
-    <section class="card cb-home-module" id="cbHomeProgress" data-home-module="progress">
-      <div class="cb-section-head"><div><span class="cb-kicker">SEGUIMIENTO MANUAL</span><h2>Progreso de tu viaje</h2></div><span class="cb-module-icon">➜</span></div>
-      <div id="cbProgressBody" aria-live="polite"><p class="note">Guardá una línea y una parada para iniciar el seguimiento.</p></div>
-      <div class="cb-progress-actions"><button class="btn" id="cbAdvanceStop" type="button">Marcar parada pasada</button><button class="btn ghost" id="cbCompleteTrip" type="button">Finalicé mi viaje</button><button class="btn ghost" id="cbResetProgress" type="button">Reiniciar</button></div>
-      <p class="note">El avance es manual y usa el orden de paradas cargado. No detecta tu ubicación ni el colectivo por GPS.</p>
-      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-progress">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
-    </section>
+    <div class="cb-home-group" data-home-group="trip">
+      <section class="card cb-home-module" id="cbHomeProgress" data-home-module="progress">
+        <div class="cb-module-summary">
+          <div class="cb-section-head"><div><span class="cb-kicker">SEGUIMIENTO MANUAL</span><h2>Progreso de tu viaje</h2></div><span class="cb-module-icon">➜</span></div>
+          <p class="cb-module-teaser">Marcá las paradas que vas pasando y seguí el avance de tu recorrido.</p>
+          <button class="btn cb-module-open" type="button" data-cb-expand aria-expanded="false" aria-controls="cbContentProgress">＋ Abrir panel</button>
+          <a class="btn cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-progress">✦ Ver tutorial de este panel</a>
+        </div>
+        <div class="cb-module-content" id="cbContentProgress" hidden>
+          <div id="cbProgressBody" aria-live="polite"><p class="note">Guardá una línea y una parada para iniciar el seguimiento.</p></div>
+          <div class="cb-progress-actions"><button class="btn" id="cbAdvanceStop" type="button">Marcar parada pasada</button><button class="btn ghost" id="cbCompleteTrip" type="button">Finalicé mi viaje</button><button class="btn ghost" id="cbResetProgress" type="button">Reiniciar</button></div>
+          <p class="note">El avance es manual y usa el orden de paradas cargado. No detecta tu ubicación ni el colectivo por GPS.</p>
+        </div>
+      </section>
     </div>
-    <div class="cb-home-group" data-home-group="info"><div class="cb-home-group-title"><span>02</span><div><b>Información y novedades</b><small>Clima y actividad reciente</small></div></div>
-    <section class="card cb-home-module" id="cbHomeWeather" data-home-module="weather">
-      <div class="cb-section-head"><div><span class="cb-kicker">SAN RAFAEL · MENDOZA</span><h2>Clima para salir</h2></div><span class="cb-module-icon">☀</span></div>
-      <div id="cbWeatherBody" class="cb-weather-body"><p class="note">Consultá las condiciones actuales cuando tengas conexión.</p></div>
-      <button class="btn ghost" id="cbWeatherRefresh" type="button">Actualizar clima</button>
-      <p class="note">Pronóstico externo de <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>. Puede no coincidir exactamente con tu parada.</p>
-      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-weather">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
-    </section>
-    <section class="card cb-home-module" id="cbHomeNotifications" data-home-module="notifications">
-      <div class="cb-section-head"><div><span class="cb-kicker">CENTRO DE NOTIFICACIONES</span><h2>Tu actividad</h2></div><span class="cb-module-icon">◉</span></div>
-      <div id="cbNotificationsList" class="cb-notifications-list"><p class="note">Todavía no hay novedades guardadas.</p></div>
-      <div class="cb-inline-actions"><button class="btn ghost" id="cbMarkNotificationsRead" type="button">Marcar todo leído</button><button class="btn ghost" id="cbClearNotifications" type="button">Borrar historial</button></div>
-      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-notifications">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
-    </section>
+
+    <div class="cb-home-group" data-home-group="info">
+      <section class="card cb-home-module" id="cbHomeWeather" data-home-module="weather">
+        <div class="cb-module-summary">
+          <div class="cb-section-head"><div><span class="cb-kicker">SAN RAFAEL · MENDOZA</span><h2>Clima para salir</h2></div><span class="cb-module-icon">☀</span></div>
+          <p class="cb-module-teaser">Consultá la temperatura y las condiciones actuales.</p>
+          <button class="btn cb-module-open" type="button" data-cb-expand aria-expanded="false" aria-controls="cbContentWeather">＋ Abrir panel</button>
+          <a class="btn cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-weather">✦ Ver tutorial de este panel</a>
+        </div>
+        <div class="cb-module-content" id="cbContentWeather" hidden>
+          <div id="cbWeatherBody" class="cb-weather-body"><p class="note">Consultá las condiciones actuales cuando tengas conexión.</p></div>
+          <button class="btn ghost" id="cbWeatherRefresh" type="button">Actualizar clima</button>
+          <p class="note">Pronóstico externo de <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>. Puede no coincidir exactamente con tu parada.</p>
+        </div>
+      </section>
+
+      <section class="card cb-home-module" id="cbHomeNotifications" data-home-module="notifications">
+        <div class="cb-module-summary">
+          <div class="cb-section-head"><div><span class="cb-kicker">CENTRO DE NOTIFICACIONES</span><h2>Tu actividad</h2></div><span class="cb-module-icon">◉</span></div>
+          <p class="cb-module-teaser">Revisá avisos, novedades y notificaciones guardadas.</p>
+          <button class="btn cb-module-open" type="button" data-cb-expand aria-expanded="false" aria-controls="cbContentNotifications">＋ Abrir panel</button>
+          <a class="btn cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-notifications">✦ Ver tutorial de este panel</a>
+        </div>
+        <div class="cb-module-content" id="cbContentNotifications" hidden>
+          <div id="cbNotificationsList" class="cb-notifications-list"><p class="note">Todavía no hay novedades guardadas.</p></div>
+          <div class="cb-inline-actions"><button class="btn ghost" id="cbMarkNotificationsRead" type="button">Marcar todo leído</button><button class="btn ghost" id="cbClearNotifications" type="button">Borrar historial</button></div>
+        </div>
+      </section>
     </div>
-    <div class="cb-home-group" data-home-group="activity"><div class="cb-home-group-title"><span>03</span><div><b>Tu actividad</b><small>Viajes realizados y logros</small></div></div>
-    <section class="card cb-home-module" id="cbHomeStats" data-home-module="stats">
-      <div class="cb-section-head"><div><span class="cb-kicker">ESTADÍSTICAS PERSONALES</span><h2>Mis viajes y logros</h2></div><span class="cb-module-icon">✦</span></div>
-      <div id="cbStatsBody"></div>
-      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-stats">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
-    </section>
+
+    <div class="cb-home-group" data-home-group="activity">
+      <section class="card cb-home-module" id="cbHomeStats" data-home-module="stats">
+        <div class="cb-module-summary">
+          <div class="cb-section-head"><div><span class="cb-kicker">ESTADÍSTICAS PERSONALES</span><h2>Mis viajes y logros</h2></div><span class="cb-module-icon">✦</span></div>
+          <p class="cb-module-teaser">Consultá tus viajes completados y los logros que conseguiste.</p>
+          <button class="btn cb-module-open" type="button" data-cb-expand aria-expanded="false" aria-controls="cbContentStats">＋ Abrir panel</button>
+          <a class="btn cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-stats">✦ Ver tutorial de este panel</a>
+        </div>
+        <div class="cb-module-content" id="cbContentStats" hidden>
+          <div id="cbStatsBody"></div>
+        </div>
+      </section>
     </div>
-    <div class="cb-home-group" data-home-group="tools"><div class="cb-home-group-title"><span>04</span><div><b>Herramientas</b><small>Conexión y respaldo de tus datos</small></div></div>
-    <section class="card cb-home-module" id="cbHomeOffline" data-home-module="offline">
-      <div class="cb-section-head"><div><span class="cb-kicker">ESTADO DEL DISPOSITIVO</span><h2>Conexión y datos</h2></div><span class="cb-module-icon">⌁</span></div>
-      <p id="cbConnectionStatus" class="cb-connection-status">Comprobando conexión…</p>
-      <p class="note">Las líneas y horarios incluidos en este archivo siguen disponibles sin Internet. El clima, los enlaces externos y las funciones para compartir necesitan conexión.</p>
-      <button class="btn ghost" id="cbExportData" type="button">Crear copia de seguridad</button>
-      <button class="btn ghost" id="cbImportData" type="button">Restaurar copia</button>
-      <button class="btn" id="cbInstallApp" type="button" hidden>Instalar ConectaBus</button>
-      <input id="cbImportFile" type="file" accept="application/json,.json" hidden>
-      <p id="cbBackupStatus" class="note" role="status"></p>
-      <a class="btn ghost cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-tools">ⓘ ¿Cómo se usa este panel? Ver tutorial</a>
-    </section>
+
+    <div class="cb-home-group" data-home-group="tools">
+      <section class="card cb-home-module" id="cbHomeOffline" data-home-module="offline">
+        <div class="cb-module-summary">
+          <div class="cb-section-head"><div><span class="cb-kicker">ESTADO DEL DISPOSITIVO</span><h2>Conexión y datos</h2></div><span class="cb-module-icon">⌁</span></div>
+          <p class="cb-module-teaser">Revisá la conexión y administrá tus copias de seguridad.</p>
+          <button class="btn cb-module-open" type="button" data-cb-expand aria-expanded="false" aria-controls="cbContentOffline">＋ Abrir panel</button>
+          <a class="btn cb-panel-tutorial" href="#tutorial" data-tutorial-target="tutorial-tools">✦ Ver tutorial de este panel</a>
+        </div>
+        <div class="cb-module-content" id="cbContentOffline" hidden>
+          <p id="cbConnectionStatus" class="cb-connection-status">Comprobando conexión…</p>
+          <p class="note">Las líneas y horarios incluidos en este archivo siguen disponibles sin Internet. El clima, los enlaces externos y las funciones para compartir necesitan conexión.</p>
+          <button class="btn ghost" id="cbExportData" type="button">Crear copia de seguridad</button>
+          <button class="btn ghost" id="cbImportData" type="button">Restaurar copia</button>
+          <button class="btn" id="cbInstallApp" type="button" hidden>Instalar ConectaBus</button>
+          <input id="cbImportFile" type="file" accept="application/json,.json" hidden>
+          <p id="cbBackupStatus" class="note" role="status"></p>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -1042,19 +1355,19 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 
   <section class="view" id="v-tutorial">
     <div class="card">
-      <span class="cb-kicker">GUÍA PARA EMPEZAR</span><h2>¡Bienvenido a ConectaBus!</h2>
-      <p>Este tutorial te explica de forma simple para qué sirve cada parte. Podés volver a Inicio cuando quieras.</p>
-      <div class="cb-tutorial-step"><span>1</span><div><b>Elegí tu colectivo</b><p>Entrá en <b>Líneas</b>, seleccioná la línea y el sentido del recorrido. Después elegí la parada donde vas a subir y guardá tu viaje.</p><a href="#lineas" class="btn ghost linkbtn">Ir a Líneas</a></div></div>
-      <div class="cb-tutorial-step"><span>2</span><div><b>Consultá los horarios</b><p>En <b>Horarios</b> podés revisar las salidas disponibles para cada línea. Tené en cuenta que los horarios cargados pueden ser de demostración.</p><a href="#horarios" class="btn ghost linkbtn">Ver horarios</a></div></div>
-      <div class="cb-tutorial-step"><span>3</span><div><b>Buscá tu parada en el mapa</b><p>Abrí <b>Mapa</b> para orientarte, buscar calles, lugares y consultar los marcadores de paradas.</p><a href="#mapa" class="btn ghost linkbtn">Abrir mapa</a></div></div>
-      <div class="cb-tutorial-step"><span>4</span><div><b>Revisá los avisos</b><p>En <b>Avisos</b> aparecen mensajes sobre el servicio, demoras y avisos de demostración. Mirá siempre el detalle para saber si un aviso es una prueba.</p><a href="#avisos" class="btn ghost linkbtn">Ver avisos</a></div></div>
-      <div class="cb-tutorial-step" id="tutorial-progress"><span>5</span><div><b>Seguí tu viaje desde Inicio</b><p>En <b>Progreso de tu viaje</b> podés marcar manualmente las paradas que pasaste y tocar <b>Finalicé mi viaje</b> al terminar. No usa GPS para detectar el avance.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></div>
-      <div class="cb-tutorial-step"><span>6</span><div><b>Usá Emergencia si necesitás ayuda</b><p>Encontrás teléfonos útiles, opciones para compartir datos y una guía de seguridad. Las llamadas o mensajes se realizan solo si vos tocás las opciones correspondientes.</p><a href="#emergencia" class="btn danger linkbtn">Abrir Emergencia</a></div></div>
-      <div class="cb-tutorial-step"><span>7</span><div><b>Personalizá la aplicación</b><p>En <b>Ajustes</b> podés cambiar el tema, el tamaño de letra, sonidos y algunas tarjetas que aparecen en Inicio.</p><a href="#ajustes" class="btn ghost linkbtn">Ir a Ajustes</a></div></div>
-      <div class="cb-tutorial-step" id="tutorial-weather"><span>8</span><div><b>Consultá el clima</b><p>El panel <b>Clima para salir</b> muestra temperatura y condiciones actuales de San Rafael. Tocá <b>Actualizar clima</b> para consultar de nuevo. Necesitás Internet; si no hay conexión, puede mostrar el último dato guardado.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></div>
-      <div class="cb-tutorial-step" id="tutorial-notifications"><span>9</span><div><b>Revisá tu actividad y notificaciones</b><p>Este panel reúne novedades y notificaciones guardadas. Podés marcarlas como leídas o borrar el historial con sus botones. Revisá el contenido antes de tomar decisiones: algunos avisos son de demostración.</p><a href="#avisos" class="btn ghost linkbtn">Ir a Avisos</a></div></div>
-      <div class="cb-tutorial-step" id="tutorial-stats"><span>10</span><div><b>Consultá tus viajes y logros</b><p>El panel <b>Mis viajes y logros</b> resume la actividad que ConectaBus registró en este dispositivo. Se actualiza según los viajes que vayas completando desde el seguimiento.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></div>
-      <div class="cb-tutorial-step" id="tutorial-tools"><span>11</span><div><b>Revisá la conexión y guardá tus datos</b><p>El panel indica si tenés Internet. Con <b>Crear copia de seguridad</b> descargás un archivo con tus datos de ConectaBus; con <b>Restaurar copia</b> podés recuperar un respaldo anterior. Guardá el archivo en un lugar seguro.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></div>
+      <span class="cb-kicker">AYUDA Y APRENDIZAJE</span><h2>Tutoriales de ConectaBus</h2>
+      <p class="cb-tutorial-intro">Elegí el tema que querés aprender. Tocá una tarjeta para abrir la explicación y volvé a tocarla para cerrarla. Si llegás desde un panel, se abrirá directamente su tutorial.</p>
+      <details class="cb-tutorial-step" id="tutorial-lines"><summary><span class="cb-tutorial-number">1</span><span class="cb-tutorial-heading"><b>Elegí tu colectivo</b><small>Configurá la línea, el sentido y la parada donde vas a subir.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>Entrá en <b>Líneas</b>, seleccioná la línea y el sentido del recorrido. Después elegí la parada donde vas a subir y guardá tu viaje.</p><a href="#lineas" class="btn ghost linkbtn">Ir a Líneas</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-schedules"><summary><span class="cb-tutorial-number">2</span><span class="cb-tutorial-heading"><b>Consultá los horarios</b><small>Buscá las salidas disponibles para cada recorrido.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>En <b>Horarios</b> podés revisar las salidas disponibles para cada línea. Tené en cuenta que los horarios cargados pueden ser de demostración.</p><a href="#horarios" class="btn ghost linkbtn">Ver horarios</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-map"><summary><span class="cb-tutorial-number">3</span><span class="cb-tutorial-heading"><b>Buscá tu parada en el mapa</b><small>Orientate y encontrá calles, lugares y paradas.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>Abrí <b>Mapa</b> para orientarte, buscar calles, lugares y consultar los marcadores de paradas.</p><a href="#mapa" class="btn ghost linkbtn">Abrir mapa</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-notices"><summary><span class="cb-tutorial-number">4</span><span class="cb-tutorial-heading"><b>Revisá los avisos</b><small>Consultá novedades, mensajes y avisos del servicio.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>En <b>Avisos</b> aparecen mensajes sobre el servicio, demoras y avisos de demostración. Mirá siempre el detalle para saber si un aviso es una prueba.</p><a href="#avisos" class="btn ghost linkbtn">Ver avisos</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-progress"><summary><span class="cb-tutorial-number">5</span><span class="cb-tutorial-heading"><b>Seguí tu viaje desde Inicio</b><small>Marcá las paradas que pasaste y finalizá tu viaje.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>En <b>Progreso de tu viaje</b> podés marcar manualmente las paradas que pasaste y tocar <b>Finalicé mi viaje</b> al terminar. No usa GPS para detectar el avance.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-emergency"><summary><span class="cb-tutorial-number">6</span><span class="cb-tutorial-heading"><b>Usá Emergencia si necesitás ayuda</b><small>Encontrá teléfonos útiles y opciones para pedir ayuda.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>Encontrás teléfonos útiles, opciones para compartir datos y una guía de seguridad. Las llamadas o mensajes se realizan solo si vos tocás las opciones correspondientes.</p><a href="#emergencia" class="btn danger linkbtn">Abrir Emergencia</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-settings"><summary><span class="cb-tutorial-number">7</span><span class="cb-tutorial-heading"><b>Personalizá la aplicación</b><small>Adaptá el aspecto y las preferencias de la aplicación.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>En <b>Ajustes</b> podés cambiar el tema, el tamaño de letra, sonidos y algunas tarjetas que aparecen en Inicio.</p><a href="#ajustes" class="btn ghost linkbtn">Ir a Ajustes</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-weather"><summary><span class="cb-tutorial-number">8</span><span class="cb-tutorial-heading"><b>Consultá el clima</b><small>Consultá la temperatura y las condiciones de San Rafael.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>El panel <b>Clima para salir</b> muestra temperatura y condiciones actuales de San Rafael. Tocá <b>Actualizar clima</b> para consultar de nuevo. Necesitás Internet; si no hay conexión, puede mostrar el último dato guardado.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-notifications"><summary><span class="cb-tutorial-number">9</span><span class="cb-tutorial-heading"><b>Revisá tu actividad y notificaciones</b><small>Revisá las novedades y notificaciones guardadas.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>Este panel reúne novedades y notificaciones guardadas. Podés marcarlas como leídas o borrar el historial con sus botones. Revisá el contenido antes de tomar decisiones: algunos avisos son de demostración.</p><a href="#avisos" class="btn ghost linkbtn">Ir a Avisos</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-stats"><summary><span class="cb-tutorial-number">10</span><span class="cb-tutorial-heading"><b>Consultá tus viajes y logros</b><small>Consultá los viajes que completaste y tus logros.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>El panel <b>Mis viajes y logros</b> resume la actividad que ConectaBus registró en este dispositivo. Se actualiza según los viajes que vayas completando desde el seguimiento.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></details>
+      <details class="cb-tutorial-step" id="tutorial-tools"><summary><span class="cb-tutorial-number">11</span><span class="cb-tutorial-heading"><b>Revisá la conexión y guardá tus datos</b><small>Revisá tu conexión y guardá una copia de tus datos.</small></span><span class="cb-tutorial-chevron" aria-hidden="true"></span></summary><div class="cb-tutorial-content"><p>El panel indica si tenés Internet. Con <b>Crear copia de seguridad</b> descargás un archivo con tus datos de ConectaBus; con <b>Restaurar copia</b> podés recuperar un respaldo anterior. Guardá el archivo en un lugar seguro.</p><a href="#inicio" class="btn ghost linkbtn">Volver a Inicio</a></div></details>
     </div>
     <div class="card"><h2>Un detalle importante</h2><p class="note">ConectaBus incluye funciones de demostración. La ubicación en vivo de colectivos, las demoras reales y algunos recorridos u horarios no están conectados a un sistema oficial en tiempo real. Para emergencias reales, usá los teléfonos oficiales.</p><a href="#inicio" class="btn linkbtn">Listo, volver a Inicio</a></div>
   </section>
@@ -2003,7 +2316,7 @@ TRIP.confirmed = TRIP.confirmed === true;
 if(!TRIP.confirmed)TRIP.alarma=false;
 if(typeof TRIP.linea!=="number"||!REAL[TRIP.linea])TRIP.linea=0;
 if(TRIP.dir!=="vuelta")TRIP.dir="ida";
-var tripLastAlarm=false,tripAudio=null;
+var tripLastAlarm=false,tripAudio=null,tripAlarmReminderLastPromptKey=null;
 function tripCurrentStops(){var R=REAL[TRIP.linea]||REAL[0],D=R.dir[TRIP.dir]||R.dir.ida;return pdOf(D,diaHoy())}
 function tripSelectMarkup(prefix){
   var R=REAL[TRIP.linea]||REAL[0],D=R.dir[TRIP.dir]||R.dir.ida,stops=pdOf(D,diaHoy());
@@ -2022,21 +2335,33 @@ function bindTripControls(prefix){
   var li=$(prefix+'Line'),di=$(prefix+'Dir'),st=$(prefix+'Stop');if(!li||!di||!st)return;
   li.addEventListener('change',function(){TRIP.linea=+li.value;TRIP.dir='ida';TRIP.parada=tripCurrentStops()[0]||'';renderTripControls();});
   di.addEventListener('change',function(){TRIP.dir=di.value;TRIP.parada=tripCurrentStops()[0]||'';renderTripControls();});
-  st.addEventListener('change',function(){TRIP.parada=st.value;});
+  st.addEventListener('change',function(){
+    TRIP.parada=st.value;
+    if(!TRIP.alarma)showTripAlarmReminder();
+  });
 }
 
 function syncTripFav(){if(TRIP.parada)lsSet("cb_fav",{linea:TRIP.linea,dir:TRIP.dir,parada:TRIP.parada})}
+var tripEditorCloseAfterSave=false;
 function renderTripControls(){
   var box=$("tripControls");if(!box)return;
-  box.innerHTML='<b>'+(TRIP.confirmed?'Editar tu colectivo y parada':'Elegí tu colectivo y tu parada')+'</b><p class="note">Elegí el número de línea que aparece en los horarios, el sentido y la parada donde esperás.</p>'+tripSelectMarkup('trip')+
+  var oldEditor=box.querySelector("#tripEditor"),keepOpen=oldEditor?oldEditor.open:!TRIP.confirmed;
+  if(tripEditorCloseAfterSave){keepOpen=false;tripEditorCloseAfterSave=false;}
+  var editorTitle=TRIP.confirmed?"Editar tu colectivo y parada":"Elegí tu colectivo y tu parada";
+  var editorHint=TRIP.confirmed?"Abrí para cambiar la línea, el sentido o la parada.":"Configurá tu línea, sentido y parada.";
+  box.innerHTML='<details class="trip-editor" id="tripEditor" '+(keepOpen?'open':'')+'><summary><span class="trip-editor-heading"><strong>'+editorTitle+'</strong><small>'+editorHint+'</small></span></summary><div class="trip-editor-body trip-controls"><p class="note">Elegí el número de línea que aparece en los horarios, el sentido y la parada donde esperás.</p>'+tripSelectMarkup('trip')+
     '<div class="trip-actions"><button class="btn" id="tripSave">Guardar como mi colectivo</button><button class="btn '+(TRIP.alarma?'danger':'ghost')+'" id="tripAlarm">'+(TRIP.alarma?'🔔 Alarma activada':'Activar alarma')+'</button></div><button class="btn ghost" id="tripTestAlarm">Probar sonido de alarma</button>'+ 
+    '<p class="note">La alarma suena con la anticipación que elegiste en Ajustes antes del próximo horario publicado para la parada elegida. Funciona mientras esta página permanezca abierta; no detecta la posición física del colectivo: para eso hace falta GPS en vivo de la empresa. La página debe permanecer abierta y la alarma activada.</p></div></details>'+
     '<div id="tripStatus" class="trip-status">'+(TRIP.confirmed?'Consultando el próximo horario…':'Primero guardá tu línea y parada para activar el aviso.')+'</div>'+
-    '<p class="note">La alarma suena con la anticipación que elegiste en Ajustes antes del próximo horario publicado para la parada elegida. Funciona mientras esta página permanezca abierta; no detecta la posición física del colectivo: para eso hace falta GPS en vivo de la empresa. La página debe permanecer abierta y la alarma activada.</p>';
+    '<section class="trip-discover" aria-label="Ayuda para encontrar tu línea"><strong>¿No sabés cuáles son las líneas?</strong><p>Explorá los recorridos o consultá los horarios antes de elegir tu colectivo.</p><div class="trip-discover-actions"><a class="btn ghost" href="#lineas">Ver líneas</a><a class="btn ghost" href="#horarios">Ver horarios</a></div></section>';
   bindTripControls('trip');
   $("tripSave").addEventListener("click",function(){
     var li=$("tripLine"),di=$("tripDir"),st=$("tripStop");if(!li||!di||!st)return;
     TRIP.linea=+li.value;TRIP.dir=di.value;TRIP.parada=st.value;TRIP.confirmed=true;delete TRIP.completedAt;delete TRIP.completedLine;delete TRIP.completedStop;TRIP.progressIndex=Math.max(0,tripCurrentStops().indexOf(TRIP.parada));
-    saveTrip();syncTripFav();tripLastAlarm=false;renderMiParada();syncTripStopMarker();updateTripAlert();
+    tripEditorCloseAfterSave=true;saveTrip();syncTripFav();tripLastAlarm=false;renderMiParada();syncTripStopMarker();updateTripAlert();
+    // Respaldo: si guardó la parada predeterminada sin cambiar el selector,
+    // mostrar el mismo aviso al confirmar el viaje.
+    if(!TRIP.alarma)showTripAlarmReminder();
   });
   $("tripAlarm").addEventListener("click",function(){
     if(!TRIP.confirmed){$("tripStatus").textContent="Primero guardá tu línea y parada.";return}
@@ -2097,6 +2422,39 @@ function playTripAlarm(){
   }catch(e){}
 }
 
+function tripAlarmReminderKey(){return [TRIP.linea,TRIP.dir,TRIP.parada].join("|");}
+function showTripAlarmReminder(){
+  if(!TRIP||!TRIP.parada||TRIP.alarma||document.getElementById("cbAlarmReminder"))return;
+  var reminderKey=tripAlarmReminderKey();
+  // No repetirlo mientras se sigue editando la misma línea, sentido y parada.
+  if(tripAlarmReminderLastPromptKey===reminderKey)return;
+  // Ignorar el bloqueo global de versiones anteriores; el "No mostrar más"
+  // actual solo se aplica a esta combinación concreta de línea y parada.
+  if(lsGet("cb_alarm_reminder_hidden_for")===reminderKey)return;
+  tripAlarmReminderLastPromptKey=reminderKey;
+  var R=REAL[TRIP.linea]||REAL[0];
+  var overlay=document.createElement("div");overlay.id="cbAlarmReminder";overlay.className="cb-alarm-reminder";overlay.setAttribute("role","presentation");
+  overlay.innerHTML='<section class="cb-alarm-reminder-card" role="dialog" aria-modal="true" aria-labelledby="cbAlarmReminderTitle" aria-describedby="cbAlarmReminderText"><div class="cb-alarm-reminder-icon" aria-hidden="true">🔔</div><h2 id="cbAlarmReminderTitle">¿Querés activar la alarma?</h2><p id="cbAlarmReminderText">Elegiste la Línea '+esc(R.num)+' para la parada <b>'+esc(TRIP.parada)+'</b>, pero la alarma está desactivada. ¿Querés activarla para recibir un aviso antes del horario previsto?</p><p class="cb-alarm-reminder-fine">La alarma usa los horarios cargados y funciona mientras ConectaBus permanezca abierta. No indica la ubicación GPS en vivo del colectivo.</p><div class="cb-alarm-reminder-actions"><button type="button" class="primary" data-alarm-choice="activate">🔔 Activar alarma</button><button type="button" class="secondary" data-alarm-choice="understood">Entendido</button><button type="button" class="quiet" data-alarm-choice="never">No mostrar más para este viaje</button></div></section>';
+  document.body.appendChild(overlay);
+  var first=overlay.querySelector('[data-alarm-choice="activate"]');if(first)first.focus();
+  function close(){if(overlay.parentNode)overlay.remove();}
+  overlay.addEventListener("click",function(e){
+    if(e.target===overlay){close();return;}
+    var button=e.target.closest("[data-alarm-choice]");if(!button)return;
+    var choice=button.getAttribute("data-alarm-choice");
+    if(choice==="never"){lsSet("cb_alarm_reminder_hidden_for",tripAlarmReminderKey());close();return;}
+    if(choice==="understood"){close();return;}
+    if(choice==="activate"){
+      TRIP.alarma=true;tripLastAlarm=false;
+      try{var AC=window.AudioContext||window.webkitAudioContext;if(AC){tripAudio=tripAudio||new AC();if(tripAudio.state==="suspended")tripAudio.resume()}}catch(err){}
+      close();
+      if(typeof renderTripControls==="function")renderTripControls();
+      if(typeof notify==="function")notify("Alarma seleccionada","Al guardar tu colectivo, la alarma quedará activada para este viaje.","trip");
+    }
+  });
+  overlay.addEventListener("keydown",function(e){if(e.key==="Escape")close();});
+}
+
 function updateTripAlert(){
   var status=$("tripStatus"),toast=$("tripToast");if(!status||!toast)return;
   if(!TRIP.confirmed){status.className="trip-status off";status.textContent="Elegí y guardá tu línea y parada para ver el próximo horario.";toast.classList.remove("on");return;}
@@ -2132,10 +2490,11 @@ function route(){
 }
 
 /* Accesos contextuales: cada panel de Inicio abre su tema exacto del tutorial. */
-document.addEventListener("click",function(e){var link=e.target.closest("[data-tutorial-target]");if(!link)return;e.preventDefault();var target=link.getAttribute("data-tutorial-target");if(location.hash!=="#tutorial")location.hash="#tutorial";setTimeout(function(){var section=document.getElementById(target);if(section)section.scrollIntoView({behavior:"smooth",block:"start"});},120);});
+document.addEventListener("click",function(e){var link=e.target.closest("[data-tutorial-target]");if(!link)return;e.preventDefault();var target=link.getAttribute("data-tutorial-target");function openAndShow(){var section=document.getElementById(target);if(!section)return;if(section.tagName&&section.tagName.toLowerCase()==="details")section.open=true;section.scrollIntoView({behavior:"smooth",block:"start"});}if(location.hash!=="#tutorial"){location.hash="#tutorial";setTimeout(openAndShow,220);}else{openAndShow();}});
+document.addEventListener("click",function(e){var button=e.target.closest("[data-cb-expand]");if(!button)return;var card=button.closest(".cb-home-module");if(!card)return;var content=document.getElementById(button.getAttribute("aria-controls"));if(!content)return;var opening=content.hidden;content.hidden=!opening;card.classList.toggle("is-expanded",opening);button.setAttribute("aria-expanded",String(opening));button.textContent=opening?"− Cerrar panel":"＋ Abrir panel";if(opening){setTimeout(function(){card.scrollIntoView({behavior:"smooth",block:"nearest"});},60);}});
 window.addEventListener("hashchange",route);
 if(!TRIP.parada||tripCurrentStops().indexOf(TRIP.parada)<0)TRIP.parada=tripCurrentStops()[0]||"";saveTrip();applyPrefs();renderLineas();renderEmTipos();renderMiParada();syncTripStopMarker();renderAjustes();tickFecha();setInterval(tickFecha,1000);route();renderAvisos();renderHorarios();tick();setInterval(tick,1000);
-if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=document.createElement("div");n.className="cb-global-alert";n.id="cbSetupReminder";n.setAttribute("role","alert");n.innerHTML='<div>🚌 ¡Configurá tu viaje!</div><small>Todavía no guardaste tu colectivo y tu parada. Elegilos para consultar horarios y preparar tus avisos.</small><button type="button" id="cbSetupGo">Elegir mi colectivo</button> <button type="button" id="cbSetupClose">Ahora no</button>';document.body.appendChild(n);$("cbSetupGo").addEventListener("click",function(){n.remove();location.hash="#lineas"});$("cbSetupClose").addEventListener("click",function(){n.remove()})},900)}
+if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=document.createElement("div");n.className="cb-global-alert";n.id="cbSetupReminder";n.setAttribute("role","alert");n.innerHTML='<div>🚌 ¡Configurá tu viaje!</div><small>Todavía no guardaste tu colectivo y tu parada. Elegilos para consultar horarios y preparar tus avisos.</small><button type="button" id="cbSetupGo">Elegir mi colectivo</button> <button type="button" id="cbSetupClose">Ahora no</button>';document.body.appendChild(n);$("cbSetupGo").addEventListener("click",function(){n.remove();if(location.hash!=="#inicio")location.hash="#inicio";else route();setTimeout(function(){var editor=document.getElementById("tripEditor");if(editor){editor.open=true;editor.scrollIntoView({behavior:"smooth",block:"center"});}else{var host=document.getElementById("miBody");if(host)host.scrollIntoView({behavior:"smooth",block:"center"});}},260)});$("cbSetupClose").addEventListener("click",function(){n.remove()})},900)}
 
 /* Se usa únicamente el plano SVG detallado de ConectaBus. */
 </script>
