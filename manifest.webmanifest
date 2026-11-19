@@ -1,0 +1,32 @@
+{
+  "name": "ConectaBus San Rafael",
+  "short_name": "ConectaBus",
+  "description": "Recorridos, horarios y herramientas de seguridad para viajar en colectivo en San Rafael, Mendoza.",
+  "lang": "es-AR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f5f4f8",
+  "theme_color": "#6d3fd6",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

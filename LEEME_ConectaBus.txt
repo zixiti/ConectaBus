@@ -1,0 +1,24 @@
+CONECTABUS · PAQUETE COMPLETO · INTERFAZ ORGANIZADA
+
+Contenido:
+- index.html: aplicación completa.
+- manifest.webmanifest e iconos: configuración de instalación como aplicación.
+- sw.js: caché de la interfaz para uso sin conexión.
+
+Uso:
+1. Abrí index.html para utilizar la aplicación como archivo local. Las líneas y horarios incorporados están disponibles dentro del archivo.
+2. Para instalarla como aplicación y activar la caché automática sin conexión, publicá TODOS los archivos del paquete en un sitio HTTPS y abrí la dirección en Chrome u otro navegador compatible.
+3. En ConectaBus, entrá a Ajustes > Configuración avanzada para personalizar perfiles, alarmas, HUD, accesibilidad, tarjetas de Inicio y orden de módulos.
+4. En Ajustes > Laboratorio podés probar notificaciones, alarmas y accesos a las nuevas funciones.
+5. La navegación inferior está ordenada por prioridad; Ajustes queda disponible desde el engranaje del encabezado. Los paneles secundarios de Ajustes y Emergencias se despliegan al tocarlos.
+6. En Inicio podés crear y restaurar copias de seguridad JSON de los datos guardados en este dispositivo.
+
+NOTAS IMPORTANTES:
+- El planificador y el comparador se basan en los nombres de paradas que ya figuran en las listas de líneas. No calculan distancias ni tiempos GPS reales.
+- El seguimiento de paradas es manual.
+- Las ubicaciones que todavía no están correctamente asociadas al plano no reciben coordenadas inventadas.
+- El clima se consulta desde Open-Meteo y requiere Internet.
+- Las llamadas, mensajes y avisos de seguridad requieren acción del usuario. No se llama ni se envía un mensaje automáticamente.
+- El temporizador de llegada no sustituye un servicio de emergencia ni puede garantizar una alerta si el navegador está cerrado.
+- Las demoras, avisos o vehículos de demostración siguen siendo simulaciones, no reportes oficiales en vivo.
+- La caché PWA necesita HTTPS; abrir el HTML local no instala el service worker.
