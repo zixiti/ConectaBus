@@ -1254,6 +1254,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
       <h2>Avisos de la central</h2>
       <p class="note" style="margin:0">Acá se muestran solamente las novedades de tu colectivo seleccionado. Los ejemplos marcados como DEMO no son reportes oficiales en vivo.</p>
       <div id="avSelectedLine" style="margin:10px 0 0;padding:9px 12px;border-radius:10px;background:var(--violet-soft);font-weight:700"></div>
+      <div id="avRemoteStatus" class="note" role="status" aria-live="polite" style="margin:8px 0">Conectando con Central ConectaBus…</div>
       <div class="av-summary" id="avSummary"></div>
       <div class="av-filters" id="avFilters" aria-label="Filtrar avisos">
         <button class="av-filter" data-filter="todos" aria-pressed="true">Todos</button>
@@ -1439,7 +1440,7 @@ var LINEAS = [
   {id:3, nombre:"Línea 3", ruta:"Recorrido de ejemplo, de oeste a este por Plaza San Martín", freq:30, T:8, delay:0, color:"#6b667a"}
 ];
 var BUSES = []; // No mostrar colectivos ficticios: solo líneas oficiales elegidas por el usuario.
-var AVISOS = []; // Avisos cargados para líneas reales; cada registro se vincula con lineaNum.
+var AVISOS = []; // Avisos recibidos desde Central ConectaBus; se filtran por línea seleccionada.
 var filtroAvisos="todos";
 var emergencia = false;
 var busApproachNotice = null;
@@ -1841,6 +1842,75 @@ function avisosDeEjemplo(route){
   ];
   return examples.map(function(a){a.lineaNum=lineKey;a.linea=lineLabel;a.h="Ejemplo";a.prioridad=a.tipo==="demora"?"media":"baja";a.demo=true;return a});
 }
+
+/* Avisos publicados desde Central ConectaBus (Supabase, entorno de demostración). */
+var CENTRAL_SUPABASE_URL="https://rhrtecgsoieklktybmeq.supabase.co";
+var CENTRAL_SUPABASE_KEY="sb_publishable_2hBGLhmo_dTuaBTkzL18bg_02YyKRg8";
+var centralNoticeRequest=0;
+var centralNoticeError="";
+function centralStatus(message,kind){
+  var el=$("avRemoteStatus");if(!el)return;
+  el.textContent=message;
+  el.style.padding="9px 11px";
+  el.style.borderRadius="10px";
+  el.style.border="1px solid "+(kind==="error"?"rgba(190,55,65,.35)":kind==="ok"?"rgba(25,145,100,.3)":"var(--line)");
+  el.style.background=kind==="error"?"rgba(190,55,65,.08)":kind==="ok"?"rgba(25,145,100,.08)":"var(--card)";
+  el.style.color=kind==="error"?"#bd3542":kind==="ok"?"#16845f":"var(--muted)";
+}
+function centralTypeLabel(type){
+ var labels={demora:"DEMORA",desvio:"DESVÍO",corte:"CALLE CORTADA",accidente:"ACCIDENTE",parada_suspendida:"PARADA SUSPENDIDA",parada_movida:"PARADA TRASLADADA",frecuencia:"FRECUENCIA REDUCIDA",interrupcion:"INTERRUPCIÓN",unidad:"UNIDAD FUERA DE SERVICIO",ocupacion:"ALTA OCUPACIÓN",cambio:"CAMBIO DE RECORRIDO",refuerzo:"REFUERZO",normalizado:"NORMALIZADO",informacion:"INFORMACIÓN"};
+ return labels[type]||"AVISO";
+}
+async function syncCentralAvisos(){
+ var route=selectedAvisoRoute(),lineKey=route?String(route.num):"";
+ var requestId=++centralNoticeRequest;
+ if(!lineKey){AVISOS=[];centralStatus("Seleccioná un colectivo para consultar sus avisos de la Central.","info");renderAvisos();return;}
+ try{
+  var url=CENTRAL_SUPABASE_URL+"/rest/v1/avisos_demo?select=*&linea=eq."+encodeURIComponent(lineKey)+"&order=creado_en.desc&limit=100";
+  var response=await fetch(url,{method:"GET",headers:{"apikey":CENTRAL_SUPABASE_KEY,"Authorization":"Bearer "+CENTRAL_SUPABASE_KEY,"Accept":"application/json"}});
+  var raw=await response.text(),rows;
+  try{rows=raw?JSON.parse(raw):[]}catch(_){throw new Error("La respuesta de la Central no se pudo interpretar.");}
+  if(!response.ok){
+   var detail=rows&&typeof rows==="object"?(rows.message||rows.details||JSON.stringify(rows)):String(rows||"");
+   if(response.status===401||response.status===403)throw new Error("Supabase no autorizó la lectura. Revisar la clave pública y la política de lectura de avisos_demo. "+detail);
+   if(response.status===404)throw new Error("No se encontró avisos_demo. Revisar que la tabla esté creada en el proyecto correcto. "+detail);
+   throw new Error("La base de avisos respondió HTTP "+response.status+". "+detail);
+  }
+  if(requestId!==centralNoticeRequest||String((selectedAvisoRoute()||{}).num||"")!==lineKey)return;
+  if(!Array.isArray(rows))throw new Error("La base de avisos no devolvió una lista.");
+  var now=Date.now(),mapped=[];
+  rows.forEach(function(r){
+   if(!r||r.estado==="cancelado")return;
+   var created=Date.parse(r.creado_en)||now,expires=r.vence_en?Date.parse(r.vence_en):null;
+   if(r.estado==="activo"&&expires&&expires<=now)return;
+   if(r.estado==="normalizado"&&created<now-48*60*60*1000)return;
+   var normalized=r.estado==="normalizado"||r.tipo==="normalizado";
+   var delay=r.demora_minutos==null?"":" · demora estimada "+r.demora_minutos+" min";
+   mapped.push({
+    tipo:r.tipo==="demora"?"demora":"info",
+    etiqueta:normalized?"NORMALIZADO":centralTypeLabel(r.tipo),
+    t:normalized?(r.titulo||"Servicio normalizado"):r.titulo,
+    detalle:(r.descripcion||"")+(delay&&!normalized?delay:""),
+    zona:r.ubicacion||"Recorrido completo",
+    h:new Date(created).toLocaleTimeString("es-AR",{hour:"2-digit",minute:"2-digit"}),
+    linea:"Línea "+lineKey+" · "+route.nombre,
+    lineaNum:lineKey,
+    prioridad:r.gravedad==="urgente"||r.gravedad==="critical"?"alta":r.gravedad==="importante"||r.gravedad==="high"?"media":"baja",
+    demo:false,central:true,remoteId:r.id,estado:r.estado
+   });
+  });
+  AVISOS=mapped;
+  centralNoticeError="";
+  centralStatus("● Conectado con Central ConectaBus · "+mapped.length+" aviso(s) para la línea "+lineKey,"ok");
+  renderAvisos();
+ }catch(err){
+  if(requestId!==centralNoticeRequest)return;
+  centralNoticeError=err&&err.message?err.message:String(err);
+  centralStatus("No se pudo actualizar desde la Central: "+centralNoticeError,"error");
+  renderAvisos();
+ }
+}
+
 function renderAvisos(){
   var route=selectedAvisoRoute();
   var lineKey=route?String(route.num):"";
@@ -1862,7 +1932,7 @@ function renderAvisos(){
     var kind=a.tipo==="emerg"?"emerg":a.tipo==="demora"?"demora":"info";
     var tagText=a.etiqueta||(kind==="emerg"?"URGENTE":kind==="demora"?"DEMORA":"SERVICIO");
     var tag=kind==="emerg"?'<span class="av-tag crit">'+avEsc(tagText)+'</span>':kind==="demora"?'<span class="av-tag warn">'+avEsc(tagText)+'</span>':'<span class="av-tag">'+avEsc(tagText)+'</span>';
-    var source=a.demo===false?"ACTUALIZACIÓN":"DEMO";
+    var source=a.central?"CENTRAL":a.demo===false?"ACTUALIZACIÓN":"DEMO";
     return '<article class="aviso '+kind+(a.busApproach?' bus-near-notice':'')+'"><span class="ic2 '+kind+'">'+ic[kind]+'</span><div class="av-body"><div class="av-top">'+tag+'<span class="av-tag">'+avEsc(lineLabel)+'</span></div><p><b>'+avEsc(a.t)+'</b></p>'+(a.detalle?'<div class="av-detail">'+avEsc(a.detalle)+'</div>':'')+'<div class="av-meta"><span>⌖ '+avEsc(a.zona||"Recorrido completo")+'</span><span>◷ '+avEsc(a.h||"Sin hora")+'</span><span>'+source+'</span></div></div></article>';
   }).join(""):'<div class="av-empty">No hay avisos de esta categoría para '+avEsc(lineLabel)+'.</div>';
   $("banner").classList.toggle("on",emergencia);$("banner2").classList.toggle("on",emergencia);
@@ -2361,7 +2431,7 @@ function setTripFromControls(prefix){
 }
 function bindTripControls(prefix){
   var li=$(prefix+'Line'),di=$(prefix+'Dir'),st=$(prefix+'Stop');if(!li||!di||!st)return;
-  li.addEventListener('change',function(){TRIP.linea=+li.value;TRIP.dir='ida';TRIP.parada=tripCurrentStops()[0]||'';renderTripControls();renderAvisos();renderAjustes();});
+  li.addEventListener('change',function(){TRIP.linea=+li.value;TRIP.dir='ida';TRIP.parada=tripCurrentStops()[0]||'';renderTripControls();renderAvisos();syncCentralAvisos();renderAjustes();});
   di.addEventListener('change',function(){TRIP.dir=di.value;TRIP.parada=tripCurrentStops()[0]||'';renderTripControls();renderAvisos();});
   st.addEventListener('change',function(){
     TRIP.parada=st.value;
@@ -2522,7 +2592,7 @@ function route(){
 document.addEventListener("click",function(e){var link=e.target.closest("[data-tutorial-target]");if(!link)return;e.preventDefault();var target=link.getAttribute("data-tutorial-target");function openAndShow(){var section=document.getElementById(target);if(!section)return;if(section.tagName&&section.tagName.toLowerCase()==="details")section.open=true;section.scrollIntoView({behavior:"smooth",block:"start"});}if(location.hash!=="#tutorial"){location.hash="#tutorial";setTimeout(openAndShow,220);}else{openAndShow();}});
 document.addEventListener("click",function(e){var button=e.target.closest("[data-cb-expand]");if(!button)return;var card=button.closest(".cb-home-module");if(!card)return;var content=document.getElementById(button.getAttribute("aria-controls"));if(!content)return;var opening=content.hidden;content.hidden=!opening;card.classList.toggle("is-expanded",opening);button.setAttribute("aria-expanded",String(opening));button.textContent=opening?"− Cerrar panel":"＋ Abrir panel";if(opening){setTimeout(function(){card.scrollIntoView({behavior:"smooth",block:"nearest"});},60);}});
 window.addEventListener("hashchange",route);
-if(!TRIP.parada||tripCurrentStops().indexOf(TRIP.parada)<0)TRIP.parada=tripCurrentStops()[0]||"";saveTrip();applyPrefs();renderLineas();renderEmTipos();renderMiParada();syncTripStopMarker();renderAjustes();tickFecha();setInterval(tickFecha,1000);route();renderAvisos();renderHorarios();tick();setInterval(tick,1000);
+if(!TRIP.parada||tripCurrentStops().indexOf(TRIP.parada)<0)TRIP.parada=tripCurrentStops()[0]||"";saveTrip();applyPrefs();renderLineas();renderEmTipos();renderMiParada();syncTripStopMarker();renderAjustes();tickFecha();setInterval(tickFecha,1000);route();renderAvisos();syncCentralAvisos();setInterval(syncCentralAvisos,15000);renderHorarios();tick();setInterval(tick,1000);
 if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=document.createElement("div");n.className="cb-global-alert";n.id="cbSetupReminder";n.setAttribute("role","alert");n.innerHTML='<div>🚌 ¡Configurá tu viaje!</div><small>Todavía no guardaste tu colectivo y tu parada. Elegilos para consultar horarios y preparar tus avisos.</small><button type="button" id="cbSetupGo">Elegir mi colectivo</button> <button type="button" id="cbSetupClose">Ahora no</button>';document.body.appendChild(n);$("cbSetupGo").addEventListener("click",function(){n.remove();if(location.hash!=="#inicio")location.hash="#inicio";else route();setTimeout(function(){var editor=document.getElementById("tripEditor");if(editor){editor.open=true;editor.scrollIntoView({behavior:"smooth",block:"center"});}else{var host=document.getElementById("miBody");if(host)host.scrollIntoView({behavior:"smooth",block:"center"});}},260)});$("cbSetupClose").addEventListener("click",function(){n.remove()})},900)}
 
 /* Se usa únicamente el plano SVG detallado de ConectaBus. */
