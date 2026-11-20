@@ -1252,7 +1252,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   <section class="view" id="v-avisos">
     <div class="card">
       <h2>Avisos de la central</h2>
-      <p class="note" style="margin:0">Acá se muestran los avisos publicados desde Central ConectaBus para tu colectivo seleccionado. Se actualizan automáticamente cada 15 segundos. Los ejemplos DEMO están identificados y no son reportes oficiales.</p>
+      <p class="note" style="margin:0">Acá aparecen únicamente los avisos publicados desde Central ConectaBus para el colectivo seleccionado. Se actualizan automáticamente cada 15 segundos.</p>
       <div id="avSelectedLine" style="margin:10px 0 0;padding:9px 12px;border-radius:10px;background:var(--violet-soft);font-weight:700"></div>
       <div id="avRemoteStatus" class="note" role="status" aria-live="polite" style="margin:8px 0">Conectando con Central ConectaBus…</div>
       <div class="av-summary" id="avSummary"></div>
@@ -1260,7 +1260,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
         <button class="av-filter" data-filter="todos" aria-pressed="true">Todos</button>
         <button class="av-filter" data-filter="demora" aria-pressed="false">Demoras</button>
         <button class="av-filter" data-filter="info" aria-pressed="false">Servicio</button>
-        <button class="av-filter" data-filter="emerg" aria-pressed="false">Emergencias</button>
+        
       </div>
       <div id="avisos" aria-live="polite"></div>
       <button class="btn dghost" id="sos">Simular emergencia (demostración)</button>
