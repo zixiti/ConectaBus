@@ -1097,12 +1097,14 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
             <rect x="-185" y="-650" width="110" height="100" rx="5" fill="#4caf7a" fill-opacity=".4"/>
             <rect x="946" y="-253" width="80" height="60" rx="5" fill="#4caf7a" fill-opacity=".4"/>
             <rect x="555" y="-205" width="55" height="50" rx="5" fill="#4caf7a" fill-opacity=".4"/>
-            <path class="route" id="r3" stroke="#6b667a" stroke-width="10" stroke-opacity=".5" d="M-307 182V62H170V-178H426"/>
-            <path class="route" id="r1" stroke="#6d3fd6" stroke-width="5" d="M-307 600V62H295V470H676V600"/>
-            <path class="route" id="r2" stroke="#b79cf2" stroke-width="5" d="M-56 -310V470H-168V600"/>
-            <circle cx="-307" cy="600" r="7" fill="#6d3fd6"/><circle cx="676" cy="600" r="7" fill="#6d3fd6"/>
-            <circle cx="-56" cy="-310" r="7" fill="#b79cf2"/><circle cx="-168" cy="600" r="7" fill="#b79cf2"/>
-            <circle cx="-307" cy="182" r="7" fill="#6b667a"/><circle cx="426" cy="-178" r="7" fill="#6b667a"/>
+            <g id="legacyDemoRoutes" style="display:none" aria-hidden="true">
+              <path class="route" id="r3" stroke="#6b667a" stroke-width="10" stroke-opacity=".5" d="M-307 182V62H170V-178H426"/>
+              <path class="route" id="r1" stroke="#6d3fd6" stroke-width="5" d="M-307 600V62H295V470H676V600"/>
+              <path class="route" id="r2" stroke="#b79cf2" stroke-width="5" d="M-56 -310V470H-168V600"/>
+              <circle cx="-307" cy="600" r="7" fill="#6d3fd6"/><circle cx="676" cy="600" r="7" fill="#6d3fd6"/>
+              <circle cx="-56" cy="-310" r="7" fill="#b79cf2"/><circle cx="-168" cy="600" r="7" fill="#b79cf2"/>
+              <circle cx="-307" cy="182" r="7" fill="#6b667a"/><circle cx="426" cy="-178" r="7" fill="#6b667a"/>
+            </g>
             <text class="st av" x="-1000" y="290">Av. Hipólito Yrigoyen</text>
             <text class="st av" x="-650" y="301">Av. Hipólito Yrigoyen</text>
             <text class="st av" x="-250" y="314">Av. Hipólito Yrigoyen</text>
@@ -1250,7 +1252,8 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   <section class="view" id="v-avisos">
     <div class="card">
       <h2>Avisos de la central</h2>
-      <p class="note" style="margin:0">Información ordenada por importancia. Los avisos que aparecen ahora son ejemplos de demostración, no reportes oficiales en vivo.</p>
+      <p class="note" style="margin:0">Acá se muestran solamente las novedades de tu colectivo seleccionado. Los ejemplos marcados como DEMO no son reportes oficiales en vivo.</p>
+      <div id="avSelectedLine" style="margin:10px 0 0;padding:9px 12px;border-radius:10px;background:var(--violet-soft);font-weight:700"></div>
       <div class="av-summary" id="avSummary"></div>
       <div class="av-filters" id="avFilters" aria-label="Filtrar avisos">
         <button class="av-filter" data-filter="todos" aria-pressed="true">Todos</button>
@@ -1436,10 +1439,7 @@ var LINEAS = [
   {id:3, nombre:"Línea 3", ruta:"Recorrido de ejemplo, de oeste a este por Plaza San Martín", freq:30, T:8, delay:0, color:"#6b667a"}
 ];
 var BUSES = []; // No mostrar colectivos ficticios: solo líneas oficiales elegidas por el usuario.
-var AVISOS = [
-  {tipo:"demora", t:"Demora estimada de 8 minutos por circulación lenta en Av. Hipólito Yrigoyen.", h:"Ejemplo", linea:"Línea 1", zona:"Av. Hipólito Yrigoyen", detalle:"Si estás esperando, calculá unos minutos extra. La estimación puede cambiar según el tránsito.", prioridad:"media"},
-  {tipo:"info", t:"Servicio normalizado luego de una interrupción temporal.", h:"Ejemplo", linea:"Línea 3", zona:"Centro", detalle:"El recorrido vuelve a funcionar con normalidad en esta simulación.", prioridad:"baja"}
-];
+var AVISOS = []; // Avisos cargados para líneas reales; cada registro se vincula con lineaNum.
 var filtroAvisos="todos";
 var emergencia = false;
 var busApproachNotice = null;
@@ -1722,9 +1722,8 @@ var gb=$("buses");
 function renderDemoBuses(){if(gb)gb.innerHTML="";}
 function tick(){
   renderDemoBuses();
-  // No hay GPS oficial conectado. Evitamos mostrar iconos M1/M2/M3 inventados.
-  $("etas").innerHTML='<p class="note">El colectivo morado se desplaza por el recorrido elegido en modo DEMO y avisa al acercarse a la parada seleccionada. No representa una unidad rastreada por GPS.</p>';
-  $("prox").textContent="Seleccioná tu colectivo para ver sus próximos horarios.";
+  $("etas").innerHTML='<p class="note">No hay posiciones GPS oficiales conectadas. Consultá los horarios de la línea seleccionada; esta pantalla no inventa ubicaciones de colectivos.</p>';
+  $("prox").textContent="Seleccioná tu línea y parada para consultar los horarios.";
   var d=new Date();$("hora").textContent="Horarios orientativos · actualizado a las "+pad(d.getHours())+":"+pad(d.getMinutes())+".";
   if(curPlace)updateLines();
   updateTripAlert();
@@ -1802,30 +1801,7 @@ function pickPlace(p){
 }
 function updateLines(){
   var box=$("resLines");if(!box||!curPlace)return;
-  var pl=curPlace.l,st=curPlace.c==="st",h="";
-  var pass=curInfo.filter(function(d){return d.on});
-  pass.forEach(function(d){
-    var L=d.L,eta=null,near=1e9;
-    BUSES.forEach(function(b){
-      if(b.l!==L.id)return;
-      var pt=paths[L.id].getPointAtLength(lens[L.id]*b.p);
-      near=Math.min(near,Math.hypot(pt.x-pl[0],pt.y-pl[1])*0.983);
-      if(b.p<d.p){var e=(d.p-b.p)*L.T+L.delay;if(eta===null||e<eta)eta=e}
-    });
-    var m=Math.round(d.d*0.983),walk=Math.max(1,Math.round(m/80));
-    var pasa=(st||m<=15)?"Pasa por acá":"Pasa a "+m+" m (unos "+walk+" min a pie)";
-    var sub=pasa+(eta!==null?"; el más cercano está a "+Math.round(near)+" m":"; ya pasó el último, viene el siguiente");
-    var cerca=eta!==null&&eta<=5;
-    h+='<div class="eta"><span class="badge" style="background:'+L.color+'">'+L.id+'</span><div class="t">'+L.nombre+(L.delay?" (demorada)":"")+'<small>'+sub+'</small></div>'+
-       (eta!==null?'<b>'+Math.max(1,Math.round(eta))+' min</b>':'<span class="pill late">Ya pasó</span>')+'</div>';
-    if(cerca)h=h.replace(/<\/b><\/div>$/,'</b></div>');
-  });
-  if(!pass.length){
-    var n=curInfo.slice().sort(function(a,b){return a.d-b.d})[0];
-    h='<p class="note" style="margin:8px 0 0">Ninguna línea de ejemplo pasa a menos de 300 m de este lugar. La más cercana es la '+n.L.nombre+', a '+Math.round(n.d*0.983)+' m.</p>';
-  }
-  h+='<p class="note" style="margin:8px 0 0">M1–M3 son recorridos de demostración y no equivalen a las líneas oficiales. Para elegir un colectivo real, usá los números 541, 542, 543 y los demás que aparecen en Líneas y Horarios.</p>';
-  box.innerHTML=h;
+  box.innerHTML='<p class="note" style="margin:8px 0 0">La ubicación de los colectivos no está conectada a GPS en vivo. Para consultar tu línea, elegila en el panel de viaje y revisá sus horarios y avisos.</p>';
 }
 function showPin(){
   var pin=$("pin");
@@ -1844,28 +1820,57 @@ function showPin(){
   t.setAttribute("x",p.x+12*s);t.setAttribute("y",p.y-10*s);t.setAttribute("font-size",12*s);t.textContent=p.n;
 }
 
-/* Avisos y emergencia */
+/* Avisos y emergencia: cada aviso queda vinculado a una línea real. */
+function selectedAvisoRoute(){
+  var idx=(typeof TRIP!=="undefined"&&TRIP&&Number.isInteger(TRIP.linea))?TRIP.linea:0;
+  return (window.REAL&&REAL[idx])?REAL[idx]:null;
+}
+function avEsc(value){return String(value==null?"":value).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;")}
+function avisosDeEjemplo(route){
+  if(!route)return [];
+  var stop=(typeof TRIP!=="undefined"&&TRIP&&TRIP.parada)?TRIP.parada:"";
+  var area=stop?"Parada de referencia: "+stop:"Recorrido completo";
+  var lineKey=String(route.num),lineLabel="Línea "+route.num+" · "+route.nombre;
+  var examples=[
+    {tipo:"demora",etiqueta:"DEMORA",t:"Demora estimada de 8 minutos por tránsito intenso.",zona:area,detalle:"La unidad puede llegar más tarde de lo previsto. La estimación es ilustrativa y debe reemplazarse por el dato confirmado de la central."},
+    {tipo:"info",etiqueta:"DESVÍO",t:"Desvío preventivo por trabajos en la calzada.",zona:area,detalle:"El colectivo continúa por un recorrido alternativo. Revisá si cambia el lugar de ascenso o descenso."},
+    {tipo:"info",etiqueta:"PARADA",t:"Parada temporalmente fuera de servicio.",zona:stop||"Parada del recorrido",detalle:"Como ejemplo, la unidad podría no detenerse en este punto por una intervención o una condición de seguridad."},
+    {tipo:"info",etiqueta:"FRECUENCIA",t:"Frecuencia reducida: puede aumentar el tiempo entre colectivos.",zona:"Recorrido completo",detalle:"La espera podría ser mayor a la habitual. La frecuencia debe actualizarse con información confirmada."},
+    {tipo:"info",etiqueta:"OCUPACIÓN",t:"Unidad con alta ocupación.",zona:area,detalle:"El colectivo podría tener poco espacio disponible. Tal vez convenga esperar la siguiente unidad."},
+    {tipo:"info",etiqueta:"NORMALIZADO",t:"Servicio normalizado luego de una interrupción.",zona:"Recorrido completo",detalle:"Se levantó la restricción del ejemplo y el recorrido vuelve a operar con normalidad."}
+  ];
+  return examples.map(function(a){a.lineaNum=lineKey;a.linea=lineLabel;a.h="Ejemplo";a.prioridad=a.tipo==="demora"?"media":"baja";a.demo=true;return a});
+}
 function renderAvisos(){
-  var liveDelayNotices=LINEAS.filter(function(L){return Number(L.delay)>0}).map(function(L){return {tipo:"demora",t:L.nombre+" con demora aproximada de "+L.delay+" minutos.",h:"Ahora",linea:L.nombre,zona:"Recorrido de la línea",detalle:"Aviso de demostración: la demora está cargada en la simulación de ConectaBus; no es un dato GPS ni una actualización oficial en vivo.",prioridad:"media",delayLive:true}});
-  var all=(busApproachNotice?[busApproachNotice]:[]).concat(emergencia?[{tipo:"emerg",t:"Emergencia simulada en la zona. Mantené libre el paso y seguí las indicaciones del personal.",h:"Ahora",linea:"Todas las líneas",zona:"Zona de la parada",detalle:"Este aviso es una prueba de la aplicación. No se está notificando a servicios reales.",prioridad:"alta"}]:[]).concat(liveDelayNotices,AVISOS);
+  var route=selectedAvisoRoute();
+  var lineKey=route?String(route.num):"";
+  var lineLabel=route?("Línea "+route.num+" · "+route.nombre):"Sin colectivo seleccionado";
+  var samples=avisosDeEjemplo(route);
+  var ownNotices=AVISOS.filter(function(a){return lineKey&&String(a.lineaNum||"")===lineKey});
+  var approach=(busApproachNotice&&lineKey&&String(busApproachNotice.lineaNum||"")===lineKey)?[busApproachNotice]:[];
+  var emergencyNotice=(emergencia&&route)?[{tipo:"emerg",etiqueta:"URGENTE",t:"Emergencia simulada que afecta a esta línea.",h:hhmm(),linea:lineLabel,lineaNum:lineKey,zona:TRIP.parada||"Recorrido de la línea",detalle:"Este aviso es una prueba de ConectaBus. No se notificó a servicios de emergencia ni a una empresa de transporte.",prioridad:"alta",demo:true}]:[];
+  var all=approach.concat(emergencyNotice,ownNotices,samples);
   var nDem=all.filter(function(a){return a.tipo==="demora"}).length;
   var nInfo=all.filter(function(a){return a.tipo==="info"}).length;
   var nEm=all.filter(function(a){return a.tipo==="emerg"}).length;
+  if($("avSelectedLine"))$("avSelectedLine").textContent=route?"Mostrando avisos de "+lineLabel:"Elegí un colectivo para ver sus avisos.";
   if($("avSummary"))$("avSummary").innerHTML='<div class="av-stat"><b>'+nEm+'</b><small>Emergencias</small></div><div class="av-stat"><b>'+nDem+'</b><small>Demoras</small></div><div class="av-stat"><b>'+nInfo+'</b><small>Servicio</small></div>';
   var filtered=all.filter(function(a){return filtroAvisos==="todos"||a.tipo===filtroAvisos});
   var rank={emerg:0,demora:1,info:2};filtered.sort(function(a,b){return rank[a.tipo]-rank[b.tipo]});
   var ic={demora:"↗",info:"i",emerg:"!"};
   $("avisos").innerHTML=filtered.length?filtered.map(function(a){
-    var tag=a.tipo==="emerg"?'<span class="av-tag crit">URGENTE</span>':a.tipo==="demora"?'<span class="av-tag warn">DEMORA</span>':'<span class="av-tag">SERVICIO</span>';
-    return '<article class="aviso '+a.tipo+(a.busApproach?' bus-near-notice':'')+'"><span class="ic2 '+a.tipo+'">'+ic[a.tipo]+'</span><div class="av-body"><div class="av-top">'+tag+'<span class="av-tag">'+(a.linea||"Red ConectaBus")+'</span></div><p><b>'+a.t+'</b></p>'+(a.detalle?'<div class="av-detail">'+a.detalle+'</div>':'')+'<div class="av-meta"><span>⌖ '+(a.zona||"San Rafael")+'</span><span>◷ '+(a.h||"Sin hora")+'</span><span>DEMO</span></div></div></article>';
-  }).join(""):'<div class="av-empty">No hay avisos en esta categoría.</div>';
+    var kind=a.tipo==="emerg"?"emerg":a.tipo==="demora"?"demora":"info";
+    var tagText=a.etiqueta||(kind==="emerg"?"URGENTE":kind==="demora"?"DEMORA":"SERVICIO");
+    var tag=kind==="emerg"?'<span class="av-tag crit">'+avEsc(tagText)+'</span>':kind==="demora"?'<span class="av-tag warn">'+avEsc(tagText)+'</span>':'<span class="av-tag">'+avEsc(tagText)+'</span>';
+    var source=a.demo===false?"ACTUALIZACIÓN":"DEMO";
+    return '<article class="aviso '+kind+(a.busApproach?' bus-near-notice':'')+'"><span class="ic2 '+kind+'">'+ic[kind]+'</span><div class="av-body"><div class="av-top">'+tag+'<span class="av-tag">'+avEsc(lineLabel)+'</span></div><p><b>'+avEsc(a.t)+'</b></p>'+(a.detalle?'<div class="av-detail">'+avEsc(a.detalle)+'</div>':'')+'<div class="av-meta"><span>⌖ '+avEsc(a.zona||"Recorrido completo")+'</span><span>◷ '+avEsc(a.h||"Sin hora")+'</span><span>'+source+'</span></div></div></article>';
+  }).join(""):'<div class="av-empty">No hay avisos de esta categoría para '+avEsc(lineLabel)+'.</div>';
   $("banner").classList.toggle("on",emergencia);$("banner2").classList.toggle("on",emergencia);
-  var nAct=all.filter(function(a){return a.busApproach||a.tipo!=="info"}).length;
+  var nAct=all.filter(function(a){return a.busApproach||a.tipo==="demora"||a.tipo==="emerg"}).length;
   $("nAv").textContent=nAct;$("nAv").style.display=nAct?"flex":"none";
-  var nl=LINEAS.filter(function(L){return L.delay}).length;
-  $("svcT").textContent="Mapa: recorridos simulados M1–M3 · Horarios oficiales: "+REAL.length+" líneas numeradas";
+  $("svcT").textContent=route?"Avisos vinculados a Línea "+route.num+" · "+route.nombre:"Elegí un colectivo para consultar sus avisos.";
   $("sos").textContent=emergencia?"Terminar simulación":"Simular emergencia (demostración)";
-  $("estadoEm").textContent=emergencia?"Hay una emergencia simulada activa en la zona.":"Sin emergencias activas.";
+  $("estadoEm").textContent=emergencia?"Hay una emergencia simulada activa para la línea seleccionada.":"Sin emergencias activas.";
   $("estadoEm").className=emergencia?"":"estado-ok";
   $("estadoEm").style.color=emergencia?"var(--danger)":"";
 }
@@ -2217,7 +2222,14 @@ renderEmergencyContact();
 /* Ajustes y demostración */
 var QRURL="https://claude.ai/artifact/A1JoedqWC6nQnE9vkY2wry#mapa";
 var AV0=JSON.parse(JSON.stringify(AVISOS)),avN=0;
-var AVEJ=[{tipo:"info",t:"Hoy no hay cambios en los recorridos."},{tipo:"demora",t:"Corte parcial en Av. Hipólito Yrigoyen: la Línea 1 se desvía por Cnel. Ricardo Day."},{tipo:"info",t:"Los domingos y feriados rigen los horarios reducidos."}];
+var AVEJ=[
+  {tipo:"info",etiqueta:"DESVÍO",t:"Desvío preventivo por trabajos en la calzada.",zona:"Tramo del recorrido",detalle:"La unidad utiliza calles alternativas. Ejemplo de aviso para probar la sección."},
+  {tipo:"info",etiqueta:"PARADA",t:"Parada temporalmente fuera de servicio.",zona:"Parada seleccionada",detalle:"Ejemplo de cambio temporal de parada. Confirmá siempre la ubicación alternativa."},
+  {tipo:"info",etiqueta:"FRECUENCIA",t:"Frecuencia reducida durante este período.",zona:"Recorrido completo",detalle:"Puede aumentar el intervalo entre unidades. Aviso de demostración."},
+  {tipo:"info",etiqueta:"OCUPACIÓN",t:"Unidad con alta ocupación.",zona:"Recorrido completo",detalle:"Puede haber poco espacio disponible para subir. Aviso de demostración."},
+  {tipo:"info",etiqueta:"NORMALIZADO",t:"Servicio normalizado luego de una interrupción.",zona:"Recorrido completo",detalle:"El recorrido vuelve a funcionar con normalidad. Aviso de demostración."},
+  {tipo:"demora",etiqueta:"DEMORA",t:"Demora estimada por tránsito intenso.",zona:"Tramo del recorrido",detalle:"La espera puede ser mayor a la prevista. Aviso de demostración."}
+];
 function chipA(k,v,txt,on){return '<button class="chip" data-a="'+k+'" data-v="'+v+'" aria-pressed="'+on+'">'+txt+'</button>'}
 function renderQR(){
   var box=$("qrBox");
@@ -2253,7 +2265,9 @@ function renderAjustes(){
   $("aData").innerHTML=chipA("dataSaver","1","Ahorro activado",!!PR.dataSaver)+chipA("dataSaver","0","Normal",!PR.dataSaver);
   $("aReminder").innerHTML=chipA("setupReminder","1","Recordarme al abrir",PR.setupReminder!==false)+chipA("setupReminder","0","No recordar",PR.setupReminder===false);
   $("aLead").value=String(PR.leadMinutes||5);
-  $("dDelay").textContent=LINEAS[1].delay?"Terminar demora de la Línea 2":"Simular demora en la Línea 2";
+  var noticeRoute=selectedAvisoRoute(),noticeKey=noticeRoute?String(noticeRoute.num):"";
+  var hasDemoDelay=noticeKey&&AVISOS.some(function(a){return a.id==="demo-delay-"+noticeKey});
+  $("dDelay").textContent=hasDemoDelay?"Terminar demora demo de la línea "+noticeKey:"Simular demora en mi colectivo";
   $("dEmerg").textContent=emergencia?"Terminar emergencia simulada":"Simular emergencia";
   $("dFast").textContent=SPEED>8?"Colectivos a velocidad normal":"Acelerar colectivos";
   renderQR();
@@ -2275,14 +2289,28 @@ $("v-ajustes").addEventListener("click",function(e){
     lsSet("cb_prefs",PR);applyPrefs();renderAjustes();$("aPrefsStatus").textContent="Se restauraron las preferencias iniciales.";return;
   }
   if(id==="dDelay"){
-    var L2=LINEAS[1];
-    if(L2.delay){L2.delay=0;AVISOS.unshift({tipo:"info",t:"La Línea 2 retoma su horario normal.",h:hhmm()})}
-    else{L2.delay=10;AVISOS.unshift({tipo:"demora",t:"La Línea 2 se atrasa unos 10 minutos por obras en Av. Bartolomé Mitre.",h:hhmm(),linea:"Línea 2",zona:"Av. Bartolomé Mitre",detalle:"Demora de demostración. Activá la alarma de tu viaje para recibir sonido.",prioridad:"media"});showGlobalAlert("¡LÍNEA 2 CON DEMORA!","Se estima un atraso de 10 minutos. Revisá el panel Avisos.")}
+    var activeRoute=selectedAvisoRoute();
+    if(activeRoute){
+      var activeKey=String(activeRoute.num),delayId="demo-delay-"+activeKey;
+      var existing=AVISOS.findIndex(function(a){return a.id===delayId});
+      if(existing>=0){AVISOS.splice(existing,1)}
+      else{
+        AVISOS.unshift({id:delayId,tipo:"demora",etiqueta:"DEMORA",t:"Demora estimada de 10 minutos por circulación lenta.",h:hhmm(),lineaNum:activeKey,linea:"Línea "+activeKey+" · "+activeRoute.nombre,zona:(TRIP&&TRIP.parada)?TRIP.parada:"Recorrido de la línea",detalle:"Demora de demostración asociada únicamente a tu colectivo seleccionado. No es un dato GPS ni un reporte oficial.",prioridad:"media",demo:true});
+        showGlobalAlert("¡LÍNEA "+activeKey+" CON DEMORA!","Aviso de prueba: estimación de 10 minutos. Revisá Avisos para ver el detalle.");
+      }
+    }
   }
   if(id==="dEmerg")emergencia=!emergencia;
-  if(id==="dAviso"){var a=AVEJ[avN%AVEJ.length];avN++;AVISOS.unshift({tipo:a.tipo,t:a.t,h:hhmm()+" · demo",linea:"Red ConectaBus",zona:"San Rafael",detalle:"Mensaje generado para probar los avisos de la aplicación.",prioridad:a.tipo==="emerg"?"alta":a.tipo==="demora"?"media":"baja"})}
+  if(id==="dAviso"){
+    var activeRouteForNotice=selectedAvisoRoute();
+    if(activeRouteForNotice){
+      var a=AVEJ[avN%AVEJ.length];avN++;
+      var lineKey=String(activeRouteForNotice.num);
+      AVISOS.unshift({tipo:a.tipo,etiqueta:a.etiqueta,t:a.t,h:hhmm()+" · demo",lineaNum:lineKey,linea:"Línea "+lineKey+" · "+activeRouteForNotice.nombre,zona:(TRIP&&TRIP.parada)?TRIP.parada:a.zona,detalle:a.detalle,prioridad:a.tipo==="emerg"?"alta":a.tipo==="demora"?"media":"baja",demo:true});
+    }
+  }
   if(id==="dFast")SPEED=SPEED>8?8:40;
-  if(id==="dReset"){LINEAS[1].delay=0;AVISOS.length=0;AV0.forEach(function(x){AVISOS.push(JSON.parse(JSON.stringify(x)))});emergencia=false;SPEED=8;avN=0}
+  if(id==="dReset"){AVISOS.length=0;busApproachNotice=null;emergencia=false;SPEED=8;avN=0}
   if(id==="aCopy"){
     var m=$("aMsg");
     if(navigator.share){navigator.share({title:"ConectaBus",url:QRURL}).catch(function(){})}
@@ -2333,10 +2361,11 @@ function setTripFromControls(prefix){
 }
 function bindTripControls(prefix){
   var li=$(prefix+'Line'),di=$(prefix+'Dir'),st=$(prefix+'Stop');if(!li||!di||!st)return;
-  li.addEventListener('change',function(){TRIP.linea=+li.value;TRIP.dir='ida';TRIP.parada=tripCurrentStops()[0]||'';renderTripControls();});
-  di.addEventListener('change',function(){TRIP.dir=di.value;TRIP.parada=tripCurrentStops()[0]||'';renderTripControls();});
+  li.addEventListener('change',function(){TRIP.linea=+li.value;TRIP.dir='ida';TRIP.parada=tripCurrentStops()[0]||'';renderTripControls();renderAvisos();renderAjustes();});
+  di.addEventListener('change',function(){TRIP.dir=di.value;TRIP.parada=tripCurrentStops()[0]||'';renderTripControls();renderAvisos();});
   st.addEventListener('change',function(){
     TRIP.parada=st.value;
+    renderAvisos();
     if(!TRIP.alarma)showTripAlarmReminder();
   });
 }
@@ -2393,7 +2422,7 @@ function renderMapStopPicker(){
   $("mapTripClose").addEventListener("click",function(){box.hidden=true;location.hash="#mapa"});
 }
 
-function saveTrip(){lsSet("cb_trip",TRIP);window.dispatchEvent(new Event("cb-trip-updated"))}
+function saveTrip(){lsSet("cb_trip",TRIP);window.dispatchEvent(new Event("cb-trip-updated"));if(typeof renderAvisos==="function")renderAvisos();}
 function nextScheduledTrip(){
   if(!TRIP.confirmed)return null;
   var R=REAL[TRIP.linea]||REAL[0],D=R.dir[TRIP.dir]||R.dir.ida,P=pdOf(D,diaHoy()),ix=P.indexOf(TRIP.parada),rows=D.filas[diaHoy()]||[];
@@ -2623,7 +2652,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
       simBusAlerted=true;simBusAlertUntil=Date.now()+11000;
       var noticeText="¡El colectivo está muy cerca de tu parada! Línea "+num+" · Parada "+(ix+1)+": "+selectedStop+".";
       if(alert){alert.textContent="🚌 "+noticeText+" Aviso de demostración, no GPS en vivo.";alert.classList.add("on");}
-      busApproachNotice={tipo:"info",t:"🚌 "+noticeText,h:"Ahora",linea:"Línea "+num,zona:selectedStop,detalle:"El colectivo de demostración pasó por la zona de tu parada seleccionada. Es una simulación visual, no una ubicación GPS en vivo.",prioridad:"alta",busApproach:true};
+      busApproachNotice={tipo:"info",etiqueta:"COLECTIVO CERCA",t:"🚌 "+noticeText,h:"Ahora",linea:"Línea "+num,lineaNum:String(num),zona:selectedStop,detalle:"El colectivo de demostración pasó por la zona de tu parada seleccionada. Es una simulación visual, no una ubicación GPS en vivo.",prioridad:"alta",busApproach:true,demo:true};
       renderAvisos();
       showGlobalAlert("¡TU COLECTIVO ESTÁ CERCA!",noticeText+" · Aviso DEMO, sin GPS en vivo.");
       if(navigator.vibrate){try{navigator.vibrate([180,90,180,90,260])}catch(e){}}
@@ -2658,6 +2687,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
     var data=currentRoute();if(!selectedStop){statusEl.textContent="Esta línea no tiene paradas cargadas para el día seleccionado.";return}
     TRIP.linea=selectedLine;TRIP.dir=selectedDir;TRIP.parada=selectedStop;TRIP.confirmed=true;TRIP.alarma=!!alarm;TRIP.mapPoint=null;
     if(typeof saveTrip==="function")saveTrip();
+    if(typeof renderAvisos==="function")renderAvisos();
     if(typeof syncTripFav==="function")syncTripFav();
     if(typeof renderMiParada==="function")renderMiParada();
     if(typeof syncTripStopMarker==="function")syncTripStopMarker();
