@@ -1441,6 +1441,9 @@ var LINEAS = [
 ];
 var BUSES = []; // No mostrar colectivos ficticios: solo líneas oficiales elegidas por el usuario.
 var AVISOS = []; // Avisos recibidos desde Central ConectaBus; se filtran por línea seleccionada.
+var IGNORED_CENTRAL_KEY="conectabus_avisos_ignorados_v1";
+var ignoredCentralNotices={};
+try{ignoredCentralNotices=JSON.parse(localStorage.getItem(IGNORED_CENTRAL_KEY)||"{}")||{}}catch(e){ignoredCentralNotices={}}
 var filtroAvisos="todos";
 var emergencia = false;
 var busApproachNotice = null;
@@ -1915,37 +1918,33 @@ function renderAvisos(){
   var route=selectedAvisoRoute();
   var lineKey=route?String(route.num):"";
   var lineLabel=route?("Línea "+route.num+" · "+route.nombre):"Sin colectivo seleccionado";
-  var samples=avisosDeEjemplo(route);
-  var ownNotices=AVISOS.filter(function(a){return lineKey&&String(a.lineaNum||"")===lineKey});
-  var approach=(busApproachNotice&&lineKey&&String(busApproachNotice.lineaNum||"")===lineKey)?[busApproachNotice]:[];
-  var emergencyNotice=(emergencia&&route)?[{tipo:"emerg",etiqueta:"URGENTE",t:"Emergencia simulada que afecta a esta línea.",h:hhmm(),linea:lineLabel,lineaNum:lineKey,zona:TRIP.parada||"Recorrido de la línea",detalle:"Este aviso es una prueba de ConectaBus. No se notificó a servicios de emergencia ni a una empresa de transporte.",prioridad:"alta",demo:true}]:[];
-  var all=approach.concat(emergencyNotice,ownNotices,samples);
+  var all=AVISOS.filter(function(a){
+    return lineKey&&String(a.lineaNum||"")===lineKey&&a.remoteId&&!ignoredCentralNotices[String(a.remoteId)];
+  });
   var nDem=all.filter(function(a){return a.tipo==="demora"}).length;
   var nInfo=all.filter(function(a){return a.tipo==="info"}).length;
-  var nEm=all.filter(function(a){return a.tipo==="emerg"}).length;
-  if($("avSelectedLine"))$("avSelectedLine").textContent=route?"Mostrando avisos de "+lineLabel:"Elegí un colectivo para ver sus avisos.";
-  if($("avSummary"))$("avSummary").innerHTML='<div class="av-stat"><b>'+nEm+'</b><small>Emergencias</small></div><div class="av-stat"><b>'+nDem+'</b><small>Demoras</small></div><div class="av-stat"><b>'+nInfo+'</b><small>Servicio</small></div>';
+  var nEm=0;
+  if($("avSelectedLine"))$("avSelectedLine").textContent=route?"Mostrando avisos publicados desde Central ConectaBus para "+lineLabel:"Elegí un colectivo para ver sus avisos.";
+  if($("avSummary"))$("avSummary").innerHTML='<div class="av-stat"><b>'+nDem+'</b><small>Demoras</small></div><div class="av-stat"><b>'+nInfo+'</b><small>Servicio</small></div>';
   var filtered=all.filter(function(a){return filtroAvisos==="todos"||a.tipo===filtroAvisos});
-  var rank={emerg:0,demora:1,info:2};filtered.sort(function(a,b){return rank[a.tipo]-rank[b.tipo]});
-  var ic={demora:"↗",info:"i",emerg:"!"};
+  var rank={demora:1,info:2};filtered.sort(function(a,b){return rank[a.tipo]-rank[b.tipo]});
+  var ic={demora:"↗",info:"i"};
   $("avisos").innerHTML=filtered.length?filtered.map(function(a){
-    var kind=a.tipo==="emerg"?"emerg":a.tipo==="demora"?"demora":"info";
-    var tagText=a.etiqueta||(kind==="emerg"?"URGENTE":kind==="demora"?"DEMORA":"SERVICIO");
-    var tag=kind==="emerg"?'<span class="av-tag crit">'+avEsc(tagText)+'</span>':kind==="demora"?'<span class="av-tag warn">'+avEsc(tagText)+'</span>':'<span class="av-tag">'+avEsc(tagText)+'</span>';
-    var source=a.central?"CENTRAL":a.demo===false?"ACTUALIZACIÓN":"DEMO";
-    return '<article class="aviso '+kind+(a.busApproach?' bus-near-notice':'')+'"><span class="ic2 '+kind+'">'+ic[kind]+'</span><div class="av-body"><div class="av-top">'+tag+'<span class="av-tag">'+avEsc(lineLabel)+'</span></div><p><b>'+avEsc(a.t)+'</b></p>'+(a.detalle?'<div class="av-detail">'+avEsc(a.detalle)+'</div>':'')+'<div class="av-meta"><span>⌖ '+avEsc(a.zona||"Recorrido completo")+'</span><span>◷ '+avEsc(a.h||"Sin hora")+'</span><span>'+source+'</span></div></div></article>';
-  }).join(""):'<div class="av-empty">No hay avisos de esta categoría para '+avEsc(lineLabel)+'.</div>';
+    var kind=a.tipo==="demora"?"demora":"info";
+    var tagText=a.etiqueta||(kind==="demora"?"DEMORA":"SERVICIO");
+    var tag=kind==="demora"?'<span class="av-tag warn">'+avEsc(tagText)+'</span>':'<span class="av-tag">'+avEsc(tagText)+'</span>';
+    return '<article class="aviso '+kind+'"><span class="ic2 '+kind+'">'+ic[kind]+'</span><div class="av-body"><div class="av-top">'+tag+'<span class="av-tag">'+avEsc(lineLabel)+'</span></div><p><b>'+avEsc(a.t)+'</b></p>'+(a.detalle?'<div class="av-detail">'+avEsc(a.detalle)+'</div>':'')+'<div class="av-meta"><span>⌖ '+avEsc(a.zona||"Recorrido completo")+'</span><span>◷ '+avEsc(a.h||"Sin hora")+'</span><span>CENTRAL</span></div><button type="button" class="av-filter" data-ignore-central="'+avEsc(a.remoteId)+'" style="margin-top:9px">Ignorar aviso</button></div></article>';
+  }).join(""):'<div class="av-empty">No hay avisos publicados desde la Central para '+avEsc(lineLabel)+' que coincidan con este filtro.</div>';
   $("banner").classList.toggle("on",emergencia);$("banner2").classList.toggle("on",emergencia);
-  var nAct=all.filter(function(a){return a.busApproach||a.tipo==="demora"||a.tipo==="emerg"}).length;
-  $("nAv").textContent=nAct;$("nAv").style.display=nAct?"flex":"none";
+  $("nAv").textContent=all.length;$("nAv").style.display=all.length?"flex":"none";
   $("svcT").textContent=route?"Avisos vinculados a Línea "+route.num+" · "+route.nombre:"Elegí un colectivo para consultar sus avisos.";
-  $("sos").textContent=emergencia?"Terminar simulación":"Simular emergencia (demostración)";
   $("estadoEm").textContent=emergencia?"Hay una emergencia simulada activa para la línea seleccionada.":"Sin emergencias activas.";
   $("estadoEm").className=emergencia?"":"estado-ok";
   $("estadoEm").style.color=emergencia?"var(--danger)":"";
 }
 if($("avFilters"))$("avFilters").addEventListener("click",function(e){var b=e.target.closest?e.target.closest("button[data-filter]"):null;if(!b)return;filtroAvisos=b.dataset.filter;[].forEach.call($("avFilters").querySelectorAll("button"),function(x){x.setAttribute("aria-pressed",x===b?"true":"false")});renderAvisos()});
-$("sos").addEventListener("click",function(){emergencia=!emergencia;renderAvisos()});
+$("avisos").addEventListener("click",function(e){var b=e.target.closest?e.target.closest("button[data-ignore-central]"):null;if(!b)return;var id=String(b.dataset.ignoreCentral||"");if(!id)return;ignoredCentralNotices[id]=true;try{localStorage.setItem(IGNORED_CENTRAL_KEY,JSON.stringify(ignoredCentralNotices))}catch(err){}renderAvisos()});
+var sosButton=$("sos");if(sosButton)sosButton.remove();
 var PARADA_URL="https://www.google.com/maps/search/?api=1&query=Plaza+San+Mart%C3%ADn%2C+San+Rafael%2C+Mendoza%2C+Argentina";
 function sinUbicacion(out){
   out.innerHTML='<p class="note">No pudimos obtener tu ubicación. Activá el permiso de ubicación en el navegador y probá de nuevo. Si es urgente, llamá al 911 e indicá: Parada Plaza San Martín, San Rafael, Mendoza.</p><a class="btn ghost linkbtn" target="_blank" rel="noopener" href="'+PARADA_URL+'">Ver la parada en Google Maps</a>';
