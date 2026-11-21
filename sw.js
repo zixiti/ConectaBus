@@ -1,5 +1,5 @@
 /* ConectaBus · caché de la interfaz para instalaciones HTTPS */
-const CACHE_NAME = "conectabus-shell-v16";
+const CACHE_NAME = "conectabus-shell-v17";
 const INDEX_URL = new URL("./index.html", self.registration.scope).href;
 const CORE_FILES = [INDEX_URL, "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./assets/backrooms-level0.webp?v=2"];
 self.addEventListener("install", event => {
@@ -12,7 +12,18 @@ self.addEventListener("fetch", event => {
   const request = event.request;
   if (request.method !== "GET") return;
   const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
+  if (url.origin !== self.location.origin) {
+    if (request.destination === "image") {
+      event.respondWith(caches.match(request).then(cached => cached || fetch(request).then(response => {
+        if (response && (response.ok || response.type === "opaque")) {
+          const copy = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(request, copy));
+        }
+        return response;
+      })));
+    }
+    return;
+  }
   if (request.mode === "navigate") {
     event.respondWith(fetch(request).then(response => {
       const copy = response.clone();
