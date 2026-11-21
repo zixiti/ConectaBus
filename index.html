@@ -715,7 +715,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   background:linear-gradient(145deg,#b99b4c,#655126)!important;color:#fff3c1!important;box-shadow:0 0 12px rgba(225,186,87,.16)!important
 }
 #cbBackroomsBackdrop .cb-backrooms-image{
-  background-size:100% 100%!important;background-position:center!important;
+  inset:0!important;background-size:100% 100%!important;background-position:center!important;
   filter:brightness(1.10) saturate(.98) contrast(1.04)!important;
   animation:cbBackroomsApproach 32s ease-in-out infinite alternate
 }
@@ -759,7 +759,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 :root.cb-backrooms-glitch #cbBackroomsBackdrop .cb-backrooms-scan{opacity:.34;animation:cbBackroomsTear .17s steps(2,end) both}
 :root.cb-backrooms-static #cbBackroomsBackdrop .cb-backrooms-image{animation:none!important;transform:scale(1.01)}
 :root.cb-backrooms-static #cbBackroomsBackdrop .cb-backrooms-bulb{transition:none}
-.cb-animated-preview{background-size:100% 100%!important}
+.cb-animated-preview{background-size:cover!important}
 
 </style>
 
