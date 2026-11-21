@@ -1294,6 +1294,119 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 
 </style>
 
+<style id="cb-fix-backrooms-user-css">
+/* ============================================================
+   CONECTABUS · FIX BACKROOMS
+   1) Iluminación real (se apaga suave, no mancha negra)
+   2) Fondo animado con parpadeo de fluorescente
+   3) Barra inferior 100% transparente (sin morado)
+   ============================================================ */
+
+/* ---------- 3) BARRA INFERIOR TRANSPARENTE ---------- */
+:root[data-animated-skin="backrooms-level0"] nav,
+:root[data-animated-skin="backrooms-level0"] #nav{
+  background:transparent !important;
+  border-top:1px solid rgba(225,220,203,.14) !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+:root[data-animated-skin="backrooms-level0"] #nav a{
+  background:transparent !important;
+  color:#e4d6ad !important;
+}
+:root[data-animated-skin="backrooms-level0"] #nav a[aria-current="page"]{
+  background:rgba(135,102,37,.32) !important;
+  color:#ffe29a !important;
+  box-shadow:inset 0 0 0 1px rgba(255,222,148,.32) !important;
+}
+
+/* ---------- 1) ILUMINACIÓN REAL ---------- */
+/* Apagamos los halos gigantes heredados y el blend raro */
+#cbBackroomsBackdrop .cb-backrooms-bulb:before,
+#cbBackroomsBackdrop .cb-backrooms-bulb:after{
+  display:none !important;
+  content:none !important;
+}
+
+/* Cada fluorescente tiene un halo suave que SÍ se apaga con transición */
+#cbBackroomsBackdrop .cb-backrooms-bulb{
+  background:
+    radial-gradient(ellipse at center,
+      rgba(255,242,205,.55) 0%,
+      rgba(255,235,190,.28) 38%,
+      rgba(255,230,180,.10) 68%,
+      transparent 100%) !important;
+  border:none !important;
+  filter:blur(6px) !important;
+  opacity:1 !important;
+  transition:opacity .55s ease, filter .55s ease, background .55s ease !important;
+  box-shadow:none !important;
+  z-index:2;
+  mix-blend-mode:screen;
+}
+
+/* Cuando se apaga una lámpara: el halo se desvanece (no aparece un rectángulo negro) */
+:root.cb-backrooms-powercut #cbBackroomsBackdrop .cb-backrooms-bulb{
+  opacity:0 !important;
+  filter:blur(14px) brightness(0) !important;
+  background:radial-gradient(ellipse at center,
+    rgba(0,0,0,.55) 0%,
+    rgba(0,0,0,.25) 45%,
+    transparent 100%) !important;
+}
+
+/* Las lámparas "keep" (las que se quedan encendidas) recuperan su brillo */
+:root.cb-backrooms-powercut.cb-backrooms-keep-a #cbBackroomsBackdrop .light-a,
+:root.cb-backrooms-powercut.cb-backrooms-keep-b #cbBackroomsBackdrop .light-b,
+:root.cb-backrooms-powercut.cb-backrooms-keep-c #cbBackroomsBackdrop .light-c,
+:root.cb-backrooms-powercut.cb-backrooms-keep-d #cbBackroomsBackdrop .light-d,
+:root.cb-backrooms-powercut.cb-backrooms-keep-e #cbBackroomsBackdrop .light-e,
+:root.cb-backrooms-powercut.cb-backrooms-keep-f #cbBackroomsBackdrop .light-f{
+  opacity:1 !important;
+  filter:blur(6px) brightness(1.15) !important;
+}
+
+/* La oscuridad global sube suavemente cuando hay powercut, no de golpe */
+:root.cb-backrooms-powercut #cbBackroomsBackdrop:after{
+  background:
+    linear-gradient(180deg,
+      rgba(8,9,8,.10),
+      rgba(6,7,6,.22) 48%,
+      rgba(3,4,3,.55)) !important;
+  transition:background .9s ease !important;
+}
+
+/* ---------- 2) FONDO ANIMADO: respiración + parpadeo ---------- */
+@keyframes cbBackroomsBreathe{
+  0%   { transform:scale(1.02) translate(0,0); }
+  50%  { transform:scale(1.06) translate(-.3%,-.2%); }
+  100% { transform:scale(1.03) translate(.2%,.1%); }
+}
+@keyframes cbBackroomsFlicker{
+  0%, 100% { filter:brightness(.90) saturate(.52) contrast(1.02) hue-rotate(-6deg); }
+  2%       { filter:brightness(.78) saturate(.48) contrast(1.04) hue-rotate(-6deg); }
+  4%       { filter:brightness(.92) saturate(.52) contrast(1.02) hue-rotate(-6deg); }
+  70%      { filter:brightness(.90) saturate(.52) contrast(1.02) hue-rotate(-6deg); }
+  72%      { filter:brightness(.84) saturate(.50) contrast(1.03) hue-rotate(-6deg); }
+  74%      { filter:brightness(.90) saturate(.52) contrast(1.02) hue-rotate(-6deg); }
+}
+#cbBackroomsBackdrop .cb-backrooms-image{
+  animation:
+    cbBackroomsBreathe 34s ease-in-out infinite alternate,
+    cbBackroomsFlicker 7s linear infinite !important;
+}
+
+/* Respeta a quien pide menos movimiento */
+@media (prefers-reduced-motion: reduce){
+  #cbBackroomsBackdrop .cb-backrooms-image{
+    animation:none !important;
+    transform:scale(1.02) !important;
+    filter:brightness(.90) saturate(.52) contrast(1.02) hue-rotate(-6deg) !important;
+  }
+  #cbBackroomsBackdrop .cb-backrooms-bulb{transition:none !important}
+}
+</style>
 </head>
 <body>
 
