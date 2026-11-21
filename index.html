@@ -1607,6 +1607,75 @@ html,body{background-color:#050505!important}
   body{background-color:#050505!important}
 }
 </style>
+
+<style id="cb-backrooms-multilevel-skins">
+/* COLECCION BACKROOMS · ocho ambientes animados, sin imágenes externas */
+.cb-level-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.cb-level-pick{min-width:0;text-align:left;padding:8px;border-radius:14px;border:1px solid var(--line,rgba(255,255,255,.16));background:rgba(20,18,14,.52);color:var(--ink);display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:border-color .2s,transform .2s,background .2s}
+.cb-level-pick:active{transform:scale(.98)}
+.cb-level-pick.is-selected{border:2px solid #d8b75f;background:rgba(190,153,67,.16);box-shadow:0 0 18px rgba(213,176,91,.16)}
+.cb-level-pick b{font-size:.95rem}.cb-level-pick small{font-size:.75rem;color:var(--muted)}
+.cb-level-thumb{height:76px;width:100%;border-radius:9px;display:block;overflow:hidden;position:relative;background-size:cover}
+.cb-level-thumb.level0{background:linear-gradient(90deg,transparent 45%,rgba(255,244,180,.8) 46% 53%,transparent 54%),repeating-linear-gradient(90deg,#a79b56 0 18px,#c5b76e 19px 38px)}
+.cb-level-thumb.level150{background:repeating-linear-gradient(90deg,transparent 0 24px,#514d45 25px 28px),linear-gradient(150deg,#8c887b,#33332f)}
+.cb-level-thumb.level399{background:radial-gradient(circle at 70% 40%,#ff38c9,transparent 28%),linear-gradient(120deg,#081d35,#102b44 50%,#180c28)}
+.cb-level-thumb.levelminus1{background:repeating-linear-gradient(90deg,#252525 0 7px,#a3a3a3 8px 10px,#3a3a3a 11px 30px)}
+.cb-level-thumb.level38{background:linear-gradient(110deg,rgba(235,112,20,.6),transparent),linear-gradient(#d18b49,#55402d)}
+.cb-level-thumb.levelfun{background:radial-gradient(circle at 25% 20%,#ffe16b 0 4px,transparent 5px),linear-gradient(135deg,#edb4a9,#79c4d0 55%,#c9a5df)}
+.cb-level-thumb.theend{background:repeating-linear-gradient(90deg,#b7a88e 0 13px,#554c40 14px 22px),linear-gradient(#e8dfcb,#554b40)}
+.cb-level-thumb.level94{background:linear-gradient(180deg,#a9c4d0 0 50%,#75945c 51% 100%),linear-gradient(90deg,#e7c97f,#a97c48)}
+#cbBackroomsBackdrop .cb-backrooms-image{transition:filter 1s ease,background-position 1s ease}
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop .cb-backrooms-image{
+ background-image:
+ repeating-linear-gradient(0deg,transparent 0 16%,rgba(30,29,26,.42) 16.3% 17%,transparent 17.3% 33%),
+ repeating-linear-gradient(90deg,transparent 0 18%,rgba(35,34,31,.62) 18.4% 19.4%,transparent 19.8% 38%),
+ linear-gradient(155deg,transparent 0 48%,rgba(20,20,18,.7) 48.3% 49%,transparent 49.5%),
+ linear-gradient(180deg,#9a978a 0%,#6d6a61 50%,#35332f 100%)!important;
+ filter:brightness(.72) contrast(1.18) saturate(.48)!important;animation:cbLevel150Move 24s ease-in-out infinite alternate!important
+}
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop:after{background:linear-gradient(90deg,rgba(0,0,0,.25),transparent 35%,rgba(0,0,0,.45)),linear-gradient(180deg,transparent 35%,rgba(0,0,0,.62))!important}
+:root[data-animated-skin="backrooms-level399"] #cbBackroomsBackdrop .cb-backrooms-image{
+ background-image:radial-gradient(ellipse at 50% 25%,rgba(255,50,210,.5),transparent 30%),repeating-linear-gradient(90deg,transparent 0 12%,rgba(0,220,255,.22) 12.2% 12.6%,transparent 13% 25%),linear-gradient(180deg,#101c39 0%,#172b48 48%,#080d1c 100%)!important;
+ filter:brightness(.72) contrast(1.2) saturate(1.45)!important;animation:cbNeonDrift 18s ease-in-out infinite alternate!important
+}
+:root[data-animated-skin="backrooms-level399"] #cbBackroomsBackdrop:after{background:radial-gradient(ellipse at 50% 40%,transparent 8%,rgba(0,0,12,.72) 100%),linear-gradient(90deg,rgba(0,210,255,.08),transparent 48%,rgba(255,0,180,.12))!important}
+:root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop .cb-backrooms-image{
+ background-image:repeating-linear-gradient(90deg,transparent 0 12%,rgba(5,5,5,.9) 12.3% 13.2%,transparent 13.5% 25%),linear-gradient(180deg,#8a8a8a 0%,#555 54%,#202020 100%)!important;
+ filter:grayscale(1) brightness(.58) contrast(1.2)!important;animation:cbMinusOneDrift 32s linear infinite!important
+}
+:root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop:after{background:radial-gradient(ellipse at 50% 48%,transparent 0 12%,rgba(0,0,0,.75) 100%)!important}
+:root[data-animated-skin="backrooms-level38"] #cbBackroomsBackdrop .cb-backrooms-image{
+ background-image:repeating-linear-gradient(90deg,transparent 0 20%,rgba(69,42,22,.48) 20.5% 21.5%,transparent 22% 39%),radial-gradient(ellipse at 50% 75%,rgba(244,127,34,.35),transparent 52%),linear-gradient(180deg,#bd7844 0%,#8d5839 48%,#49382c 100%)!important;
+ filter:brightness(.65) saturate(.82) sepia(.28) contrast(1.15)!important;animation:cbSmog 22s ease-in-out infinite alternate!important
+}
+:root[data-animated-skin="backrooms-level38"] #cbBackroomsBackdrop:after{background:linear-gradient(180deg,rgba(231,128,54,.25),rgba(12,8,5,.68)),radial-gradient(ellipse,transparent 5%,rgba(0,0,0,.45) 100%)!important}
+:root[data-animated-skin="backrooms-fun"] #cbBackroomsBackdrop .cb-backrooms-image{
+ background-image:radial-gradient(ellipse at 18% 36%,#e6a7cb 0 13%,transparent 13.5%),radial-gradient(ellipse at 78% 38%,#82c9d0 0 16%,transparent 16.5%),radial-gradient(ellipse at 48% 56%,#e9d18b 0 18%,transparent 18.5%),repeating-linear-gradient(90deg,transparent 0 22%,rgba(255,255,255,.2) 22.3% 22.8%,transparent 23% 45%),linear-gradient(180deg,#c99aaf 0%,#d8b8a0 54%,#9b2934 55% 100%)!important;
+ filter:brightness(.7) saturate(.86) contrast(1.08)!important;animation:cbFunFloat 16s ease-in-out infinite alternate!important
+}
+:root[data-animated-skin="backrooms-fun"] #cbBackroomsBackdrop:after{background:radial-gradient(ellipse,transparent 0 12%,rgba(20,0,8,.72) 100%),linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.48))!important}
+:root[data-animated-skin="backrooms-the-end"] #cbBackroomsBackdrop .cb-backrooms-image{
+ background-image:repeating-linear-gradient(90deg,transparent 0 8%,rgba(55,45,34,.78) 8.3% 10%,transparent 10.3% 19%),repeating-linear-gradient(0deg,transparent 0 17%,rgba(210,198,174,.35) 17.4% 18%,transparent 18.4% 35%),linear-gradient(180deg,#b9ad98,#746b5d 58%,#2c2924)!important;
+ filter:brightness(.62) saturate(.48) contrast(1.16)!important;animation:cbEndlessLibrary 36s linear infinite!important
+}
+:root[data-animated-skin="backrooms-the-end"] #cbBackroomsBackdrop:after{background:radial-gradient(ellipse at 50% 42%,transparent 5%,rgba(0,0,0,.72) 100%),linear-gradient(180deg,rgba(231,218,192,.08),rgba(0,0,0,.42))!important}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-backrooms-image{
+ background-image:radial-gradient(ellipse at 50% 22%,rgba(222,236,245,.24),transparent 28%),repeating-linear-gradient(90deg,transparent 0 17%,rgba(74,54,37,.55) 17.4% 19%,transparent 19.5% 35%),linear-gradient(180deg,#9bb3c0 0%,#c1b7a0 49%,#708b59 50%,#526a42 100%)!important;
+ filter:brightness(.7) saturate(.7) sepia(.12) contrast(1.12)!important;animation:cbStopMotion 20s steps(8,end) infinite!important
+}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop:after{background:radial-gradient(ellipse at 50% 50%,transparent 10%,rgba(0,0,0,.52) 100%),linear-gradient(180deg,rgba(20,25,28,.05),rgba(20,15,8,.45))!important}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-backrooms-scan{opacity:.08;animation:cbFilmGrain .24s steps(2,end) infinite}
+@keyframes cbLevel150Move{0%{transform:scale(1.04) translateX(-.5%)}100%{transform:scale(1.1) translateX(.6%)}}
+@keyframes cbNeonDrift{0%{background-position:0 0,0 0,center}100%{background-position:6% 3%,18px 0,center}}
+@keyframes cbMinusOneDrift{0%{transform:scale(1.04) translateY(0)}100%{transform:scale(1.1) translateY(-1.2%)}}
+@keyframes cbSmog{0%{background-position:0 0,45% 50%,center}100%{background-position:12px 0,60% 44%,center}}
+@keyframes cbFunFloat{0%{transform:scale(1.04) translateY(0)}100%{transform:scale(1.09) translateY(-1.2%)}}
+@keyframes cbEndlessLibrary{0%{background-position:0 0,0 0,center}100%{background-position:0 0,0 120px,center}}
+@keyframes cbStopMotion{0%,100%{transform:scale(1.045) translateX(0)}50%{transform:scale(1.065) translateX(.35%)}}
+@keyframes cbFilmGrain{0%{opacity:.04}50%{opacity:.14}100%{opacity:.06}}
+@media(max-width:380px){.cb-level-grid{gap:7px}.cb-level-pick{padding:6px}.cb-level-thumb{height:65px}}
+@media(prefers-reduced-motion:reduce){:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image,:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important}}
+</style>
 </head>
 <body>
 
@@ -2021,19 +2090,20 @@ html,body{background-color:#050505!important}
     </div>
 
     <div class="card cb-animated-skins" id="cbAnimatedSkins">
-      <div class="cb-section-head"><div><span class="cb-kicker">COLECCIÓN ESPECIAL</span><h2>Skins animadas</h2></div><span class="cb-module-icon">◉</span></div>
-      <p class="note">Fondos con escenas animadas. Se pueden activar por separado de los temas normales.</p>
-      <div class="cb-animated-skin-entry">
-        <div class="cb-animated-preview" aria-label="Vista previa del Nivel 0 de los Backrooms">
-          <span class="cb-animated-preview-tag">BACKROOMS</span><strong>NIVEL 0</strong><small>THE LOBBY · AMBIENTE INQUIETANTE</small>
-        </div>
-        <div>
-          <b>Backrooms · Nivel 0</b>
-          <p class="note">Pasillos amarillos, la bacteria a lo lejos, acercamiento visual, interferencias y luces fluorescentes que parpadean. Los paneles de ConectaBus siguen siendo legibles.</p>
-          <div class="cb-animated-skin-actions"><button class="btn" type="button" id="cbBackroomsToggle" aria-pressed="false">Activar fondo</button></div>
-          <p class="note" id="cbAnimatedSkinStatus" role="status">Fondo desactivado.</p>
-        </div>
+      <div class="cb-section-head"><div><span class="cb-kicker">COLECCIÓN ESPECIAL</span><h2>Skins animadas · Backrooms</h2></div><span class="cb-module-icon">◉</span></div>
+      <p class="note">Elegí un nivel para transformar el ambiente de ConectaBus. Cada uno tiene movimiento, iluminación y atmósfera propios. Tu selección queda guardada.</p>
+      <div class="cb-level-grid" id="cbBackroomsLevelGrid">
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level0"><span class="cb-level-thumb level0"></span><b>Nivel 0</b><small>The Lobby · fluorescentes</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level150"><span class="cb-level-thumb level150"></span><b>Nivel 150</b><small>Construcción abandonada</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level399"><span class="cb-level-thumb level399"></span><b>Nivel 399</b><small>Paraíso de neón</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level-minus1"><span class="cb-level-thumb levelminus1"></span><b>Nivel -1</b><small>Pasillos en gris</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level38"><span class="cb-level-thumb level38"></span><b>Nivel 38</b><small>Ciudad bajo el smog</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-fun"><span class="cb-level-thumb levelfun"></span><b>Level Fun</b><small>Fiesta inquietante</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-the-end"><span class="cb-level-thumb theend"></span><b>The End</b><small>Biblioteca infinita</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level94"><span class="cb-level-thumb level94"></span><b>Nivel 94</b><small>Pueblo de animación</small></button>
       </div>
+      <p class="note" id="cbAnimatedSkinStatus" role="status">No hay ningún fondo Backrooms activado.</p>
+      <div class="cb-animated-skin-actions"><button class="btn ghost" type="button" id="cbBackroomsToggle" aria-pressed="false">Desactivar fondo</button></div>
     </div>
     <div class="card settings-smart">
       <h2>Preferencias inteligentes</h2>
@@ -3693,8 +3763,20 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   var root=document.documentElement,nextTimer=null,restoreTimer=null,effectTimers=[];
   var letters=["a","b","c","d","e","f"];
   var bulbs=Array.prototype.slice.call(document.querySelectorAll("#cbBackroomsBackdrop .cb-backrooms-bulb"));
+  var labels={
+    "backrooms-level0":"Nivel 0 · El Lobby",
+    "backrooms-level150":"Nivel 150 · Construcción abandonada",
+    "backrooms-level399":"Nivel 399 · Paraíso de neón",
+    "backrooms-level-minus1":"Nivel -1 · Pasillos a escala de grises",
+    "backrooms-level38":"Nivel 38 · Ciudad contaminada",
+    "backrooms-fun":"Level Fun · Fiesta inquietante",
+    "backrooms-the-end":"The End · Biblioteca infinita",
+    "backrooms-level94":"Nivel 94 · Pueblo de animación"
+  };
   function prefs(){return window.PR||{};}
-  function active(){return prefs().animatedSkin==="backrooms-level0";}
+  function selected(){var k=prefs().animatedSkin;return labels[k]?k:"none";}
+  function active(){return selected()!=="none";}
+  function isLevel0(){return selected()==="backrooms-level0";}
   function motionAllowed(){
     var p=prefs(),reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     return p.animations!==false&&p.shaders!==false&&p.dataSaver!==true&&!reduced;
@@ -3711,53 +3793,53 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
     effectTimers.forEach(clearTimeout);effectTimers=[];
     restoreLights();
   }
-  function scheduleEffect(){
-    if(!active()||!motionAllowed()||document.hidden)return;
+  function scheduleLevel0(){
+    if(!isLevel0()||!motionAllowed()||document.hidden)return;
     nextTimer=setTimeout(function(){
       nextTimer=null;
-      if(!active()||!motionAllowed()||document.hidden)return;
+      if(!isLevel0()||!motionAllowed()||document.hidden)return;
       var order=letters.slice().sort(function(){return Math.random()-.5;});
-      var offCount=2+Math.floor(Math.random()*3); // apaga entre 2 y 4 tubos
-      var offLetters=order.slice(0,offCount);
-      restoreLights();
-      root.classList.add("cb-backrooms-powercut");
+      var offCount=2+Math.floor(Math.random()*3),offLetters=order.slice(0,offCount);
+      restoreLights();root.classList.add("cb-backrooms-powercut");
       letters.forEach(function(k){if(offLetters.indexOf(k)<0)root.classList.add("cb-backrooms-keep-"+k);});
       bulbs.forEach(function(b){
         var key=letters.find(function(k){return b.classList.contains("light-"+k);});
         if(!key||offLetters.indexOf(key)<0)return;
-        later(function(){
-          if(!active()||document.hidden)return;
-          b.classList.add("cb-flicker");
-          later(function(){
-            b.classList.remove("cb-flicker");
-            b.classList.add("cb-is-off");
-          },520);
-        },Math.floor(Math.random()*360));
+        later(function(){if(!isLevel0()||document.hidden)return;b.classList.add("cb-flicker");later(function(){b.classList.remove("cb-flicker");b.classList.add("cb-is-off");},520);},Math.floor(Math.random()*360));
       });
       if(Math.random()<.12)root.classList.add("cb-backrooms-glitch");
-      restoreTimer=setTimeout(function(){
-        restoreTimer=null;
-        restoreLights();
-        scheduleEffect();
-      },3000+Math.random()*1500);
+      restoreTimer=setTimeout(function(){restoreTimer=null;restoreLights();scheduleLevel0();},3000+Math.random()*1500);
     },5200+Math.random()*6800);
   }
   function update(){
-    var on=active(),move=on&&motionAllowed(),button=document.getElementById("cbBackroomsToggle");
-    if(on)root.setAttribute("data-animated-skin","backrooms-level0");else root.removeAttribute("data-animated-skin");
+    var key=selected(),on=key!=="none",move=on&&motionAllowed();
+    if(on)root.setAttribute("data-animated-skin",key);else root.removeAttribute("data-animated-skin");
     root.classList.toggle("cb-backrooms-static",on&&!move);
     var meta=document.querySelector('meta[name="theme-color"]');
     if(meta)meta.setAttribute("content","#050505");
     stopEffects();
-    if(move)scheduleEffect();
+    if(move&&isLevel0())scheduleLevel0();
     var card=document.getElementById("cbAnimatedSkins");if(card)card.classList.toggle("is-active",on);
-    if(button){button.textContent=on?"Desactivar fondo":"Activar fondo";button.setAttribute("aria-pressed",String(on));}
+    document.querySelectorAll("[data-backrooms-skin]").forEach(function(btn){
+      var chosen=btn.getAttribute("data-backrooms-skin")===key;
+      btn.classList.toggle("is-selected",chosen);btn.setAttribute("aria-pressed",String(chosen));
+    });
+    var toggle=document.getElementById("cbBackroomsToggle");
+    if(toggle){toggle.textContent=on?"Desactivar fondo":"No hay fondo activo";toggle.setAttribute("aria-pressed",String(on));toggle.disabled=!on;}
     var status=document.getElementById("cbAnimatedSkinStatus");
-    if(status)status.textContent=!on?"Fondo desactivado.":(move?"Activo: los fluorescentes titilan, algunos se apagan y la zona que iluminaban se oscurece suavemente.":"Fondo activo en modo fijo por ahorro de recursos o preferencia de movimiento reducido.");
+    if(status)status.textContent=!on?"No hay ningún fondo Backrooms activado.":(move?labels[key]+" activo · animaciones en marcha.":" "+labels[key]+" activo en modo fijo por ahorro de recursos o preferencia de movimiento reducido.");
   }
+  var grid=document.getElementById("cbBackroomsLevelGrid");
+  if(grid)grid.addEventListener("click",function(e){
+    var btn=e.target&&e.target.closest?e.target.closest("[data-backrooms-skin]"):null;if(!btn)return;
+    var p=prefs(),key=btn.getAttribute("data-backrooms-skin");
+    p.animatedSkin=p.animatedSkin===key?"none":key;
+    try{localStorage.setItem("cb_prefs",JSON.stringify(p));}catch(e){}
+    update();
+  });
   var toggle=document.getElementById("cbBackroomsToggle");
   if(toggle)toggle.addEventListener("click",function(){
-    var p=prefs();p.animatedSkin=active()?"none":"backrooms-level0";
+    var p=prefs();p.animatedSkin="none";
     try{localStorage.setItem("cb_prefs",JSON.stringify(p));}catch(e){}
     update();
   });
@@ -3769,8 +3851,6 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   });
   document.addEventListener("visibilitychange",function(){if(document.hidden)stopEffects();else update();});
   window.addEventListener("pageshow",update);window.addEventListener("pagehide",stopEffects);
-  var preview=document.querySelector(".cb-animated-preview");
-  if(preview)preview.style.backgroundImage='linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.72)),url("./assets/backrooms-level0.webp?v=2")';
   update();
 })();
 </script>
