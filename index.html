@@ -1407,6 +1407,101 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   #cbBackroomsBackdrop .cb-backrooms-bulb{transition:none !important}
 }
 </style>
+<style id="cb-fix-backrooms-master-v2">
+/* ============================================================
+   CONECTABUS · FIX MAESTRO BACKROOMS (v2)
+   ============================================================ */
+
+/* ---------- 1. FONDO: Quitar saturación y hacerlo nítido ---------- */
+:root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop .cb-backrooms-image{
+  /* Quitamos los filtros amarillos y saturados. Lo dejamos natural y oscuro */
+  filter: brightness(0.65) contrast(1.15) saturate(0.8) !important;
+  /* Animación lenta y suave */
+  animation: cbBackroomsBreathe 40s ease-in-out infinite alternate !important;
+  will-change: transform;
+}
+
+/* Quitamos las capas extra de oscuridad que hacían que se viera turbio */
+:root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop:after{
+  background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.6) 100%) !important;
+  transition: background 1s ease !important;
+}
+
+@keyframes cbBackroomsBreathe {
+  0%   { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.08) translate(-1%, -0.5%); }
+}
+
+/* ---------- 2. LUCES REALES (Que sí se apaguen) ---------- */
+/* Ocultamos los halos falsos que flotaban en medio de la pantalla */
+#cbBackroomsBackdrop .cb-backrooms-bulb::before,
+#cbBackroomsBackdrop .cb-backrooms-bulb::after {
+  display: none !important;
+}
+
+/* Diseñamos las lámparas para que parezcan fluorescentes reales */
+#cbBackroomsBackdrop .cb-backrooms-bulb {
+  background: linear-gradient(180deg, #fffef0 0%, #ffea99 100%) !important;
+  border-radius: 4px !important;
+  box-shadow: 0 0 15px 5px rgba(255, 240, 150, 0.6) !important;
+  opacity: 1 !important;
+  transition: all 0.1s ease !important;
+  z-index: 5;
+}
+
+/* Cuando se apagan las luces (Modo Powercut) */
+:root.cb-backrooms-powercut #cbBackroomsBackdrop .cb-backrooms-bulb {
+  background: #1a1a1a !important;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.8), 0 0 0px transparent !important;
+  opacity: 0.8 !important;
+}
+
+/* Mantener encendidas las que diga el sistema */
+:root.cb-backrooms-powercut.cb-backrooms-keep-a #cbBackroomsBackdrop .light-a,
+:root.cb-backrooms-powercut.cb-backrooms-keep-b #cbBackroomsBackdrop .light-b,
+:root.cb-backrooms-powercut.cb-backrooms-keep-c #cbBackroomsBackdrop .light-c,
+:root.cb-backrooms-powercut.cb-backrooms-keep-d #cbBackroomsBackdrop .light-d,
+:root.cb-backrooms-powercut.cb-backrooms-keep-e #cbBackroomsBackdrop .light-e,
+:root.cb-backrooms-powercut.cb-backrooms-keep-f #cbBackroomsBackdrop .light-f {
+  background: linear-gradient(180deg, #fffef0 0%, #ffea99 100%) !important;
+  box-shadow: 0 0 20px 8px rgba(255, 240, 150, 0.7) !important;
+}
+
+/* Efecto de parpadeo (flicker) real cuando hay un apagón */
+:root.cb-backrooms-glitch #cbBackroomsBackdrop .cb-backrooms-bulb:not(.cb-is-off),
+:root.cb-backrooms-powercut #cbBackroomsBackdrop .cb-backrooms-bulb {
+  animation: cbFlicker 0.2s infinite alternate !important;
+}
+
+@keyframes cbFlicker {
+  0%, 100% { opacity: 1; filter: brightness(1.2); }
+  50% { opacity: 0.3; filter: brightness(0.5); }
+}
+
+/* ---------- 3. BARRA INFERIOR (ELIMINAR EL MORADO) ---------- */
+:root[data-animated-skin="backrooms-level0"] nav,
+:root[data-animated-skin="backrooms-level0"] #nav {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Hacemos que los iconos y textos de la barra se lean bien sin fondo */
+:root[data-animated-skin="backrooms-level0"] #nav a {
+  color: #dcdcdc !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8) !important;
+}
+
+/* El botón de "Inicio" activo en la barra */
+:root[data-animated-skin="backrooms-level0"] #nav a[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border-radius: 12px;
+}
+</style>
 </head>
 <body>
 
