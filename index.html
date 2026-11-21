@@ -1714,6 +1714,50 @@ html,body{background-color:#050505!important}
 :root[data-animated-skin] #nav a{background:transparent!important;color:#dedbd2!important}
 :root[data-animated-skin] #nav a[aria-current="page"]{color:#fff!important;text-shadow:0 0 10px var(--cb-level-accent)!important}
 </style>
+<style id="cb-backrooms-photo-overhaul">
+/* Fotografías y ambientes fotorrealistas para los niveles */
+:root[data-animated-skin] .card,:root[data-animated-skin] .tile,:root[data-animated-skin] .cb-intro-fold{
+ background:rgba(8,9,10,.49)!important;border-color:rgba(235,229,211,.22)!important;
+ backdrop-filter:blur(6px)!important;-webkit-backdrop-filter:blur(6px)!important;box-shadow:0 8px 28px rgba(0,0,0,.2)!important
+}
+:root[data-animated-skin="backrooms-level0"] .card,:root[data-animated-skin="backrooms-level0"] .tile,:root[data-animated-skin="backrooms-level0"] .cb-intro-fold{background:rgba(8,9,10,.44)!important;border-color:rgba(235,229,211,.2)!important}
+:root[data-animated-skin] .cb-level-pick{background:rgba(9,10,12,.38)!important;border-color:rgba(235,229,211,.2)!important}
+:root[data-animated-skin] .cb-level-pick.is-selected{background:rgba(190,153,67,.14)!important;border-color:var(--cb-level-accent,#d8b75f)!important}
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.unsplash.com/photo-1768321916027-d0f69289227f?auto=format&fit=crop&w=1600&q=85")!important;background-position:center 48%!important;filter:brightness(.62) saturate(.55) contrast(1.15)!important;animation:cbPhoto150 30s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-level399"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.unsplash.com/photo-1671362962572-50cf4edca731?auto=format&fit=crop&w=1600&q=85")!important;background-position:center 48%!important;filter:brightness(.54) saturate(1.35) hue-rotate(12deg) contrast(1.15)!important;animation:cbPhoto399 17s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.unsplash.com/photo-1706312554818-947831b1db3d?auto=format&fit=crop&w=1600&q=85")!important;background-position:center 50%!important;filter:grayscale(1) brightness(.55) contrast(1.25)!important;animation:cbPhotoMinus1 36s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-level38"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.unsplash.com/photo-1632880906599-59908aa9af2f?auto=format&fit=crop&w=1600&q=85")!important;background-position:center 52%!important;filter:brightness(.53) saturate(.58) sepia(.16) contrast(1.18)!important;animation:cbPhoto38 28s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-fun"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.pexels.com/photos/25359159/pexels-photo-25359159.jpeg?auto=compress&cs=tinysrgb&w=1600")!important;background-position:center 50%!important;filter:brightness(.5) saturate(.78) contrast(1.22)!important;animation:cbPhotoFun 15s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-the-end"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.stockcake.com/public/8/7/5/875806f1-5b84-4ee3-b772-a3ff110e50f0_medium/endless-liminal-library-stockcake.jpg")!important;background-position:center 50%!important;filter:brightness(.57) saturate(.58) contrast(1.2)!important;animation:cbPhotoEnd 23s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://es-backrooms-wiki.wdfiles.com/local--files/level-94/Level-94-1.jpg")!important;background-position:center 52%!important;filter:brightness(.62) saturate(.72) contrast(1.14)!important;animation:cbPhoto94 21s steps(7,end) infinite!important}
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop:after{background:linear-gradient(180deg,rgba(6,7,9,.1),rgba(5,5,6,.2) 48%,rgba(0,0,0,.62)),radial-gradient(ellipse at 50% 40%,transparent 12%,rgba(0,0,0,.38) 100%)!important}
+:root[data-animated-skin="backrooms-level399"] #cbBackroomsBackdrop:after{background:linear-gradient(130deg,rgba(37,0,48,.28),rgba(4,9,29,.12) 45%,rgba(0,0,0,.55)),radial-gradient(ellipse at 50% 42%,transparent 12%,rgba(0,0,12,.55) 100%)!important}
+:root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop:after{background:radial-gradient(ellipse at 50% 45%,transparent 5%,rgba(0,0,0,.7) 100%),linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.24))!important}
+:root[data-animated-skin="backrooms-level38"] #cbBackroomsBackdrop:after{background:linear-gradient(180deg,rgba(30,23,15,.18),rgba(8,8,8,.68)),radial-gradient(ellipse at 50% 38%,transparent 8%,rgba(0,0,0,.48) 100%)!important}
+:root[data-animated-skin="backrooms-fun"] #cbBackroomsBackdrop:after{background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.6)),radial-gradient(ellipse at 50% 42%,transparent 8%,rgba(0,0,0,.55) 100%)!important}
+:root[data-animated-skin="backrooms-the-end"] #cbBackroomsBackdrop:after{background:linear-gradient(180deg,rgba(25,25,16,.08),rgba(0,0,0,.58)),radial-gradient(ellipse at 50% 42%,transparent 6%,rgba(0,0,0,.5) 100%)!important}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop:after{background:linear-gradient(180deg,rgba(14,18,22,.05),rgba(13,13,12,.46)),radial-gradient(ellipse at 50% 48%,transparent 10%,rgba(0,0,0,.46) 100%)!important}
+:root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop .cb-backrooms-scan,:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-backrooms-scan{opacity:.08!important;animation:cbPhotoGrain .32s steps(2,end) infinite!important}
+.cb-level-thumb.level0{background-image:url("./assets/backrooms-level0.webp?v=2")!important}
+.cb-level-thumb.level150{background-image:url("https://images.unsplash.com/photo-1768321916027-d0f69289227f?auto=format&fit=crop&w=700&q=75")!important}
+.cb-level-thumb.level399{background-image:url("https://images.unsplash.com/photo-1671362962572-50cf4edca731?auto=format&fit=crop&w=700&q=75")!important}
+.cb-level-thumb.levelminus1{background-image:url("https://images.unsplash.com/photo-1706312554818-947831b1db3d?auto=format&fit=crop&w=700&q=75")!important}
+.cb-level-thumb.level38{background-image:url("https://images.unsplash.com/photo-1632880906599-59908aa9af2f?auto=format&fit=crop&w=700&q=75")!important}
+.cb-level-thumb.levelfun{background-image:url("https://images.pexels.com/photos/25359159/pexels-photo-25359159.jpeg?auto=compress&cs=tinysrgb&w=700")!important}
+.cb-level-thumb.theend{background-image:url("https://images.stockcake.com/public/8/7/5/875806f1-5b84-4ee3-b772-a3ff110e50f0_medium/endless-liminal-library-stockcake.jpg")!important}
+.cb-level-thumb.level94{background-image:url("https://es-backrooms-wiki.wdfiles.com/local--files/level-94/Level-94-1.jpg")!important}
+@keyframes cbPhoto150{0%{transform:scale(1.035) translate3d(-.25%,0,0)}100%{transform:scale(1.095) translate3d(.55%,-.3%,0)}}
+@keyframes cbPhoto399{0%{transform:scale(1.035);filter:brightness(.52) saturate(1.2) hue-rotate(8deg)}100%{transform:scale(1.09);filter:brightness(.68) saturate(1.55) hue-rotate(-8deg)}}
+@keyframes cbPhotoMinus1{0%{transform:scale(1.035) translateY(0)}100%{transform:scale(1.09) translateY(-.65%)}}
+@keyframes cbPhoto38{0%{transform:scale(1.035) translateX(-.25%)}100%{transform:scale(1.085) translateX(.35%)}}
+@keyframes cbPhotoFun{0%{transform:scale(1.04) translateY(0)}100%{transform:scale(1.095) translateY(-.8%)}}
+@keyframes cbPhotoEnd{0%,100%{transform:scale(1.04);filter:brightness(.55) saturate(.52)}50%{transform:scale(1.075);filter:brightness(.7) saturate(.65)}}
+@keyframes cbPhoto94{0%,100%{transform:scale(1.04) translateX(0)}50%{transform:scale(1.075) translateX(.35%)}}
+@keyframes cbPhotoGrain{0%{opacity:.04}50%{opacity:.15}100%{opacity:.07}}
+:root.cb-backrooms-static[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image{animation:none!important;transform:scale(1.025)!important}
+:root.cb-backrooms-static[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important;opacity:0!important}
+@media(prefers-reduced-motion:reduce){:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image,:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important;transform:scale(1.025)!important}}
+</style>
 </head>
 <body>
 
@@ -2132,13 +2176,13 @@ html,body{background-color:#050505!important}
       <p class="note">Elegí un nivel para transformar el ambiente de ConectaBus. Cada uno tiene movimiento, iluminación y atmósfera propios. Tu selección queda guardada.</p>
       <div class="cb-level-grid" id="cbBackroomsLevelGrid">
         <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level0"><span class="cb-level-thumb level0"></span><b>Nivel 0</b><small>The Lobby · fluorescentes</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level150"><span class="cb-level-thumb level150"></span><b>Nivel 150</b><small>Construcción abandonada</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level150"><span class="cb-level-thumb level150"></span><b>Nivel 150</b><small>Fiebre de Construcción</small></button>
         <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level399"><span class="cb-level-thumb level399"></span><b>Nivel 399</b><small>Paraíso de neón</small></button>
         <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level-minus1"><span class="cb-level-thumb levelminus1"></span><b>Nivel -1</b><small>Pasillos en gris</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level38"><span class="cb-level-thumb level38"></span><b>Nivel 38</b><small>Ciudad bajo el smog</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-fun"><span class="cb-level-thumb levelfun"></span><b>Level Fun</b><small>Fiesta inquietante</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-the-end"><span class="cb-level-thumb theend"></span><b>The End</b><small>Biblioteca infinita</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level94"><span class="cb-level-thumb level94"></span><b>Nivel 94</b><small>Pueblo de animación</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level38"><span class="cb-level-thumb level38"></span><b>Nivel 38</b><small>Condominios Adoberos · años 90</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-fun"><span class="cb-level-thumb levelfun"></span><b>Level Fun</b><small>Almacén infinito de inflables</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-the-end"><span class="cb-level-thumb theend"></span><b>The End</b><small>Biblioteca y terminales CRT</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level94"><span class="cb-level-thumb level94"></span><b>Nivel 94</b><small>Pueblo de los años 30 y castillo</small></button>
       </div>
       <p class="note" id="cbAnimatedSkinStatus" role="status">No hay ningún fondo Backrooms activado.</p>
       <div class="cb-animated-skin-actions"><button class="btn ghost" type="button" id="cbBackroomsToggle" aria-pressed="false">Desactivar fondo</button></div>
