@@ -1601,10 +1601,10 @@ html,body{background-color:#050505!important}
 
 
 <style id="cb-android-navigation-bar-fix">
-/* Android/PWA: intentar que la zona del sistema combine con ConectaBus */
-html,body{background-color:#050505!important}
+/* Android/PWA: las zonas seguras acompañan el tema activo */
+html,body{background-color:var(--bg,#f2f7fc)!important}
 @supports (padding: env(safe-area-inset-bottom)){
-  body{background-color:#050505!important}
+  body{background-color:var(--bg,#f2f7fc)!important}
 }
 </style>
 
