@@ -1762,44 +1762,44 @@ html,body{background-color:#050505!important}
 <style id="cb-fix-theme-depth-v4">
 /* AJUSTES: tarjetas de skins oscuras, con acentos que respetan cada tema */
 :root{
-  --cb-settings-glass:rgba(13,15,20,.86);
+  --cb-settings-glass:rgba(13,15,20,.58);
   --cb-settings-edge:rgba(198,185,230,.30);
   --cb-settings-accent:#9a78f0;
   --cb-settings-text:#f4f1fa;
   --cb-settings-muted:#c5bfd1;
 }
 :root[data-skin="classic"]{
-  --cb-settings-glass:linear-gradient(145deg,rgba(31,22,48,.92),rgba(15,13,24,.94));
+  --cb-settings-glass:linear-gradient(145deg,rgba(31,22,48,.60),rgba(15,13,24,.63));
   --cb-settings-edge:rgba(174,137,245,.38);--cb-settings-accent:#b99af8;
   --cb-settings-text:#f7f0ff;--cb-settings-muted:#d1c2e8;
 }
 :root[data-skin="pixel"]{
-  --cb-settings-glass:linear-gradient(145deg,rgba(20,38,43,.96),rgba(10,23,33,.97));
+  --cb-settings-glass:linear-gradient(145deg,rgba(20,38,43,.64),rgba(10,23,33,.66));
   --cb-settings-edge:rgba(185,237,83,.48);--cb-settings-accent:#c7f45b;
   --cb-settings-text:#eff8d8;--cb-settings-muted:#c4d6a4;
 }
 :root[data-skin="neon"]{
-  --cb-settings-glass:linear-gradient(145deg,rgba(28,15,50,.94),rgba(8,15,32,.96));
+  --cb-settings-glass:linear-gradient(145deg,rgba(28,15,50,.63),rgba(8,15,32,.65));
   --cb-settings-edge:rgba(39,216,232,.42);--cb-settings-accent:#40e5f0;
   --cb-settings-text:#f0f5ff;--cb-settings-muted:#c2cbe8;
 }
 :root[data-skin="space"]{
-  --cb-settings-glass:linear-gradient(145deg,rgba(25,28,66,.94),rgba(7,13,34,.96));
+  --cb-settings-glass:linear-gradient(145deg,rgba(25,28,66,.63),rgba(7,13,34,.65));
   --cb-settings-edge:rgba(160,145,255,.40);--cb-settings-accent:#b5a0ff;
   --cb-settings-text:#f1f3ff;--cb-settings-muted:#c3c9e6;
 }
 :root[data-skin="craft"]{
-  --cb-settings-glass:linear-gradient(145deg,rgba(39,48,31,.96),rgba(24,29,23,.97));
+  --cb-settings-glass:linear-gradient(145deg,rgba(39,48,31,.64),rgba(24,29,23,.66));
   --cb-settings-edge:rgba(167,180,113,.48);--cb-settings-accent:#a7c66b;
   --cb-settings-text:#f2efd9;--cb-settings-muted:#d2d0ac;
 }
 :root[data-skin="motion"]{
-  --cb-settings-glass:linear-gradient(145deg,rgba(54,24,67,.94),rgba(21,18,49,.96));
+  --cb-settings-glass:linear-gradient(145deg,rgba(54,24,67,.63),rgba(21,18,49,.65));
   --cb-settings-edge:rgba(255,120,199,.42);--cb-settings-accent:#ff86ca;
   --cb-settings-text:#fff1fb;--cb-settings-muted:#e0c5e6;
 }
 :root[data-skin="sky"]{
-  --cb-settings-glass:linear-gradient(145deg,rgba(13,44,66,.94),rgba(8,27,45,.96));
+  --cb-settings-glass:linear-gradient(145deg,rgba(13,44,66,.63),rgba(8,27,45,.65));
   --cb-settings-edge:rgba(92,195,235,.44);--cb-settings-accent:#79d7fa;
   --cb-settings-text:#effaff;--cb-settings-muted:#c2dce8;
 }
@@ -1825,9 +1825,18 @@ html,body{background-color:#050505!important}
   -webkit-backdrop-filter:blur(8px) saturate(.82)!important;
 }
 #v-ajustes .skin-choice .skin-copy b{color:var(--cb-settings-text)!important}
+#v-ajustes .chip{
+  background:rgba(8,10,14,.48)!important;color:var(--cb-settings-muted)!important;
+  border:1px solid var(--cb-settings-edge)!important;box-shadow:none!important
+}
+#v-ajustes .chip[aria-pressed="true"]{
+  background:color-mix(in srgb,var(--cb-settings-accent) 25%,rgba(8,10,14,.58))!important;
+  color:var(--cb-settings-text)!important;border-color:var(--cb-settings-accent)!important;
+  box-shadow:0 0 13px color-mix(in srgb,var(--cb-settings-accent) 18%,transparent)!important
+}
 #v-ajustes .skin-choice[aria-pressed="true"]{
   border:2px solid var(--cb-settings-accent)!important;
-  background:linear-gradient(145deg,color-mix(in srgb,var(--cb-settings-accent) 16%,rgba(12,14,20,.92)),rgba(10,12,18,.94))!important;
+  background:linear-gradient(145deg,color-mix(in srgb,var(--cb-settings-accent) 16%,rgba(12,14,20,.58)),rgba(10,12,18,.60))!important;
   box-shadow:0 0 0 1px color-mix(in srgb,var(--cb-settings-accent) 35%,transparent),
     0 0 22px color-mix(in srgb,var(--cb-settings-accent) 18%,transparent)!important;
 }
@@ -1835,12 +1844,12 @@ html,body{background-color:#050505!important}
   outline:2px solid var(--cb-settings-accent);outline-offset:3px
 }
 #v-ajustes input:not([type="checkbox"]),#v-ajustes select,#v-ajustes textarea{
-  background:rgba(5,8,13,.68)!important;color:var(--cb-settings-text)!important;
+  background:rgba(5,8,13,.54)!important;color:var(--cb-settings-text)!important;
   border-color:var(--cb-settings-edge)!important
 }
 #v-ajustes select option{background:#11151d;color:#f4f1fa}
 #v-ajustes .cb-level-pick{
-  background:rgba(8,10,14,.70)!important;color:var(--cb-settings-text)!important;
+  background:rgba(8,10,14,.54)!important;color:var(--cb-settings-text)!important;
   border-color:var(--cb-settings-edge)!important;
   box-shadow:0 7px 20px rgba(0,0,0,.22)!important;
 }
@@ -1853,7 +1862,7 @@ html,body{background-color:#050505!important}
 
 /* En las skins Backrooms los ajustes adoptan el color del nivel activo */
 :root[data-animated-skin]{
-  --cb-settings-glass:rgba(9,10,12,.72);
+  --cb-settings-glass:rgba(9,10,12,.48);
   --cb-settings-edge:color-mix(in srgb,var(--cb-level-accent,#c8ad65) 34%,transparent);
   --cb-settings-accent:var(--cb-level-accent,#c8ad65);
   --cb-settings-text:#f4f0e5;
@@ -1866,14 +1875,14 @@ html,body{background-color:#050505!important}
 }
 :root[data-animated-skin] #v-ajustes .skin-choice,
 :root[data-animated-skin] #v-ajustes .cb-level-pick{
-  background:rgba(8,9,10,.56)!important;
+  background:rgba(8,9,10,.50)!important;
   border-color:var(--cb-settings-edge)!important;
   color:var(--cb-settings-text)!important;
 }
 :root[data-animated-skin] #v-ajustes .skin-choice[aria-pressed="true"],
 :root[data-animated-skin] #v-ajustes .cb-level-pick.is-selected{
   border-color:var(--cb-settings-accent)!important;
-  background:color-mix(in srgb,var(--cb-settings-accent) 15%,rgba(8,9,10,.76))!important;
+  background:color-mix(in srgb,var(--cb-settings-accent) 15%,rgba(8,9,10,.55))!important;
 }
 
 /* BACKROOMS: tres planos ambientales con velocidades distintas para que el fondo tenga volumen */
