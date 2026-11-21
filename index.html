@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#171307">
+<meta name="theme-color" content="#090805">
 <link rel="manifest" href="./manifest.webmanifest">
 <title>ConectaBus</title>
 <style>
@@ -1125,6 +1125,108 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   #v-tutorial .cb-tutorial-heading small{font-size:.74rem}
   #v-tutorial .cb-tutorial-content{padding:12px 12px 14px 55px}
 }
+
+/* CONECTABUS · Backrooms Nivel 0: luz ambiental más natural */
+:root[data-animated-skin="backrooms-level0"]{color-scheme:dark}
+:root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop .cb-backrooms-image{
+  filter:brightness(.94) saturate(.68) contrast(1.035)!important
+}
+:root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop:after{
+  background:linear-gradient(180deg,rgba(7,7,5,.035),rgba(10,9,6,.05) 50%,rgba(4,4,3,.18)),
+    radial-gradient(ellipse at 50% 46%,transparent 12%,rgba(0,0,0,.19) 100%)!important
+}
+/* Elimina el apagado tipo rectángulo negro: la lámpara conserva su forma */
+#cbBackroomsBackdrop .cb-backrooms-bulb{
+  display:block!important;position:absolute;z-index:3;isolation:isolate;overflow:visible;
+  border:0!important;border-radius:3px;background:transparent!important;
+  box-shadow:none!important;pointer-events:none
+}
+#cbBackroomsBackdrop .cb-backrooms-bulb:before{
+  content:"";position:absolute;z-index:-1;inset:-520% -175%;border-radius:50%;
+  background:radial-gradient(ellipse at center,
+    rgba(255,235,181,.28) 0%,rgba(255,226,155,.19) 32%,
+    rgba(255,219,139,.08) 58%,transparent 82%);
+  filter:blur(9px);opacity:.92;
+  transition:opacity .9s ease,filter .9s ease,background .9s ease
+}
+#cbBackroomsBackdrop .cb-backrooms-bulb:after{
+  content:"";position:absolute;inset:0;border-radius:inherit;
+  background:linear-gradient(180deg,rgba(255,255,242,.97),rgba(255,239,194,.93) 48%,rgba(255,219,146,.86));
+  border:1px solid rgba(255,247,220,.76);
+  box-shadow:0 0 5px rgba(255,244,205,.72),0 0 13px rgba(255,224,151,.5),0 0 25px rgba(255,213,129,.24);
+  opacity:.93;transition:opacity .7s ease,filter .7s ease,box-shadow .7s ease
+}
+/* Apagada: desaparece el brillo y queda una sombra amplia y difusa en el techo */
+#cbBackroomsBackdrop .cb-backrooms-bulb.cb-is-off:before{
+  background:radial-gradient(ellipse at center,
+    rgba(7,7,5,.47) 0%,rgba(9,8,5,.32) 34%,
+    rgba(9,8,5,.13) 62%,transparent 84%);
+  filter:blur(13px);opacity:.96
+}
+#cbBackroomsBackdrop .cb-backrooms-bulb.cb-is-off:after{
+  opacity:.13;filter:brightness(.28) saturate(.45);
+  box-shadow:none;border-color:rgba(50,47,37,.18)
+}
+/* Cortes progresivos: pequeño titileo antes de apagarse */
+#cbBackroomsBackdrop .cb-backrooms-bulb.cb-flicker:before,
+#cbBackroomsBackdrop .cb-backrooms-bulb.cb-flicker:after{
+  animation:cbBackroomsTubeFlicker .52s steps(1,end) both
+}
+@keyframes cbBackroomsTubeFlicker{
+  0%,100%{opacity:.95;filter:brightness(1)}
+  14%{opacity:.18;filter:brightness(.3)}
+  25%{opacity:.9;filter:brightness(1.15)}
+  43%{opacity:.08;filter:brightness(.18)}
+  58%{opacity:.72;filter:brightness(.78)}
+  71%{opacity:.12;filter:brightness(.25)}
+  86%{opacity:.55;filter:brightness(.6)}
+}
+/* Desactiva la antigua mancha oscura puntual: ahora el oscurecimiento acompaña a cada tubo */
+:root.cb-backrooms-darkzone #cbBackroomsBackdrop .cb-backrooms-local-dark{opacity:0!important}
+:root.cb-backrooms-powercut #cbBackroomsBackdrop .cb-backrooms-image{
+  filter:brightness(.86) saturate(.66) contrast(1.04)!important
+}
+:root[data-animated-skin="backrooms-level0"] nav{
+  background:rgba(10,8,4,.30)!important;
+  border-top:1px solid rgba(232,210,157,.20)!important;
+  box-shadow:0 -5px 16px rgba(0,0,0,.10)!important;
+  backdrop-filter:blur(2px) saturate(.72)!important;
+  -webkit-backdrop-filter:blur(2px) saturate(.72)!important
+}
+:root[data-animated-skin="backrooms-level0"] nav a{
+  background:transparent!important;color:rgba(255,239,202,.86)!important
+}
+:root[data-animated-skin="backrooms-level0"] nav a[aria-current="page"]{
+  background:rgba(135,102,37,.30)!important;
+  color:#ffe29a!important;
+  box-shadow:inset 0 0 0 1px rgba(255,222,148,.30)!important
+}
+:root[data-animated-skin="backrooms-level0"] .card,
+:root[data-animated-skin="backrooms-level0"] .tile,
+:root[data-animated-skin="backrooms-level0"] .dashboard-panel,
+:root[data-animated-skin="backrooms-level0"] .dash-action,
+:root[data-animated-skin="backrooms-level0"] .dash-trip,
+:root[data-animated-skin="backrooms-level0"] .skin-choice,
+:root[data-animated-skin="backrooms-level0"] .my-selection,
+:root[data-animated-skin="backrooms-level0"] .map-options,
+:root[data-animated-skin="backrooms-level0"] .top{
+  background:rgba(18,16,9,.43)!important;
+  border-color:rgba(221,201,151,.32)!important
+}
+/* Neutraliza los antiguos estilos que pintaban los tubos apagados de negro */
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-a) #cbBackroomsBackdrop .light-a,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-b) #cbBackroomsBackdrop .light-b,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-c) #cbBackroomsBackdrop .light-c,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-d) #cbBackroomsBackdrop .light-d,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-e) #cbBackroomsBackdrop .light-e,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-f) #cbBackroomsBackdrop .light-f{
+  background:transparent!important;border:0!important;box-shadow:none!important;filter:none!important
+}
+@media(prefers-reduced-motion:reduce){
+  #cbBackroomsBackdrop .cb-backrooms-bulb:before,
+  #cbBackroomsBackdrop .cb-backrooms-bulb:after{transition:none!important;animation:none!important}
+}
+
 </style>
 
 </head>
@@ -3210,45 +3312,70 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
 <script id="cb-backrooms-animated-skins">
 (function(){
   "use strict";
-  var root=document.documentElement,nextTimer=null,clearTimer=null;
-  var zones=[
-    {x:"31%",y:"20%"},{x:"55%",y:"27%"},{x:"43%",y:"40%"},
-    {x:"70%",y:"47%"},{x:"82%",y:"35%"},{x:"24%",y:"52%"},
-    {x:"61%",y:"57%"},{x:"37%",y:"31%"}
-  ];
+  var root=document.documentElement,nextTimer=null,restoreTimer=null,effectTimers=[];
+  var letters=["a","b","c","d","e","f"];
+  var bulbs=Array.prototype.slice.call(document.querySelectorAll("#cbBackroomsBackdrop .cb-backrooms-bulb"));
   function prefs(){return window.PR||{};}
   function active(){return prefs().animatedSkin==="backrooms-level0";}
   function motionAllowed(){
     var p=prefs(),reduced=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     return p.animations!==false&&p.shaders!==false&&p.dataSaver!==true&&!reduced;
   }
+  function later(fn,ms){var id=setTimeout(function(){effectTimers=effectTimers.filter(function(x){return x!==id;});fn();},ms);effectTimers.push(id);return id;}
+  function restoreLights(){
+    bulbs.forEach(function(b){b.classList.remove("cb-is-off","cb-flicker");});
+    letters.forEach(function(k){root.classList.remove("cb-backrooms-keep-"+k);});
+    root.classList.remove("cb-backrooms-powercut","cb-backrooms-darkzone","cb-backrooms-glitch");
+  }
   function stopEffects(){
-    if(nextTimer)clearTimeout(nextTimer);if(clearTimer)clearTimeout(clearTimer);
-    nextTimer=null;clearTimer=null;root.classList.remove("cb-backrooms-darkzone","cb-backrooms-glitch");
+    if(nextTimer)clearTimeout(nextTimer);if(restoreTimer)clearTimeout(restoreTimer);
+    nextTimer=null;restoreTimer=null;
+    effectTimers.forEach(clearTimeout);effectTimers=[];
+    restoreLights();
   }
   function scheduleEffect(){
     if(!active()||!motionAllowed()||document.hidden)return;
     nextTimer=setTimeout(function(){
-      var zone=zones[Math.floor(Math.random()*zones.length)];
-      root.style.setProperty("--dark-x",zone.x);root.style.setProperty("--dark-y",zone.y);
-      root.classList.add("cb-backrooms-darkzone");
-      if(Math.random()<.24)root.classList.add("cb-backrooms-glitch");
-      clearTimer=setTimeout(function(){
-        root.classList.remove("cb-backrooms-darkzone","cb-backrooms-glitch");
+      nextTimer=null;
+      if(!active()||!motionAllowed()||document.hidden)return;
+      var order=letters.slice().sort(function(){return Math.random()-.5;});
+      var offCount=2+Math.floor(Math.random()*3); // apaga entre 2 y 4 tubos
+      var offLetters=order.slice(0,offCount);
+      restoreLights();
+      root.classList.add("cb-backrooms-powercut");
+      letters.forEach(function(k){if(offLetters.indexOf(k)<0)root.classList.add("cb-backrooms-keep-"+k);});
+      bulbs.forEach(function(b){
+        var key=letters.find(function(k){return b.classList.contains("light-"+k);});
+        if(!key||offLetters.indexOf(key)<0)return;
+        later(function(){
+          if(!active()||document.hidden)return;
+          b.classList.add("cb-flicker");
+          later(function(){
+            b.classList.remove("cb-flicker");
+            b.classList.add("cb-is-off");
+          },520);
+        },Math.floor(Math.random()*360));
+      });
+      if(Math.random()<.12)root.classList.add("cb-backrooms-glitch");
+      restoreTimer=setTimeout(function(){
+        restoreTimer=null;
+        restoreLights();
         scheduleEffect();
-      },1600+Math.random()*2100);
-    },5500+Math.random()*8500);
+      },3000+Math.random()*1500);
+    },5200+Math.random()*6800);
   }
   function update(){
     var on=active(),move=on&&motionAllowed(),button=document.getElementById("cbBackroomsToggle");
     if(on)root.setAttribute("data-animated-skin","backrooms-level0");else root.removeAttribute("data-animated-skin");
     root.classList.toggle("cb-backrooms-static",on&&!move);
-    var meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute("content","#171307");
-    stopEffects();if(move)scheduleEffect();
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute("content","#090805");
+    stopEffects();
+    if(move)scheduleEffect();
     var card=document.getElementById("cbAnimatedSkins");if(card)card.classList.toggle("is-active",on);
     if(button){button.textContent=on?"Desactivar fondo":"Activar fondo";button.setAttribute("aria-pressed",String(on));}
     var status=document.getElementById("cbAnimatedSkinStatus");
-    if(status)status.textContent=!on?"Fondo desactivado.":(move?"Activo: el pasillo se mueve suavemente y, de vez en cuando, se oscurece una zona puntual del fondo.":"Fondo activo en modo fijo por ahorro de recursos o preferencia de movimiento reducido.");
+    if(status)status.textContent=!on?"Fondo desactivado.":(move?"Activo: los fluorescentes titilan, algunos se apagan y la zona que iluminaban se oscurece suavemente.":"Fondo activo en modo fijo por ahorro de recursos o preferencia de movimiento reducido.");
   }
   var toggle=document.getElementById("cbBackroomsToggle");
   if(toggle)toggle.addEventListener("click",function(){
