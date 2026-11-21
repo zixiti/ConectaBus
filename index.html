@@ -1502,6 +1502,53 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   border-radius: 12px;
 }
 </style>
+
+<style id="cb-fix-backrooms-final-v3">
+/* CONECTABUS · FIX FINAL v3 — anti-saturación, luces y navegación */
+:root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop .cb-backrooms-image{
+  filter:brightness(.55) contrast(1.25) saturate(.25) sepia(.2)!important;
+  animation:cbBackroomsBreathe 30s ease-in-out infinite alternate!important;
+}
+:root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop:after{
+  background:radial-gradient(ellipse at 50% 40%,transparent 20%,rgba(0,0,0,.85) 100%)!important;
+}
+#cbBackroomsBackdrop .cb-backrooms-bulb{
+  background:#fffce8!important;border-radius:2px!important;
+  box-shadow:0 0 15px 3px rgba(255,250,200,.7),0 0 50px 15px rgba(255,245,150,.25)!important;
+  opacity:1!important;
+  transition:opacity .3s ease,box-shadow .3s ease,background .3s ease!important;
+  z-index:5;
+}
+:root.cb-backrooms-powercut #cbBackroomsBackdrop .cb-backrooms-bulb{
+  background:#2a2a28!important;box-shadow:inset 0 2px 4px rgba(0,0,0,.8)!important;opacity:.9!important;
+}
+:root.cb-backrooms-powercut.cb-backrooms-keep-a #cbBackroomsBackdrop .light-a,
+:root.cb-backrooms-powercut.cb-backrooms-keep-b #cbBackroomsBackdrop .light-b,
+:root.cb-backrooms-powercut.cb-backrooms-keep-c #cbBackroomsBackdrop .light-c,
+:root.cb-backrooms-powercut.cb-backrooms-keep-d #cbBackroomsBackdrop .light-d,
+:root.cb-backrooms-powercut.cb-backrooms-keep-e #cbBackroomsBackdrop .light-e,
+:root.cb-backrooms-powercut.cb-backrooms-keep-f #cbBackroomsBackdrop .light-f{
+  background:#fffce8!important;
+  box-shadow:0 0 20px 5px rgba(255,250,200,.8),0 0 60px 20px rgba(255,245,150,.3)!important;
+  opacity:1!important;
+}
+:root[data-animated-skin="backrooms-level0"] #nav,
+:root[data-animated-skin="backrooms-level0"] nav{
+  background:linear-gradient(to top,rgba(0,0,0,.9) 0%,rgba(0,0,0,.4) 60%,transparent 100%)!important;
+  border-top:none!important;box-shadow:none!important;backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))!important;
+}
+:root[data-animated-skin="backrooms-level0"] #nav a{
+  color:#b0b0b0!important;text-shadow:0 1px 3px rgba(0,0,0,.9)!important;
+}
+:root[data-animated-skin="backrooms-level0"] #nav a[aria-current="page"]{
+  color:#fff!important;background:transparent!important;
+  text-shadow:0 0 10px rgba(255,255,255,.5)!important;box-shadow:none!important;
+}
+html,body{background-color:#050505!important}
+</style>
+
 </head>
 <body>
 
