@@ -1758,11 +1758,223 @@ html,body{background-color:#050505!important}
 :root.cb-backrooms-static[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important;opacity:0!important}
 @media(prefers-reduced-motion:reduce){:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image,:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important;transform:scale(1.025)!important}}
 </style>
+
+<style id="cb-fix-theme-depth-v4">
+/* AJUSTES: tarjetas de skins oscuras, con acentos que respetan cada tema */
+:root{
+  --cb-settings-glass:rgba(13,15,20,.86);
+  --cb-settings-edge:rgba(198,185,230,.30);
+  --cb-settings-accent:#9a78f0;
+  --cb-settings-text:#f4f1fa;
+  --cb-settings-muted:#c5bfd1;
+}
+:root[data-skin="classic"]{
+  --cb-settings-glass:linear-gradient(145deg,rgba(31,22,48,.92),rgba(15,13,24,.94));
+  --cb-settings-edge:rgba(174,137,245,.38);--cb-settings-accent:#b99af8;
+  --cb-settings-text:#f7f0ff;--cb-settings-muted:#d1c2e8;
+}
+:root[data-skin="pixel"]{
+  --cb-settings-glass:linear-gradient(145deg,rgba(20,38,43,.96),rgba(10,23,33,.97));
+  --cb-settings-edge:rgba(185,237,83,.48);--cb-settings-accent:#c7f45b;
+  --cb-settings-text:#eff8d8;--cb-settings-muted:#c4d6a4;
+}
+:root[data-skin="neon"]{
+  --cb-settings-glass:linear-gradient(145deg,rgba(28,15,50,.94),rgba(8,15,32,.96));
+  --cb-settings-edge:rgba(39,216,232,.42);--cb-settings-accent:#40e5f0;
+  --cb-settings-text:#f0f5ff;--cb-settings-muted:#c2cbe8;
+}
+:root[data-skin="space"]{
+  --cb-settings-glass:linear-gradient(145deg,rgba(25,28,66,.94),rgba(7,13,34,.96));
+  --cb-settings-edge:rgba(160,145,255,.40);--cb-settings-accent:#b5a0ff;
+  --cb-settings-text:#f1f3ff;--cb-settings-muted:#c3c9e6;
+}
+:root[data-skin="craft"]{
+  --cb-settings-glass:linear-gradient(145deg,rgba(39,48,31,.96),rgba(24,29,23,.97));
+  --cb-settings-edge:rgba(167,180,113,.48);--cb-settings-accent:#a7c66b;
+  --cb-settings-text:#f2efd9;--cb-settings-muted:#d2d0ac;
+}
+:root[data-skin="motion"]{
+  --cb-settings-glass:linear-gradient(145deg,rgba(54,24,67,.94),rgba(21,18,49,.96));
+  --cb-settings-edge:rgba(255,120,199,.42);--cb-settings-accent:#ff86ca;
+  --cb-settings-text:#fff1fb;--cb-settings-muted:#e0c5e6;
+}
+:root[data-skin="sky"]{
+  --cb-settings-glass:linear-gradient(145deg,rgba(13,44,66,.94),rgba(8,27,45,.96));
+  --cb-settings-edge:rgba(92,195,235,.44);--cb-settings-accent:#79d7fa;
+  --cb-settings-text:#effaff;--cb-settings-muted:#c2dce8;
+}
+#v-ajustes>.card,#v-ajustes .card{
+  background:var(--cb-settings-glass)!important;
+  border-color:var(--cb-settings-edge)!important;
+  color:var(--cb-settings-text)!important;
+  box-shadow:0 9px 28px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.035)!important;
+  backdrop-filter:blur(9px) saturate(.8)!important;
+  -webkit-backdrop-filter:blur(9px) saturate(.8)!important;
+}
+#v-ajustes .card h2,#v-ajustes .card .lab,#v-ajustes .card label,
+#v-ajustes .card .cb-section-head h2{color:var(--cb-settings-text)!important}
+#v-ajustes .card .note,#v-ajustes .skin-copy small,
+#v-ajustes .card small{color:var(--cb-settings-muted)!important;opacity:1!important}
+#v-ajustes .skin-choice{
+  background:var(--cb-settings-glass)!important;
+  color:var(--cb-settings-text)!important;
+  border:1px solid var(--cb-settings-edge)!important;
+  border-radius:14px;
+  box-shadow:0 7px 20px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.04)!important;
+  backdrop-filter:blur(8px) saturate(.82)!important;
+  -webkit-backdrop-filter:blur(8px) saturate(.82)!important;
+}
+#v-ajustes .skin-choice .skin-copy b{color:var(--cb-settings-text)!important}
+#v-ajustes .skin-choice[aria-pressed="true"]{
+  border:2px solid var(--cb-settings-accent)!important;
+  background:linear-gradient(145deg,color-mix(in srgb,var(--cb-settings-accent) 16%,rgba(12,14,20,.92)),rgba(10,12,18,.94))!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--cb-settings-accent) 35%,transparent),
+    0 0 22px color-mix(in srgb,var(--cb-settings-accent) 18%,transparent)!important;
+}
+#v-ajustes .skin-choice:focus-visible,#v-ajustes .cb-level-pick:focus-visible{
+  outline:2px solid var(--cb-settings-accent);outline-offset:3px
+}
+#v-ajustes input:not([type="checkbox"]),#v-ajustes select,#v-ajustes textarea{
+  background:rgba(5,8,13,.68)!important;color:var(--cb-settings-text)!important;
+  border-color:var(--cb-settings-edge)!important
+}
+#v-ajustes select option{background:#11151d;color:#f4f1fa}
+#v-ajustes .cb-level-pick{
+  background:rgba(8,10,14,.70)!important;color:var(--cb-settings-text)!important;
+  border-color:var(--cb-settings-edge)!important;
+  box-shadow:0 7px 20px rgba(0,0,0,.22)!important;
+}
+#v-ajustes .cb-level-pick small{color:var(--cb-settings-muted)!important}
+#v-ajustes .cb-level-pick.is-selected{
+  border-color:var(--cb-level-accent,var(--cb-settings-accent))!important;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--cb-level-accent,var(--cb-settings-accent)) 38%,transparent),
+    0 0 22px color-mix(in srgb,var(--cb-level-accent,var(--cb-settings-accent)) 18%,transparent)!important
+}
+
+/* En las skins Backrooms los ajustes adoptan el color del nivel activo */
+:root[data-animated-skin]{
+  --cb-settings-glass:rgba(9,10,12,.72);
+  --cb-settings-edge:color-mix(in srgb,var(--cb-level-accent,#c8ad65) 34%,transparent);
+  --cb-settings-accent:var(--cb-level-accent,#c8ad65);
+  --cb-settings-text:#f4f0e5;
+  --cb-settings-muted:#d5d0c4;
+}
+:root[data-animated-skin] #v-ajustes>.card,
+:root[data-animated-skin] #v-ajustes .card{
+  background:var(--cb-settings-glass)!important;
+  border-color:var(--cb-settings-edge)!important;
+}
+:root[data-animated-skin] #v-ajustes .skin-choice,
+:root[data-animated-skin] #v-ajustes .cb-level-pick{
+  background:rgba(8,9,10,.56)!important;
+  border-color:var(--cb-settings-edge)!important;
+  color:var(--cb-settings-text)!important;
+}
+:root[data-animated-skin] #v-ajustes .skin-choice[aria-pressed="true"],
+:root[data-animated-skin] #v-ajustes .cb-level-pick.is-selected{
+  border-color:var(--cb-settings-accent)!important;
+  background:color-mix(in srgb,var(--cb-settings-accent) 15%,rgba(8,9,10,.76))!important;
+}
+
+/* BACKROOMS: tres planos ambientales con velocidades distintas para que el fondo tenga volumen */
+#cbBackroomsBackdrop{perspective:1100px;isolation:isolate}
+#cbBackroomsBackdrop .cb-backrooms-image{
+  background-size:cover!important;background-repeat:no-repeat!important;background-position:center center!important;
+  backface-visibility:hidden;transform-style:preserve-3d;will-change:transform,background-position,filter
+}
+#cbBackroomsBackdrop .cb-backrooms-depth{
+  position:absolute;inset:0;z-index:2;overflow:hidden;pointer-events:none;
+  transform-style:preserve-3d;mix-blend-mode:screen
+}
+#cbBackroomsBackdrop .cb-depth-plane{position:absolute;display:block;pointer-events:none;border-radius:50%}
+#cbBackroomsBackdrop .cb-depth-plane.far{
+  left:-18%;top:4%;width:136%;height:56%;
+  background:radial-gradient(ellipse at 50% 80%,rgba(220,226,230,.13),transparent 70%);
+  filter:blur(28px);opacity:.7;animation:cbDepthFar 36s ease-in-out infinite alternate
+}
+#cbBackroomsBackdrop .cb-depth-plane.middle{
+  left:-14%;top:38%;width:128%;height:38%;
+  background:radial-gradient(ellipse at 48% 50%,rgba(215,221,218,.11),transparent 72%);
+  filter:blur(22px);opacity:.55;animation:cbDepthMiddle 25s ease-in-out infinite alternate
+}
+#cbBackroomsBackdrop .cb-depth-plane.near{
+  left:-10%;bottom:-13%;width:120%;height:42%;border-radius:0;
+  background:linear-gradient(0deg,rgba(0,0,0,.43),rgba(0,0,0,.15) 42%,transparent 100%);
+  filter:blur(10px);opacity:.9;animation:cbDepthNear 21s ease-in-out infinite alternate
+}
+#cbBackroomsBackdrop .cb-depth-grain{
+  position:absolute;inset:0;display:block;opacity:.045;
+  background:repeating-linear-gradient(0deg,rgba(245,241,228,.14) 0 1px,transparent 1px 4px);
+  mix-blend-mode:overlay;animation:cbDepthGrain .32s steps(2,end) infinite
+}
+@keyframes cbDepthFar{0%{transform:translate3d(-.55%,.2%,0) scale(1.02)}100%{transform:translate3d(.65%,-.4%,0) scale(1.07)}}
+@keyframes cbDepthMiddle{0%{transform:translate3d(.6%,.25%,0) scale(1.02)}100%{transform:translate3d(-.7%,-.25%,0) scale(1.06)}}
+@keyframes cbDepthNear{0%{transform:translate3d(-.35%,0,0) scaleX(1)}100%{transform:translate3d(.45%,-1.2%,0) scaleX(1.025)}}
+@keyframes cbDepthGrain{0%{opacity:.025}50%{opacity:.07}100%{opacity:.035}}
+
+/* Cada nivel tiene su propia luz ambiental, sin convertir la escena en un filtro plano */
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop .cb-depth-plane.far{
+  background:radial-gradient(ellipse at 52% 58%,rgba(176,96,110,.22),transparent 46%),
+    radial-gradient(ellipse at 50% 84%,rgba(156,175,192,.16),transparent 72%);
+  opacity:.8
+}
+:root[data-animated-skin="backrooms-level399"] #cbBackroomsBackdrop .cb-depth-plane.far{
+  background:radial-gradient(ellipse at 50% 32%,rgba(255,49,200,.26),transparent 45%),
+    radial-gradient(ellipse at 84% 60%,rgba(0,211,255,.22),transparent 48%);
+  opacity:.85
+}
+:root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop .cb-depth-plane.far{
+  background:radial-gradient(ellipse at 50% 45%,rgba(205,215,222,.14),transparent 52%);
+  opacity:.55
+}
+:root[data-animated-skin="backrooms-level38"] #cbBackroomsBackdrop .cb-depth-plane.far{
+  background:radial-gradient(ellipse at 54% 58%,rgba(222,118,49,.22),transparent 58%);
+  opacity:.82
+}
+:root[data-animated-skin="backrooms-fun"] #cbBackroomsBackdrop .cb-depth-plane.far{
+  background:radial-gradient(ellipse at 23% 32%,rgba(255,118,184,.18),transparent 26%),
+    radial-gradient(ellipse at 78% 36%,rgba(89,211,225,.18),transparent 29%);
+  opacity:.8
+}
+:root[data-animated-skin="backrooms-the-end"] #cbBackroomsBackdrop .cb-depth-plane.far{
+  background:radial-gradient(ellipse at 50% 23%,rgba(241,229,198,.16),transparent 52%);
+  opacity:.7
+}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-depth-plane.far{
+  background:radial-gradient(ellipse at 50% 35%,rgba(239,211,150,.18),transparent 50%),
+    radial-gradient(ellipse at 25% 80%,rgba(121,153,95,.14),transparent 48%);
+  opacity:.8
+}
+
+/* El inicio y las vistas internas reservan espacio real para el dock inferior */
+#lobby.wrap{padding-bottom:calc(142px + env(safe-area-inset-bottom,0px))!important}
+#inner.wrap.inner{padding-bottom:calc(148px + env(safe-area-inset-bottom,0px))!important}
+#nav{
+  background:rgba(7,8,10,.88)!important;
+  border-top:1px solid rgba(235,231,220,.18)!important;
+  box-shadow:0 -10px 28px rgba(0,0,0,.38)!important;
+  backdrop-filter:blur(13px) saturate(.72)!important;
+  -webkit-backdrop-filter:blur(13px) saturate(.72)!important;
+}
+#nav a{text-shadow:0 1px 5px rgba(0,0,0,.75)}
+@media(prefers-reduced-motion:reduce){
+  #cbBackroomsBackdrop .cb-depth-plane,#cbBackroomsBackdrop .cb-depth-grain{animation:none!important}
+}
+:root.cb-backrooms-static #cbBackroomsBackdrop .cb-depth-plane,
+:root.cb-backrooms-static #cbBackroomsBackdrop .cb-depth-grain{animation:none!important}
+</style>
+
 </head>
 <body>
 
 <div id="cbBackroomsBackdrop" aria-hidden="true">
   <div class="cb-backrooms-image"></div>
+  <div class="cb-backrooms-depth" aria-hidden="true">
+    <span class="cb-depth-plane far"></span>
+    <span class="cb-depth-plane middle"></span>
+    <span class="cb-depth-plane near"></span>
+    <span class="cb-depth-grain"></span>
+  </div>
   <div class="cb-backrooms-bulb light-a"></div><div class="cb-backrooms-bulb light-b"></div>
   <div class="cb-backrooms-bulb light-c"></div><div class="cb-backrooms-bulb light-d"></div>
   <div class="cb-backrooms-bulb light-e"></div><div class="cb-backrooms-bulb light-f"></div>
@@ -3086,8 +3298,8 @@ document.addEventListener("click",function(e){
 var DIAS_N=["domingo","lunes","martes","miércoles","jueves","viernes","sábado"],MESES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
 function hhmm(){var d=new Date();return pad(d.getHours())+":"+pad(d.getMinutes())}
 function tickFecha(){
-  var d=new Date(),t=diaHoy();
-  $("fecha").textContent="Hoy es "+DIAS_N[d.getDay()]+" "+d.getDate()+" de "+MESES[d.getMonth()]+", "+(t==="dom"?"domingo y feriado":(t==="sab"?"sábado":"día hábil"));
+  var d=new Date();
+  $("fecha").textContent="Hoy es "+DIAS_N[d.getDay()]+" "+d.getDate()+" de "+MESES[d.getMonth()];
   $("reloj").textContent=pad(d.getHours())+":"+pad(d.getMinutes())+":"+pad(d.getSeconds());
 }
 /* Tu colectivo (parada guardada o ejemplo) */
@@ -3847,7 +4059,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   var bulbs=Array.prototype.slice.call(document.querySelectorAll("#cbBackroomsBackdrop .cb-backrooms-bulb"));
   var labels={
     "backrooms-level0":"Nivel 0 · El Lobby",
-    "backrooms-level150":"Nivel 150 · Construcción abandonada",
+    "backrooms-level150":"Nivel 150 · Carretera y el Ojo",
     "backrooms-level399":"Nivel 399 · Paraíso de neón",
     "backrooms-level-minus1":"Nivel -1 · Pasillos a escala de grises",
     "backrooms-level38":"Nivel 38 · Ciudad contaminada",
