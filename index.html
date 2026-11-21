@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#050505">
+<meta name="theme-color" content="#1769aa">
 <meta name="color-scheme" content="dark">
 <link rel="manifest" href="./manifest.webmanifest">
 <title>ConectaBus</title>
@@ -1971,6 +1971,33 @@ html,body{background-color:#050505!important}
 }
 :root.cb-backrooms-static #cbBackroomsBackdrop .cb-depth-plane,
 :root.cb-backrooms-static #cbBackroomsBackdrop .cb-depth-grain{animation:none!important}
+</style>
+
+
+<style id="cb-blue-theme-both">
+/* CONECTABUS · tema azul urbano · claro/oscuro seleccionable */
+:root{
+  --bg:#f2f7fc;--surface:#ffffff;--ink:#14283f;--muted:#60758d;--line:#d8e4f0;
+  --violet:#1769aa;--violet-soft:#e5f1fb;--violet-ink:#ffffff;
+  --danger:#c62836;--danger-soft:#fdebed;--warn:#946000;--warn-soft:#fff4d9;--ok:#16734a;
+  --map:#eaf2f9;--road:#cbd9e7;color-scheme:light;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0b1624;--surface:#142338;--ink:#eaf3fc;--muted:#a7bdd2;--line:#29415a;
+  --violet:#63b4f2;--violet-soft:#1c3853;--violet-ink:#071522;
+  --danger:#ff727c;--danger-soft:#421f2a;--warn:#f4c66b;--warn-soft:#3b301b;--ok:#62d39b;
+  --map:#101f31;--road:#30465e;color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0b1624;--surface:#142338;--ink:#eaf3fc;--muted:#a7bdd2;--line:#29415a;
+  --violet:#63b4f2;--violet-soft:#1c3853;--violet-ink:#071522;
+  --danger:#ff727c;--danger-soft:#421f2a;--warn:#f4c66b;--warn-soft:#3b301b;--ok:#62d39b;
+  --map:#101f31;--road:#30465e;color-scheme:dark;
+}
+:root{--cb-settings-accent:var(--violet);--cb-settings-edge:rgba(75,157,220,.42)}
+body{background:var(--bg);color:var(--ink)}
+.card,.tile,.trip-editor,.cb-tutorial-step{box-shadow:0 5px 18px rgba(24,75,120,.055)}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline-color:var(--violet)}
 </style>
 
 </head>
