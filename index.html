@@ -596,7 +596,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 #cbBackroomsBackdrop{display:none;position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#100d05}
 :root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop{display:block}
 #cbBackroomsBackdrop .cb-backrooms-image{
-  position:absolute;inset:-4%;background-image:none;background-size:cover;background-position:center 48%;
+  position:absolute;inset:0;background-image:url("./assets/backrooms-level0.webp?v=2");background-size:100% 100%;background-position:center;
   transform:scale(1.025);transform-origin:52% 48%;filter:brightness(.83) saturate(.86) contrast(1.06);
   animation:cbBackroomsApproach 28s ease-in-out infinite alternate;will-change:transform,filter
 }
@@ -3189,7 +3189,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
 <script id="cb-backrooms-animated-skins">
 (function(){
   "use strict";
-  var root=document.documentElement,nextTimer=null,clearTimer=null,imageUrl=null;
+  var root=document.documentElement,nextTimer=null,clearTimer=null;
   var lightClasses=["cb-backrooms-keep-a","cb-backrooms-keep-b","cb-backrooms-keep-c","cb-backrooms-keep-d","cb-backrooms-keep-e","cb-backrooms-keep-f"];
   function prefs(){return window.PR||{};}
   function active(){return prefs().animatedSkin==="backrooms-level0";}
@@ -3241,21 +3241,8 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   });
   document.addEventListener("visibilitychange",function(){if(document.hidden)stopEffects();else update();});
   window.addEventListener("pageshow",update);window.addEventListener("pagehide",stopEffects);
-  Promise.all([
-    fetch("./assets/backrooms-level0-a.txt").then(function(r){if(!r.ok)throw Error("Imagen 1");return r.text();}),
-    fetch("./assets/backrooms-level0-b.txt").then(function(r){if(!r.ok)throw Error("Imagen 2");return r.text();}),
-    fetch("./assets/backrooms-level0-c.txt").then(function(r){if(!r.ok)throw Error("Imagen 3");return r.text();}),
-    fetch("./assets/backrooms-level0-d.txt").then(function(r){if(!r.ok)throw Error("Imagen 4");return r.text();})
-  ]).then(function(parts){
-    var b64=parts.join("");if(b64.length!==31432||!/^[A-Za-z0-9+/]+=*$/.test(b64))throw Error("Imagen incompleta");
-    var binary=atob(b64),bytes=new Uint8Array(binary.length);
-    for(var i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
-    imageUrl=URL.createObjectURL(new Blob([bytes],{type:"image/webp"}));
-    var img=document.querySelector("#cbBackroomsBackdrop .cb-backrooms-image");
-    var preview=document.querySelector(".cb-animated-preview");
-    if(img)img.style.backgroundImage='url("'+imageUrl+'")';
-    if(preview)preview.style.backgroundImage='linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.72)),url("'+imageUrl+'")';
-  }).catch(function(err){console.warn("No se pudo cargar el fondo animado Backrooms:",err);});
+  var preview=document.querySelector(".cb-animated-preview");
+  if(preview)preview.style.backgroundImage='linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.72)),url("./assets/backrooms-level0.webp?v=2")';
   update();
 })();
 </script>
