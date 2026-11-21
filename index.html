@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#6d3fd6">
+<meta name="theme-color" content="#1b1609">
 <link rel="manifest" href="./manifest.webmanifest">
 <title>ConectaBus</title>
 <style>
@@ -650,6 +650,117 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important}
 }
 
+
+/* BACKROOMS · refinamiento visual y apagado individual de fluorescentes */
+:root[data-animated-skin="backrooms-level0"]{
+  --bg:#171308;--surface:rgba(18,15,7,.46);--ink:#fff5d7;--muted:#e0d2ad;
+  --line:rgba(229,198,116,.44);--violet:#e3c16c;--violet-soft:rgba(112,84,29,.38);
+  --violet-ink:#211706;--danger:#ff7777;--danger-soft:rgba(90,25,20,.72);
+  --warn:#f4ca68;--warn-soft:rgba(82,62,20,.72);--ok:#9fe0ae
+}
+:root[data-animated-skin="backrooms-level0"] body{background:transparent!important}
+:root[data-animated-skin="backrooms-level0"] .card,
+:root[data-animated-skin="backrooms-level0"] .tile,
+:root[data-animated-skin="backrooms-level0"] .dashboard-panel,
+:root[data-animated-skin="backrooms-level0"] .dash-action,
+:root[data-animated-skin="backrooms-level0"] .dash-trip,
+:root[data-animated-skin="backrooms-level0"] .skin-choice,
+:root[data-animated-skin="backrooms-level0"] .my-selection,
+:root[data-animated-skin="backrooms-level0"] .map-options,
+:root[data-animated-skin="backrooms-level0"] .top{
+  background:rgba(19,16,7,.47)!important;border-color:rgba(232,203,129,.43)!important;
+  color:var(--ink);backdrop-filter:blur(1px)!important;-webkit-backdrop-filter:blur(1px)!important;
+  box-shadow:0 5px 18px rgba(0,0,0,.18)
+}
+:root[data-animated-skin="backrooms-level0"] nav{
+  background:rgba(13,11,5,.78)!important;border-top:1px solid rgba(232,203,129,.38)!important;
+  box-shadow:0 -4px 14px rgba(0,0,0,.16);backdrop-filter:blur(1px)!important;-webkit-backdrop-filter:blur(1px)!important
+}
+:root[data-animated-skin="backrooms-level0"] nav a{color:#e4d6ad!important;background:transparent!important}
+:root[data-animated-skin="backrooms-level0"] nav a[aria-current="page"]{
+  color:#ffe29a!important;background:rgba(135,102,37,.44)!important;box-shadow:inset 0 0 0 1px rgba(255,222,148,.42)
+}
+:root[data-animated-skin="backrooms-level0"] nav a.e[aria-current="page"]{
+  color:#ff9c8c!important;background:rgba(93,31,23,.45)!important
+}
+:root[data-animated-skin="backrooms-level0"] .btn,
+:root[data-animated-skin="backrooms-level0"] .chip,
+:root[data-animated-skin="backrooms-level0"] .mapctl button,
+:root[data-animated-skin="backrooms-level0"] .map-options button,
+:root[data-animated-skin="backrooms-level0"] .skin-choice{
+  color:#fff0c8!important;border-color:rgba(235,207,139,.48)!important
+}
+:root[data-animated-skin="backrooms-level0"] .btn:not(.ghost):not(.danger),
+:root[data-animated-skin="backrooms-level0"] .chip[aria-pressed="true"]{
+  background:rgba(150,119,51,.7)!important;color:#fff3cd!important
+}
+:root[data-animated-skin="backrooms-level0"] .btn.ghost,
+:root[data-animated-skin="backrooms-level0"] .chip[aria-pressed="false"],
+:root[data-animated-skin="backrooms-level0"] .mapctl button{
+  background:rgba(20,17,8,.53)!important
+}
+:root[data-animated-skin="backrooms-level0"] input,
+:root[data-animated-skin="backrooms-level0"] select,
+:root[data-animated-skin="backrooms-level0"] textarea{
+  background:rgba(15,13,7,.68)!important;color:#fff3d2!important;border-color:rgba(235,207,139,.45)!important
+}
+:root[data-animated-skin="backrooms-level0"] .note,
+:root[data-animated-skin="backrooms-level0"] .tile small,
+:root[data-animated-skin="backrooms-level0"] .card small{color:#e0d2ad!important}
+:root[data-animated-skin="backrooms-level0"] a:not(.btn){color:#f1d58a}
+:root[data-animated-skin="backrooms-level0"] .hero h1{color:#fff2bd;text-shadow:0 2px 5px #171006,0 0 18px rgba(255,220,120,.55)}
+:root[data-animated-skin="backrooms-level0"] .logo,
+:root[data-animated-skin="backrooms-level0"] .tile .ic,
+:root[data-animated-skin="backrooms-level0"] .cb-module-icon{
+  background:linear-gradient(145deg,#b99b4c,#655126)!important;color:#fff3c1!important;box-shadow:0 0 12px rgba(225,186,87,.16)!important
+}
+#cbBackroomsBackdrop .cb-backrooms-image{
+  background-size:100% 100%!important;background-position:center!important;
+  filter:brightness(1.10) saturate(.98) contrast(1.04)!important;
+  animation:cbBackroomsApproach 32s ease-in-out infinite alternate
+}
+#cbBackroomsBackdrop:after{
+  background:linear-gradient(180deg,rgba(8,7,3,.025),rgba(12,9,3,.035) 48%,rgba(4,4,2,.13))!important;
+  pointer-events:none
+}
+#cbBackroomsBackdrop .cb-backrooms-light{display:none!important}
+#cbBackroomsBackdrop .cb-backrooms-bulb{
+  position:absolute;z-index:3;display:block;border-radius:2px;
+  background:transparent;border:1px solid transparent;pointer-events:none;
+  transition:background .12s ease,border-color .12s ease,box-shadow .12s ease
+}
+#cbBackroomsBackdrop .light-a{left:19.5%;top:19.3%;width:40%;height:2.8%}
+#cbBackroomsBackdrop .light-b{left:31.8%;top:32.1%;width:19%;height:1.5%}
+#cbBackroomsBackdrop .light-c{left:36.3%;top:37.1%;width:12.5%;height:1.15%}
+#cbBackroomsBackdrop .light-d{left:38.3%;top:39.2%;width:9.4%;height:1%}
+#cbBackroomsBackdrop .light-e{left:39.3%;top:41.3%;width:7.4%;height:.85%}
+#cbBackroomsBackdrop .light-f{left:83.2%;top:41.5%;width:9%;height:1.1%}
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-a) #cbBackroomsBackdrop .light-a,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-b) #cbBackroomsBackdrop .light-b,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-c) #cbBackroomsBackdrop .light-c,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-d) #cbBackroomsBackdrop .light-d,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-e) #cbBackroomsBackdrop .light-e,
+:root.cb-backrooms-powercut:not(.cb-backrooms-keep-f) #cbBackroomsBackdrop .light-f{
+  background:linear-gradient(180deg,rgba(50,46,32,.98),rgba(13,13,9,.99))!important;
+  border:1px solid rgba(30,28,19,.95)!important;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.9),0 0 2px rgba(0,0,0,.8)!important
+}
+:root.cb-backrooms-powercut.cb-backrooms-keep-a #cbBackroomsBackdrop .light-a,
+:root.cb-backrooms-powercut.cb-backrooms-keep-b #cbBackroomsBackdrop .light-b,
+:root.cb-backrooms-powercut.cb-backrooms-keep-c #cbBackroomsBackdrop .light-c,
+:root.cb-backrooms-powercut.cb-backrooms-keep-d #cbBackroomsBackdrop .light-d,
+:root.cb-backrooms-powercut.cb-backrooms-keep-e #cbBackroomsBackdrop .light-e,
+:root.cb-backrooms-powercut.cb-backrooms-keep-f #cbBackroomsBackdrop .light-f{
+  filter:drop-shadow(0 0 10px rgba(255,226,137,.58))
+}
+:root.cb-backrooms-glitch #cbBackroomsBackdrop .cb-backrooms-image{
+  transform:scale(1.065) translateX(-.35%);filter:brightness(1.02) contrast(1.1) saturate(.92) hue-rotate(-3deg)!important
+}
+:root.cb-backrooms-glitch #cbBackroomsBackdrop .cb-backrooms-scan{opacity:.34;animation:cbBackroomsTear .17s steps(2,end) both}
+:root.cb-backrooms-static #cbBackroomsBackdrop .cb-backrooms-image{animation:none!important;transform:scale(1.01)}
+:root.cb-backrooms-static #cbBackroomsBackdrop .cb-backrooms-bulb{transition:none}
+.cb-animated-preview{background-size:100% 100%!important}
+
 </style>
 
 
@@ -1000,7 +1111,9 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 
 <div id="cbBackroomsBackdrop" aria-hidden="true">
   <div class="cb-backrooms-image"></div>
-  <div class="cb-backrooms-light light-a"></div><div class="cb-backrooms-light light-b"></div><div class="cb-backrooms-light light-c"></div>
+  <div class="cb-backrooms-bulb light-a"></div><div class="cb-backrooms-bulb light-b"></div>
+  <div class="cb-backrooms-bulb light-c"></div><div class="cb-backrooms-bulb light-d"></div>
+  <div class="cb-backrooms-bulb light-e"></div><div class="cb-backrooms-bulb light-f"></div>
   <div class="cb-backrooms-scan"></div>
 </div>
 
@@ -3077,7 +3190,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
 (function(){
   "use strict";
   var root=document.documentElement,nextTimer=null,clearTimer=null,imageUrl=null;
-  var lightClasses=["cb-backrooms-keep-a","cb-backrooms-keep-b","cb-backrooms-keep-c"];
+  var lightClasses=["cb-backrooms-keep-a","cb-backrooms-keep-b","cb-backrooms-keep-c","cb-backrooms-keep-d","cb-backrooms-keep-e","cb-backrooms-keep-f"];
   function prefs(){return window.PR||{};}
   function active(){return prefs().animatedSkin==="backrooms-level0";}
   function motionAllowed(){
@@ -3086,31 +3199,33 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   }
   function stopEffects(){
     if(nextTimer)clearTimeout(nextTimer);if(clearTimer)clearTimeout(clearTimer);
-    nextTimer=null;clearTimer=null;root.classList.remove("cb-backrooms-dim","cb-backrooms-glitch");
+    nextTimer=null;clearTimer=null;
+    root.classList.remove("cb-backrooms-powercut","cb-backrooms-glitch");
     lightClasses.forEach(function(c){root.classList.remove(c);});
   }
   function scheduleEffect(){
     if(!active()||!motionAllowed()||document.hidden)return;
     nextTimer=setTimeout(function(){
       var keep=lightClasses[Math.floor(Math.random()*lightClasses.length)];
-      root.classList.add("cb-backrooms-dim",keep);
-      if(Math.random()<.48)root.classList.add("cb-backrooms-glitch");
+      root.classList.add("cb-backrooms-powercut",keep);
+      if(Math.random()<.42)root.classList.add("cb-backrooms-glitch");
       clearTimer=setTimeout(function(){
-        root.classList.remove("cb-backrooms-dim","cb-backrooms-glitch");
+        root.classList.remove("cb-backrooms-powercut","cb-backrooms-glitch");
         lightClasses.forEach(function(c){root.classList.remove(c);});
         scheduleEffect();
-      },380+Math.random()*680);
-    },2800+Math.random()*5400);
+      },1000+Math.random()*1500);
+    },3500+Math.random()*5500);
   }
   function update(){
     var on=active(),move=on&&motionAllowed(),button=document.getElementById("cbBackroomsToggle");
     if(on)root.setAttribute("data-animated-skin","backrooms-level0");else root.removeAttribute("data-animated-skin");
     root.classList.toggle("cb-backrooms-static",on&&!move);
+    var meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute("content",on?"#1b1609":"#6d3fd6");
     stopEffects();if(move)scheduleEffect();
     var card=document.getElementById("cbAnimatedSkins");if(card)card.classList.toggle("is-active",on);
     if(button){button.textContent=on?"Desactivar fondo":"Activar fondo";button.setAttribute("aria-pressed",String(on));}
     var status=document.getElementById("cbAnimatedSkinStatus");
-    if(status)status.textContent=!on?"Fondo desactivado.":(move?"Activo: acercamiento, distorsiones y luces aleatorias encendidas/apagadas.":"Fondo activo en modo fijo por ahorro de recursos o preferencia de movimiento reducido.");
+    if(status)status.textContent=!on?"Fondo desactivado.":(move?"Activo: el pasillo se acerca suavemente y los fluorescentes se apagan por separado, dejando uno encendido.":"Fondo activo en modo fijo por ahorro de recursos o preferencia de movimiento reducido.");
   }
   var toggle=document.getElementById("cbBackroomsToggle");
   if(toggle)toggle.addEventListener("click",function(){
@@ -3129,9 +3244,10 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   Promise.all([
     fetch("./assets/backrooms-level0-a.txt").then(function(r){if(!r.ok)throw Error("Imagen 1");return r.text();}),
     fetch("./assets/backrooms-level0-b.txt").then(function(r){if(!r.ok)throw Error("Imagen 2");return r.text();}),
-    fetch("./assets/backrooms-level0-c.txt").then(function(r){if(!r.ok)throw Error("Imagen 3");return r.text();})
+    fetch("./assets/backrooms-level0-c.txt").then(function(r){if(!r.ok)throw Error("Imagen 3");return r.text();}),
+    fetch("./assets/backrooms-level0-d.txt").then(function(r){if(!r.ok)throw Error("Imagen 4");return r.text();})
   ]).then(function(parts){
-    var b64=parts.join("");if(b64.length!==41912||!/^[A-Za-z0-9+/]+=*$/.test(b64))throw Error("Imagen incompleta");
+    var b64=parts.join("");if(b64.length!==31432||!/^[A-Za-z0-9+/]+=*$/.test(b64))throw Error("Imagen incompleta");
     var binary=atob(b64),bytes=new Uint8Array(binary.length);
     for(var i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
     imageUrl=URL.createObjectURL(new Blob([bytes],{type:"image/webp"}));
