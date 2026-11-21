@@ -1,5 +1,5 @@
 /* ConectaBus · caché de la interfaz para instalaciones HTTPS */
-const CACHE_NAME = "conectabus-shell-v17";
+const CACHE_NAME = "conectabus-shell-v18";
 const INDEX_URL = new URL("./index.html", self.registration.scope).href;
 const CORE_FILES = [INDEX_URL, "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./assets/backrooms-level0.webp?v=2"];
 self.addEventListener("install", event => {
