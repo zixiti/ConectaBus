@@ -22,3 +22,15 @@ NOTAS IMPORTANTES:
 - El temporizador de llegada no sustituye un servicio de emergencia ni puede garantizar una alerta si el navegador está cerrado.
 - Las demoras, avisos o vehículos de demostración siguen siendo simulaciones, no reportes oficiales en vivo.
 - La caché PWA necesita HTTPS; abrir el HTML local no instala el service worker.
+
+
+FONDOS FOTOGRÁFICOS BACKROOMS
+- Nivel 150: fotografía de Olek Buzunov, Unsplash.
+- Nivel 399: fotografía de Jaye Hernandez, Unsplash; color y animación aplicados por ConectaBus.
+- Nivel -1: fotografía de Fran Soza, Unsplash.
+- Nivel 38: fotografía de pasillo residencial, Unsplash.
+- Level Fun: fotografía de Joan Costa, Pexels (licencia gratuita de Pexels).
+- The End: imagen fotorrealista Endless Liminal Library, StockCake (marcada como gratuita para uso comercial).
+- Nivel 94: imagen Level-94-1.jpg, Wiki Backrooms Hispano, bajo CC BY-SA 3.0. Ver https://es-backrooms-wiki.wikidot.com/level-94.
+
+Los fondos usan movimiento CSS sutil; las imágenes externas se guardan en la caché de la aplicación después de cargarse correctamente por primera vez.
