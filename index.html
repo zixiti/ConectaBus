@@ -1549,6 +1549,56 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 html,body{background-color:#050505!important}
 </style>
 
+
+<style id="cb-fix-backrooms-final-v4">
+/* CONECTABUS · FIX FINAL v4 — barra, luces y modos */
+:root[data-animated-skin="backrooms-level0"] nav,
+:root[data-animated-skin="backrooms-level0"] #nav{
+  background:linear-gradient(to top,rgba(0,0,0,.95) 0%,rgba(0,0,0,.5) 70%,transparent 100%)!important;
+  border-top:1px solid rgba(255,255,255,.05)!important;
+  backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+}
+:root[data-animated-skin="backrooms-level0"] #nav a{
+  color:#a0a0a0!important;background:transparent!important;
+  text-shadow:0 2px 4px rgba(0,0,0,.9)!important;
+}
+:root[data-animated-skin="backrooms-level0"] #nav a[aria-current="page"]{
+  color:#fff!important;background:transparent!important;
+  text-shadow:0 0 12px rgba(255,255,255,.6)!important;
+}
+#cbBackroomsBackdrop .cb-backrooms-bulb{
+  background:#fffce8!important;border-radius:2px!important;
+  box-shadow:0 0 12px 2px rgba(255,250,200,.8),0 0 35px 10px rgba(255,240,150,.2)!important;
+  opacity:1!important;transition:all .4s ease!important;z-index:5;
+}
+:root.cb-backrooms-powercut #cbBackroomsBackdrop .cb-backrooms-bulb{
+  background:#222!important;box-shadow:none!important;opacity:.8!important;
+}
+@media(prefers-color-scheme:light){
+  :root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop .cb-backrooms-image{
+    filter:brightness(.85) contrast(1.1) saturate(.8) sepia(.4)!important;
+  }
+  :root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop:after{
+    background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,.5) 100%)!important;
+  }
+}
+@media(prefers-color-scheme:dark){
+  :root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop .cb-backrooms-image{
+    filter:brightness(.5) contrast(1.3) saturate(.2) hue-rotate(-5deg)!important;
+  }
+  :root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop:after{
+    background:radial-gradient(ellipse at 50% 50%,transparent 10%,rgba(0,0,0,.85) 100%)!important;
+  }
+}
+:root[data-animated-skin="backrooms-level0"][data-theme="light"] #cbBackroomsBackdrop .cb-backrooms-image{
+  filter:brightness(.85) contrast(1.1) saturate(.8) sepia(.4)!important;
+}
+:root[data-animated-skin="backrooms-level0"][data-theme="dark"] #cbBackroomsBackdrop .cb-backrooms-image,
+:root[data-animated-skin="backrooms-level0"]:not([data-theme="light"]) #cbBackroomsBackdrop .cb-backrooms-image{
+  filter:brightness(.5) contrast(1.3) saturate(.2) hue-rotate(-5deg)!important;
+}
+</style>
+
 </head>
 <body>
 
