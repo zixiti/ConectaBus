@@ -25,12 +25,12 @@ NOTAS IMPORTANTES:
 
 
 FONDOS FOTOGRÁFICOS BACKROOMS
-- Nivel 150: fotografía de Olek Buzunov, Unsplash.
-- Nivel 399: fotografía de Jaye Hernandez, Unsplash; color y animación aplicados por ConectaBus.
-- Nivel -1: fotografía de Fran Soza, Unsplash.
+- Nivel 150: fotografía de construcción, Unsplash.
+- Nivel 399: fotografía de hotel/piscina, Unsplash; color y animación aplicados por ConectaBus.
+- Nivel -1: fotografía de pasillo monocromo, Unsplash.
 - Nivel 38: fotografía de pasillo residencial, Unsplash.
-- Level Fun: fotografía de Joan Costa, Pexels (licencia gratuita de Pexels).
-- The End: imagen fotorrealista Endless Liminal Library, StockCake (marcada como gratuita para uso comercial).
-- Nivel 94: imagen Level-94-1.jpg, Wiki Backrooms Hispano, bajo CC BY-SA 3.0. Ver https://es-backrooms-wiki.wikidot.com/level-94.
+- Level Fun: fotografía de instalación inflable, Joan Costa / Pexels (licencia gratuita de Pexels).
+- The End: imagen fotorrealista Endless Liminal Library, StockCake (licencia CC0 / dominio público).
+- Nivel 94: imagen fotorrealista Floating Enchanted Castle, StockCake (licencia CC0 / dominio público).
 
 Los fondos usan movimiento CSS sutil; las imágenes externas se guardan en la caché de la aplicación después de cargarse correctamente por primera vez.
