@@ -651,6 +651,27 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 }
 
 
+
+/* BACKROOMS · luz ambiental localizada, sin rectángulos sobre las lámparas */
+:root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop .cb-backrooms-image{
+  filter:brightness(.88) saturate(.9) contrast(1.05)!important
+}
+:root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop:after{
+  background:linear-gradient(180deg,rgba(8,7,3,.07),rgba(12,9,3,.09) 48%,rgba(4,4,2,.24)),
+    radial-gradient(ellipse at 50% 44%,transparent 10%,rgba(0,0,0,.26) 100%)!important
+}
+#cbBackroomsBackdrop .cb-backrooms-bulb{display:none!important}
+#cbBackroomsBackdrop .cb-backrooms-local-dark{
+  position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
+  background:radial-gradient(ellipse 23% 15% at var(--dark-x,50%) var(--dark-y,30%),
+    rgba(8,7,3,.76) 0%,rgba(8,7,3,.53) 30%,rgba(8,7,3,.19) 62%,transparent 100%);
+  transition:opacity .55s ease
+}
+:root.cb-backrooms-darkzone #cbBackroomsBackdrop .cb-backrooms-local-dark{opacity:1}
+:root[data-animated-skin="backrooms-level0"] nav{
+  background:rgba(13,11,5,.82)!important
+}
+
 /* BACKROOMS · refinamiento visual y apagado individual de fluorescentes */
 :root[data-animated-skin="backrooms-level0"]{
   --bg:#171308;--surface:rgba(18,15,7,.46);--ink:#fff5d7;--muted:#e0d2ad;
@@ -1114,7 +1135,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   <div class="cb-backrooms-bulb light-a"></div><div class="cb-backrooms-bulb light-b"></div>
   <div class="cb-backrooms-bulb light-c"></div><div class="cb-backrooms-bulb light-d"></div>
   <div class="cb-backrooms-bulb light-e"></div><div class="cb-backrooms-bulb light-f"></div>
-  <div class="cb-backrooms-scan"></div>
+  <div class="cb-backrooms-local-dark"></div><div class="cb-backrooms-scan"></div>
 </div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -3190,7 +3211,11 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
 (function(){
   "use strict";
   var root=document.documentElement,nextTimer=null,clearTimer=null;
-  var lightClasses=["cb-backrooms-keep-a","cb-backrooms-keep-b","cb-backrooms-keep-c","cb-backrooms-keep-d","cb-backrooms-keep-e","cb-backrooms-keep-f"];
+  var zones=[
+    {x:"31%",y:"20%"},{x:"55%",y:"27%"},{x:"43%",y:"40%"},
+    {x:"70%",y:"47%"},{x:"82%",y:"35%"},{x:"24%",y:"52%"},
+    {x:"61%",y:"57%"},{x:"37%",y:"31%"}
+  ];
   function prefs(){return window.PR||{};}
   function active(){return prefs().animatedSkin==="backrooms-level0";}
   function motionAllowed(){
@@ -3199,33 +3224,31 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   }
   function stopEffects(){
     if(nextTimer)clearTimeout(nextTimer);if(clearTimer)clearTimeout(clearTimer);
-    nextTimer=null;clearTimer=null;
-    root.classList.remove("cb-backrooms-powercut","cb-backrooms-glitch");
-    lightClasses.forEach(function(c){root.classList.remove(c);});
+    nextTimer=null;clearTimer=null;root.classList.remove("cb-backrooms-darkzone","cb-backrooms-glitch");
   }
   function scheduleEffect(){
     if(!active()||!motionAllowed()||document.hidden)return;
     nextTimer=setTimeout(function(){
-      var keep=lightClasses[Math.floor(Math.random()*lightClasses.length)];
-      root.classList.add("cb-backrooms-powercut",keep);
-      if(Math.random()<.42)root.classList.add("cb-backrooms-glitch");
+      var zone=zones[Math.floor(Math.random()*zones.length)];
+      root.style.setProperty("--dark-x",zone.x);root.style.setProperty("--dark-y",zone.y);
+      root.classList.add("cb-backrooms-darkzone");
+      if(Math.random()<.24)root.classList.add("cb-backrooms-glitch");
       clearTimer=setTimeout(function(){
-        root.classList.remove("cb-backrooms-powercut","cb-backrooms-glitch");
-        lightClasses.forEach(function(c){root.classList.remove(c);});
+        root.classList.remove("cb-backrooms-darkzone","cb-backrooms-glitch");
         scheduleEffect();
-      },1000+Math.random()*1500);
-    },3500+Math.random()*5500);
+      },1600+Math.random()*2100);
+    },5500+Math.random()*8500);
   }
   function update(){
     var on=active(),move=on&&motionAllowed(),button=document.getElementById("cbBackroomsToggle");
     if(on)root.setAttribute("data-animated-skin","backrooms-level0");else root.removeAttribute("data-animated-skin");
     root.classList.toggle("cb-backrooms-static",on&&!move);
-    var meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute("content",on?"#1b1609":"#6d3fd6");
+    var meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute("content","#171307");
     stopEffects();if(move)scheduleEffect();
     var card=document.getElementById("cbAnimatedSkins");if(card)card.classList.toggle("is-active",on);
     if(button){button.textContent=on?"Desactivar fondo":"Activar fondo";button.setAttribute("aria-pressed",String(on));}
     var status=document.getElementById("cbAnimatedSkinStatus");
-    if(status)status.textContent=!on?"Fondo desactivado.":(move?"Activo: el pasillo se acerca suavemente y los fluorescentes se apagan por separado, dejando uno encendido.":"Fondo activo en modo fijo por ahorro de recursos o preferencia de movimiento reducido.");
+    if(status)status.textContent=!on?"Fondo desactivado.":(move?"Activo: el pasillo se mueve suavemente y, de vez en cuando, se oscurece una zona puntual del fondo.":"Fondo activo en modo fijo por ahorro de recursos o preferencia de movimiento reducido.");
   }
   var toggle=document.getElementById("cbBackroomsToggle");
   if(toggle)toggle.addEventListener("click",function(){
