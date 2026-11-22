@@ -1784,6 +1784,43 @@ html,body{background-color:#050505!important}
 :root.cb-backrooms-static[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image{animation:none!important;transform:scale(1.025)!important}
 :root.cb-backrooms-static[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important;opacity:0!important}
 @media(prefers-reduced-motion:reduce){:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image,:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important;transform:scale(1.025)!important}}
+
+/* CONECTABUS · calles legibles y paneles translúcidos para todas las skins */
+#mapsvg #cbPdfStreetLabels .st{
+  font-size:19px!important;font-weight:850!important;letter-spacing:.35px!important;
+  fill:#273044!important;stroke:rgba(255,255,255,.96)!important;stroke-width:5px!important;
+  stroke-linejoin:round!important;paint-order:stroke fill!important;opacity:1!important;
+}
+#mapsvg #cbPdfStreetLabels .st.av{
+  font-size:21px!important;font-weight:950!important;fill:#26334a!important;
+  stroke:rgba(255,255,255,.98)!important;stroke-width:6px!important;
+}
+#mapsvg #cbPdfStreetLabels{opacity:1!important;display:inline!important;visibility:visible!important}
+:root[data-animated-skin] .card,
+:root[data-animated-skin] .tile,
+:root[data-animated-skin] .dashboard-panel,
+:root[data-animated-skin] .dash-action,
+:root[data-animated-skin] .dash-trip,
+:root[data-animated-skin] .skin-choice,
+:root[data-animated-skin] .my-selection,
+:root[data-animated-skin] .map-options,
+:root[data-animated-skin] .top,
+:root[data-animated-skin] .settings-panel,
+:root[data-animated-skin] .panel{
+  background:rgba(10,13,19,.27)!important;
+  border-color:rgba(225,231,244,.23)!important;
+  color:var(--ink)!important;
+  -webkit-backdrop-filter:blur(1.5px)!important;
+  backdrop-filter:blur(1.5px)!important;
+  box-shadow:0 5px 18px rgba(0,0,0,.13)!important;
+}
+:root[data-animated-skin] nav{
+  background:rgba(8,11,17,.48)!important;
+  border-color:rgba(225,231,244,.2)!important;
+  -webkit-backdrop-filter:blur(1.5px)!important;
+  backdrop-filter:blur(1.5px)!important;
+}
+
 </style>
 </head>
 <body>
