@@ -1771,6 +1771,12 @@ html,body{background-color:#050505!important}
 #cbMapBox.map-mode-real .mapctl{display:none!important}
 #cbMapBox.map-mode-real #cbRealMapPanel{display:block}
 #cbMapBox.map-mode-interactive #cbRealMapPanel{display:none!important}
+#cbMapBox.map-mode-real + .legend{display:none!important}
+#cbMapBox.map-mode-real .cb-map-interactive-note{display:none!important}
+#v-mapa.cb-map-view-real .search,#v-mapa.cb-map-view-real #res,
+#v-mapa.cb-map-view-real #mapMsg,#v-mapa.cb-map-view-real #mapStopPicker,
+#v-mapa.cb-map-view-real #mapRouteCard,#v-mapa.cb-map-view-real #poiDemoNote,
+#v-mapa.cb-map-view-real .map-guide{display:none!important}
 #cbMapBox.map-mode-interactive #mapsvg{display:block}
 #v-mapa .mapbox.map-mode-real{touch-action:pan-y}
 #v-mapa .mapbox.map-mode-real #cbRealMap{touch-action:pan-x pan-y}
@@ -1973,7 +1979,7 @@ html,body{background-color:#050505!important}
         </div>
         <small class="cb-map-attribution">Cartografía © OpenStreetMap contributors · Los recorridos y las paradas de colectivo se consultan en “Mapa de recorridos”.</small>
       </section>
-      <p class="note" style="margin:0 0 10px">Plano interactivo de recorridos ConectaBus. Conserva las paradas esquemáticas y sus trazas de demostración; cambiá a “Mapa detallado” para consultar las calles reales.</p><svg class="map map-light" id="mapsvg" viewBox="1150 600 380 421" role="img" aria-label="Plano arrastrable del centro de San Rafael con la ubicación de los colectivos">
+      <p class="note cb-map-interactive-note" style="margin:0 0 10px">Plano interactivo de recorridos ConectaBus. Conserva las paradas esquemáticas y sus trazas de demostración; cambiá a “Mapa detallado” para consultar las calles reales.</p><svg class="map map-light" id="mapsvg" viewBox="1150 600 380 421" role="img" aria-label="Plano arrastrable del centro de San Rafael con la ubicación de los colectivos">
         <defs><filter id="shd" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="1.6" stdDeviation="1.6" flood-color="#000" flood-opacity=".35"/></filter><clipPath id="cov"><polygon points="-1100,-450 3700,-450 3700,2000 -1100,2000"/></clipPath><clipPath id="c22"><polygon points="-270,-450 3700,-450 3700,2000 150,2000 150,730 -700,730 -700,190 -960,110"/></clipPath><clipPath id="c45"><polygon points="-1100,-450 -270,-450 -960,110 -700,190 -700,730 150,730 150,2000 -1100,2000"/></clipPath><pattern id="hat" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="14" stroke="var(--muted)" stroke-width="1.6" opacity=".2"/></pattern></defs>
         <rect x="-1500" y="-1500" width="7000" height="5000" fill="var(--line)"/>
         <g clip-path="url(#cov)">
@@ -4019,6 +4025,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   }
   function setMode(mode){
     var real=mode!=="interactive";
+    document.getElementById("v-mapa").classList.toggle("cb-map-view-real",real);
     box.classList.toggle("map-mode-real",real);
     box.classList.toggle("map-mode-interactive",!real);
     document.getElementById("cbMapModeReal").setAttribute("aria-pressed",String(real));
