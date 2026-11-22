@@ -997,8 +997,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   #cbHomeLayout .cb-module-teaser{min-height:0}
 }
 @media(prefers-reduced-motion:no-preference){
-  #cbHomeLayout .cb-home-module{transition:transform .18s ease,box-shadow .18s ease}
-  #cbHomeLayout .cb-home-module:not(.is-expanded):hover{transform:translateY(-2px)}
+  #cbHomeLayout .cb-home-module{transition:transform .18s ease,box-shadow .18s ease}  #cbHomeLayout .cb-home-module:not(.is-expanded):hover{transform:translateY(-2px)}
 }
 </style>
 
@@ -1997,8 +1996,7 @@ html,body{background-color:#050505!important}
     linear-gradient(30deg,transparent 0 42%,#94714d 42.5% 44%,transparent 44.5%) 39% 7%/27% 76% no-repeat,
     linear-gradient(90deg,#cba96d 0 100%) 39% 43%/27% 49% no-repeat,
     linear-gradient(150deg,transparent 0 42%,#82694d 42.5% 44%,transparent 44.5%) 72% 20%/26% 61% no-repeat,
-    linear-gradient(30deg,transparent 0 42%,#82694d 42.5% 44%,transparent 44.5%) 72% 20%/26% 61% no-repeat,
-    linear-gradient(90deg,#d5b77d 0 100%) 72% 48%/26% 42% no-repeat;
+    linear-gradient(30deg,transparent 0 42%,#82694d 42.5% 44%,transparent 44.5%) 72% 20%/26% 61% no-repeat,    linear-gradient(90deg,#d5b77d 0 100%) 72% 48%/26% 42% no-repeat;
   filter:drop-shadow(0 -8px 13px rgba(30,26,22,.13));
   opacity:calc(.72 + var(--cb-l94-night)*.22);
   transform:translateY(calc(var(--cb-l94-night)*2px));
@@ -2997,8 +2995,7 @@ $("pois").innerHTML=ph+sh;
 poiEls=[].slice.call($("pois").querySelectorAll(".poi-marker"));
 stopEls=[].slice.call($("pois").querySelectorAll(".stp"));
 stopEls.forEach(function(g){
-  g.addEventListener("click",function(e){e.stopPropagation();chooseMapStop(g)});
-  g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();chooseMapStop(g)}});
+  g.addEventListener("click",function(e){e.stopPropagation();chooseMapStop(g)});  g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();e.stopPropagation();chooseMapStop(g)}});
 });
 function syncTripStopMarker(){stopEls.forEach(function(g){
   var chosen=!!TRIP.confirmed&&g.getAttribute("data-index")===String(TRIP.mapPoint);
@@ -3997,8 +3994,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
       add(p);
     });
     return out;
-  }
-  function drawSelectedRoute(data){
+  }  function drawSelectedRoute(data){
     if(!routeLayer)return;
     routeLayer.innerHTML="";
     var profile=snapProfileToRoadGrid((urbanProfiles[String(data.r.num)]||urbanProfiles["542"]).slice());
