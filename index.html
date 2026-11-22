@@ -2701,6 +2701,7 @@ sugEl.addEventListener("click",function(e){var li=e.target.closest?e.target.clos
 document.addEventListener("click",function(e){if(!(e.target.closest&&e.target.closest(".search")))sugEl.hidden=true});
 
 function pickPlace(p){
+  if(window.cbSetMapMode)window.cbSetMapMode("interactive");
   curPlace=p;qIn.value=p.n;sugEl.hidden=true;
   var pl=p.l,thr=p.c==="st"?12:(p.c==="stop"?70:300);
   curInfo=LINEAS.map(function(L){
