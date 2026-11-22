@@ -847,6 +847,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   -webkit-backdrop-filter:blur(3px) saturate(.55)!important;
 }
 
+.cb-install-cta-wrap{margin:22px 0 12px;padding:16px;border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--surface) 72%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.cb-install-cta{display:block;width:100%;min-height:54px;font-size:1rem;font-weight:750;letter-spacing:.01em}.cb-install-cta-wrap .note{margin:9px 2px 0}
 </style>
 
 
@@ -2297,7 +2298,6 @@ html,body{background-color:#050505!important}
           <p class="note">Las líneas y horarios incluidos en este archivo siguen disponibles sin Internet. El clima, los enlaces externos y las funciones para compartir necesitan conexión.</p>
           <button class="btn ghost" id="cbExportData" type="button">Crear copia de seguridad</button>
           <button class="btn ghost" id="cbImportData" type="button">Restaurar copia</button>
-          <button class="btn" id="cbInstallApp" type="button" hidden>Instalar ConectaBus</button>
           <input id="cbImportFile" type="file" accept="application/json,.json" hidden>
           <p id="cbBackupStatus" class="note" role="status"></p>
         </div>
@@ -2320,6 +2320,10 @@ html,body{background-color:#050505!important}
     </ul>
   </div>
   <p class="note">Datos de demostración. Los recorridos y horarios son de ejemplo.</p>
+  <div class="cb-install-cta-wrap">
+    <button class="btn cb-install-cta" id="cbInstallApp" type="button">⇩ Instalar ConectaBus</button>
+    <p class="note" id="cbInstallHint">Instalá la aplicación en tu teléfono para abrirla más rápido.</p>
+  </div>
 </div>
 
 <!-- INTERIOR -->
@@ -4283,7 +4287,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   $("cbSafeStart").addEventListener("click",function(){var mins=+$("cbSafeMinutes").value||30;safeState={started:Date.now(),deadline:Date.now()+mins*60000,expiredNotified:false};put("cb_safe_timer",safeState);safeStatus();notify("Aviso de llegada iniciado","Te recordaremos confirmar que llegaste en "+mins+" minutos.","safety");});
   $("cbSafeConfirm").addEventListener("click",function(){safeStop(true)});$("cbSafeCancel").addEventListener("click",function(){if(confirm("¿Cancelar el aviso de llegada?"))safeStop(false)});
   $("cbWeatherRefresh").addEventListener("click",function(){weatherLoad(true)});$("cbExportData").addEventListener("click",exportData);$("cbImportData").addEventListener("click",function(){$("cbImportFile").click()});$("cbImportFile").addEventListener("change",function(){importData(this.files&&this.files[0])});
-  var installPrompt=null;window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();installPrompt=e;$("cbInstallApp").hidden=false;});$("cbInstallApp").addEventListener("click",function(){if(!installPrompt){$("cbBackupStatus").textContent="La instalación aparece cuando ConectaBus está publicada en un sitio HTTPS compatible.";return;}installPrompt.prompt();installPrompt.userChoice.then(function(choice){if(choice&&choice.outcome==="accepted")$("cbBackupStatus").textContent="ConectaBus se está instalando.";else $("cbBackupStatus").textContent="Podés instalarla más tarde desde el menú del navegador.";installPrompt=null;$("cbInstallApp").hidden=true;});});
+  var installPrompt=null;var installButton=$("cbInstallApp");var installHint=$("cbInstallHint");function appIsInstalled(){return window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;}function refreshInstallButton(){if(!installButton)return;var installed=appIsInstalled();installButton.hidden=installed;if(installHint)installHint.textContent=installed?"ConectaBus ya está instalada en este dispositivo.":"Instalá ConectaBus en tu teléfono para abrirla como una aplicación."; }window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();installPrompt=e;refreshInstallButton();});window.addEventListener("appinstalled",function(){installPrompt=null;refreshInstallButton();if(installHint)installHint.textContent="¡ConectaBus se instaló correctamente!";});if(installButton)installButton.addEventListener("click",function(){if(installPrompt){installPrompt.prompt();installPrompt.userChoice.then(function(choice){if(choice&&choice.outcome==="accepted"){if(installHint)installHint.textContent="ConectaBus se está instalando.";}else if(installHint){installHint.textContent="Podés instalarla más tarde desde el menú del navegador.";}installPrompt=null;refreshInstallButton();});return;}if(/iphone|ipad|ipod/i.test(navigator.userAgent)){if(installHint)installHint.textContent="En Safari: tocá Compartir y elegí “Agregar a pantalla de inicio”.";return;}if(installHint)installHint.textContent="Si no aparece la ventana, abrí el menú ⋮ del navegador y elegí “Instalar aplicación” o “Agregar a pantalla principal”. Asegurate de abrir ConectaBus desde su dirección HTTPS.";});refreshInstallButton();
   if("serviceWorker" in navigator&&location.protocol==="https:"){navigator.serviceWorker.register("./sw.js").then(function(){connectionStatus()}).catch(function(){connectionStatus()});}
   $("cbProfile").addEventListener("change",function(){PR.profile=this.value;lsSet("cb_prefs",PR)});$("cbApplyProfile").addEventListener("click",function(){applyProfile($("cbProfile").value)});$("cbAlarmTone").addEventListener("change",function(){PR.alarmTone=this.value;lsSet("cb_prefs",PR);$("cbAdvancedStatus").textContent="Estilo de alarma guardado.";});
   $("cbHudToggle").addEventListener("click",function(e){var b=e.target.closest("[data-extra-pref]");if(!b)return;PR.hud=b.dataset.value==="1";lsSet("cb_prefs",PR);applyExtraPrefs();renderAdvanced()});$("cbTouchToggle").addEventListener("click",function(e){var b=e.target.closest("[data-extra-pref]");if(!b)return;PR.largeTap=b.dataset.value==="1";lsSet("cb_prefs",PR);applyExtraPrefs();renderAdvanced()});
