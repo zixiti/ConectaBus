@@ -2162,6 +2162,42 @@ html,body{background-color:#050505!important}
 }
 </style>
 
+
+<style id="cb-backrooms-scope-fix-v6">
+/* Corrección de alcance: sol y nubes del Nivel 94 solo aparecen en el Nivel 94. */
+#cbBackroomsBackdrop .cb-l94-atmosphere,
+#cbBackroomsBackdrop .cb-l94-village{
+  display:none!important;
+}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-l94-atmosphere,
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-l94-village{
+  display:block!important;
+}
+
+/* El Nivel 150 es el pasillo interior cubierto de flores, no una pradera al atardecer. */
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop .cb-backrooms-image{
+  background-image:url("./assets/backrooms-flower-hall.webp")!important;
+  background-position:center 48%!important;
+  background-size:cover!important;
+  filter:saturate(.74) contrast(1.07) brightness(.91)!important;
+  animation:cbV5HallCamera 34s ease-in-out infinite alternate!important;
+}
+.cb-level-thumb.level150{
+  background-image:url("./assets/backrooms-flower-hall.webp")!important;
+  background-position:center 48%!important;
+}
+
+/* Un pasillo interior no debe llevar nubes de cielo superpuestas. */
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop .cb-flower-clouds,
+:root[data-animated-skin="backrooms-flower-hall"] #cbBackroomsBackdrop .cb-flower-clouds{
+  display:none!important;
+}
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop .cb-flower-grass-breeze,
+:root[data-animated-skin="backrooms-flower-hall"] #cbBackroomsBackdrop .cb-flower-grass-breeze{
+  opacity:.28!important;
+}
+</style>
+
 </head>
 <body>
 
@@ -4315,7 +4351,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   var bulbs=Array.prototype.slice.call(document.querySelectorAll("#cbBackroomsBackdrop .cb-backrooms-bulb"));
   var labels={
     "backrooms-level0":"Nivel 0 · El Lobby",
-    "backrooms-level150":"Nivel 150 · Pradera de flores",
+    "backrooms-level150":"Nivel 150 · Pasillo de flores",
     "backrooms-level399":"Nivel 399 · Paraíso de neón",
     "backrooms-level-minus1":"Nivel -1 · Pasillos a escala de grises",
     "backrooms-level38":"Nivel 38 · Ciudad contaminada",
@@ -4365,7 +4401,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   }
   var skinAssets={
     "backrooms-level0":"./assets/backrooms-level0.webp?v=2",
-    "backrooms-level150":"./assets/backrooms-level150.webp",
+    "backrooms-level150":"./assets/backrooms-flower-hall.webp",
     "backrooms-level399":"./assets/backrooms-level399.svg",
     "backrooms-level-minus1":"./assets/backrooms-level-minus1.svg",
     "backrooms-level38":"./assets/backrooms-level38.svg",
