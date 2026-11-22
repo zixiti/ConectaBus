@@ -1737,6 +1737,54 @@ html,body{background-color:#050505!important}
 #cbBackroomsBackdrop,#cbAnimatedSkins{display:none!important}
 :root[data-animated-skin] body{background:var(--bg)!important}
 </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<style id="cb-map-municipal-reference">
+/* Mapa geográfico ampliado de San Rafael; el plano esquemático queda como modo alternativo */
+.cb-map-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
+.cb-map-mode-switch button,.cb-real-map-search button,.cb-real-map-actions button{
+  min-height:42px;padding:9px 12px;border:1px solid var(--line);border-radius:12px;
+  background:var(--surface);color:var(--ink);font:inherit;font-weight:800
+}
+.cb-map-mode-switch button[aria-pressed="true"]{
+  background:var(--violet);color:#fff;border-color:var(--violet);
+  box-shadow:0 5px 16px color-mix(in srgb,var(--violet) 28%,transparent)
+}
+.cb-map-reference{margin:0 0 10px;line-height:1.5}
+.cb-real-map-search{display:flex;gap:8px;margin:0 0 9px}
+.cb-real-map-search input{flex:1;min-width:0;min-height:43px;padding:9px 12px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);font:inherit}
+.cb-real-map-search button{flex:0 0 auto;background:var(--violet);border-color:var(--violet);color:#fff}
+.cb-real-map-results{display:grid;gap:6px;margin:0 0 9px}
+.cb-real-map-results button{padding:10px 12px;text-align:left;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:inherit}
+.cb-real-map-results button small{display:block;margin-top:3px;color:var(--muted)}
+.real-map{height:min(72vh,820px);min-height:520px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#e8e4d8;z-index:1}
+.real-map .leaflet-control-attribution{font-size:10px}
+.real-map .leaflet-control-attribution a{color:#5630a8}
+.real-map .leaflet-popup-content-wrapper{border-radius:11px}
+.cb-real-map-actions{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}
+.cb-real-map-actions button{flex:1 1 145px}
+.cb-map-attribution{display:block;color:var(--muted);font-size:.72rem;line-height:1.4}
+#cbMapBox.map-mode-real #mapsvg,
+#cbMapBox.map-mode-real .map-options,
+#cbMapBox.map-mode-real .map-legacy-settings,
+#cbMapBox.map-mode-real #mapConfigStatus,
+#cbMapBox.map-mode-real .mapctl{display:none!important}
+#cbMapBox.map-mode-real #cbRealMapPanel{display:block}
+#cbMapBox.map-mode-interactive #cbRealMapPanel{display:none!important}
+#cbMapBox.map-mode-interactive #mapsvg{display:block}
+#v-mapa .mapbox.map-mode-real{touch-action:pan-y}
+#v-mapa .mapbox.map-mode-real #cbRealMap{touch-action:pan-x pan-y}
+#v-mapa .mapbox.map-mode-interactive #mapsvg{touch-action:none}
+@media(max-width:430px){
+  .real-map{height:68vh;min-height:470px}
+  .cb-map-mode-switch{gap:6px}
+  .cb-map-mode-switch button{font-size:.82rem;padding:8px 6px}
+  .cb-real-map-search button{padding:8px 10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .cb-map-mode-switch button{transition:none!important}
+}
+</style>
 </head>
 <body>
 
@@ -1905,8 +1953,27 @@ html,body{background-color:#050505!important}
         <ul id="sug" class="sug" role="listbox" hidden></ul>
       </div>
       <div id="res" class="res" hidden></div>
-      <div class="mapbox">
-      <p class="note" style="margin:0 0 10px">Plano ilustrado ampliado de San Rafael: calles y avenidas, Plaza San Martín y muchos puntos ilustrativos de hoteles, restaurantes, cafés, comercios, salud y espacios verdes. Tocá un marcador para ver su ficha.</p><svg class="map map-light" id="mapsvg" viewBox="1150 600 380 421" role="img" aria-label="Plano arrastrable del centro de San Rafael con la ubicación de los colectivos">
+      <div class="mapbox map-mode-real" id="cbMapBox">
+      <div class="cb-map-mode-switch" role="group" aria-label="Tipo de mapa">
+        <button type="button" id="cbMapModeReal" aria-pressed="true">Mapa detallado</button>
+        <button type="button" id="cbMapModeInteractive" aria-pressed="false">Mapa de recorridos</button>
+      </div>
+      <section id="cbRealMapPanel" aria-label="Mapa geográfico de San Rafael">
+        <p class="note cb-map-reference">Vista geográfica ampliable de San Rafael. Tomamos como guía el plano municipal que compartiste: la cuadrícula urbana, sus plazas y las avenidas Yrigoyen (RN 143), Rivadavia, Bartolomé Mitre, San Martín, Sarmiento, El Libertador, 9 de Julio, Emilio Mitre, Granaderos, Balloffet y Rawson (RN 159). Las calles se muestran sobre cartografía de OpenStreetMap.</p>
+        <form class="cb-real-map-search" id="cbRealMapSearch">
+          <input id="cbRealMapQuery" type="search" placeholder="Buscar calle o lugar en San Rafael" aria-label="Buscar calle o lugar en el mapa detallado" autocomplete="off"/>
+          <button type="submit" id="cbRealMapSearchButton">Buscar</button>
+        </form>
+        <div id="cbRealMapResults" class="cb-real-map-results" hidden aria-live="polite"></div>
+        <div id="cbRealMap" class="real-map" role="application" aria-label="Mapa ampliable con calles de San Rafael"></div>
+        <p class="map-status" id="cbRealMapStatus" role="status">Mapa geográfico centrado en Plaza San Martín. Podés arrastrar, acercar con dos dedos y buscar calles.</p>
+        <div class="cb-real-map-actions">
+          <button type="button" id="cbRealMapCenter">⌖ Volver a Plaza San Martín</button>
+          <button type="button" id="cbRealMapCity">▦ Ver área urbana</button>
+        </div>
+        <small class="cb-map-attribution">Cartografía © OpenStreetMap contributors · Los recorridos y las paradas de colectivo se consultan en “Mapa de recorridos”.</small>
+      </section>
+      <p class="note" style="margin:0 0 10px">Plano interactivo de recorridos ConectaBus. Conserva las paradas esquemáticas y sus trazas de demostración; cambiá a “Mapa detallado” para consultar las calles reales.</p><svg class="map map-light" id="mapsvg" viewBox="1150 600 380 421" role="img" aria-label="Plano arrastrable del centro de San Rafael con la ubicación de los colectivos">
         <defs><filter id="shd" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="1.6" stdDeviation="1.6" flood-color="#000" flood-opacity=".35"/></filter><clipPath id="cov"><polygon points="-1100,-450 3700,-450 3700,2000 -1100,2000"/></clipPath><clipPath id="c22"><polygon points="-270,-450 3700,-450 3700,2000 150,2000 150,730 -700,730 -700,190 -960,110"/></clipPath><clipPath id="c45"><polygon points="-1100,-450 -270,-450 -960,110 -700,190 -700,730 150,730 150,2000 -1100,2000"/></clipPath><pattern id="hat" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="14" stroke="var(--muted)" stroke-width="1.6" opacity=".2"/></pattern></defs>
         <rect x="-1500" y="-1500" width="7000" height="5000" fill="var(--line)"/>
         <g clip-path="url(#cov)">
@@ -3917,5 +3984,114 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
 })();
 </script>
 
+<script id="cb-real-map-enhancement">
+(function(){
+  "use strict";
+  var box=document.getElementById("cbMapBox");
+  if(!box)return;
+  var realMap=null,plazaMarker=null,searchMarker=null,lastSearchAt=0;
+  var plaza=[-34.61383402,-68.33009124];
+  var status=document.getElementById("cbRealMapStatus");
+  var results=document.getElementById("cbRealMapResults");
+  function say(message){if(status)status.textContent=message;}
+  function initMap(){
+    if(realMap)return true;
+    if(!window.L){
+      say("No se pudo cargar la cartografía externa. Comprobá tu conexión y volvé a abrir esta vista.");
+      return false;
+    }
+    try{
+      realMap=L.map("cbRealMap",{zoomControl:true,scrollWheelZoom:true,zoomSnap:.5,minZoom:11,maxZoom:19,tap:true}).setView(plaza,13.5);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+        maxZoom:19,
+        attribution:'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>',
+        crossOrigin:true
+      }).addTo(realMap);
+      plazaMarker=L.circleMarker(plaza,{radius:7,color:"#fff",weight:2,fillColor:"#6d3fd6",fillOpacity:1})
+        .addTo(realMap).bindPopup("<b>Plaza San Martín</b><br>Referencia central de ConectaBus");
+      realMap.on("tileerror",function(){say("Algunas calles no se pudieron cargar. Revisá la conexión; el mapa interactivo de recorridos sigue disponible.")});
+      return true;
+    }catch(err){
+      say("No se pudo iniciar el mapa geográfico. Podés usar “Mapa de recorridos” como alternativa.");
+      return false;
+    }
+  }
+  function setMode(mode){
+    var real=mode!=="interactive";
+    box.classList.toggle("map-mode-real",real);
+    box.classList.toggle("map-mode-interactive",!real);
+    document.getElementById("cbMapModeReal").setAttribute("aria-pressed",String(real));
+    document.getElementById("cbMapModeInteractive").setAttribute("aria-pressed",String(!real));
+    try{localStorage.setItem("cb_map_mode_v1",real?"real":"interactive")}catch(e){}
+    if(real&&initMap()){
+      setTimeout(function(){realMap.invalidateSize({pan:false});},100);
+      say("Mapa geográfico de San Rafael. Arrastrá para moverte y acercá con dos dedos.");
+    }else if(!real&&typeof applyView==="function"){
+      setTimeout(function(){applyView()},50);
+    }
+  }
+  window.cbSetMapMode=setMode;
+  document.getElementById("cbMapModeReal").addEventListener("click",function(){setMode("real")});
+  document.getElementById("cbMapModeInteractive").addEventListener("click",function(){setMode("interactive")});
+  document.getElementById("cbRealMapCenter").addEventListener("click",function(){
+    if(initMap()){realMap.setView(plaza,16,{animate:true});plazaMarker.openPopup();say("Centrado en Plaza San Martín.")}
+  });
+  document.getElementById("cbRealMapCity").addEventListener("click",function(){
+    if(initMap()){realMap.setView(plaza,13.5,{animate:true});say("Vista amplia del área urbana de San Rafael.")}
+  });
+  var form=document.getElementById("cbRealMapSearch");
+  form.addEventListener("submit",function(e){
+    e.preventDefault();
+    var query=document.getElementById("cbRealMapQuery").value.trim();
+    if(!query){say("Escribí el nombre de una calle o lugar.");return}
+    if(!initMap())return;
+    var wait=Math.max(0,1100-(Date.now()-lastSearchAt));
+    say("Buscando “"+query+"” en San Rafael…");
+    setTimeout(function(){
+      lastSearchAt=Date.now();
+      var url="https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=6&countrycodes=ar&viewbox=-68.44,-34.55,-68.22,-34.70&bounded=1&q="+encodeURIComponent(query+", San Rafael, Mendoza, Argentina");
+      fetch(url,{headers:{"Accept":"application/json"}}).then(function(response){
+        if(!response.ok)throw new Error("HTTP "+response.status);
+        return response.json();
+      }).then(function(items){
+        results.innerHTML="";
+        if(!items.length){
+          results.hidden=false;
+          var empty=document.createElement("button");empty.type="button";empty.textContent="No se encontraron coincidencias en el área de San Rafael.";empty.disabled=true;results.appendChild(empty);
+          say("No encontré esa calle o lugar dentro del área consultada. Probá con un nombre más corto.");return;
+        }
+        items.forEach(function(item){
+          var button=document.createElement("button");button.type="button";
+          var name=document.createElement("span");name.textContent=item.name||item.display_name.split(",")[0];
+          var small=document.createElement("small");small.textContent=item.display_name;
+          button.appendChild(name);button.appendChild(small);
+          button.addEventListener("click",function(){
+            var pos=[Number(item.lat),Number(item.lon)];
+            if(searchMarker)realMap.removeLayer(searchMarker);
+            searchMarker=L.circleMarker(pos,{radius:8,color:"#fff",weight:2,fillColor:"#d93025",fillOpacity:1}).addTo(realMap)
+              .bindPopup("<b>"+String(item.name||item.display_name.split(",")[0]).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})+"</b>");
+            realMap.setView(pos,17,{animate:true});searchMarker.openPopup();
+            results.hidden=true;say("Ubicación encontrada en OpenStreetMap. Revisá el nombre y la posición en el mapa.");
+          });
+          results.appendChild(button);
+        });
+        results.hidden=false;
+        say("Elegí una coincidencia para acercar el mapa.");
+      }).catch(function(){
+        results.hidden=true;say("No se pudo completar la búsqueda. Revisá tu conexión o probá nuevamente más tarde.");
+      });
+    },wait);
+  });
+  window.addEventListener("hashchange",function(){
+    if(location.hash==="#mapa"&&box.classList.contains("map-mode-real")){
+      if(initMap())setTimeout(function(){realMap.invalidateSize({pan:false})},120);
+    }
+  });
+  window.addEventListener("resize",function(){if(realMap&&box.classList.contains("map-mode-real"))realMap.invalidateSize({pan:false})});
+  var saved="real";
+  try{saved=localStorage.getItem("cb_map_mode_v1")||"real"}catch(e){}
+  setMode(saved==="interactive"?"interactive":"real");
+})();
+</script>
 </body>
 </html>
