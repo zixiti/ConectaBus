@@ -847,7 +847,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
   -webkit-backdrop-filter:blur(3px) saturate(.55)!important;
 }
 
-.cb-install-cta-wrap{margin:22px 0 12px;padding:16px;border:1px solid var(--line);border-radius:18px;background:color-mix(in srgb,var(--surface) 72%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}.cb-install-cta{display:block;width:100%;min-height:54px;font-size:1rem;font-weight:750;letter-spacing:.01em}.cb-install-cta-wrap .note{margin:9px 2px 0}
+.cb-install-settings{border-color:var(--line);background:color-mix(in srgb,var(--surface) 78%,transparent)}.cb-install-cta{display:block;width:100%;min-height:54px;font-size:1rem;font-weight:750;letter-spacing:.01em}.cb-install-settings .note{margin:9px 2px}
 </style>
 
 
@@ -2320,10 +2320,6 @@ html,body{background-color:#050505!important}
     </ul>
   </div>
   <p class="note">Datos de demostración. Los recorridos y horarios son de ejemplo.</p>
-  <div class="cb-install-cta-wrap">
-    <button class="btn cb-install-cta" id="cbInstallApp" type="button">⇩ Instalar ConectaBus</button>
-    <p class="note" id="cbInstallHint">Instalá la aplicación en tu teléfono para abrirla más rápido.</p>
-  </div>
 </div>
 
 <!-- INTERIOR -->
@@ -2617,6 +2613,13 @@ html,body{background-color:#050505!important}
       <span class="lab">Contraste</span><div class="chips" id="aHc"></div>
       <span class="lab">Efectos visuales</span><div class="chips" id="aFx"></div>
       <p class="note">Podés apagar animaciones y efectos para ahorrar batería o si preferís una interfaz más tranquila.</p>
+    </div>
+
+    <div class="card cb-install-settings">
+      <div class="cb-section-head"><div><span class="cb-kicker">TU APLICACIÓN</span><h2>Instalar ConectaBus</h2></div><span class="cb-module-icon">⇩</span></div>
+      <p class="note">Agregá ConectaBus a la pantalla de inicio para abrirla como una aplicación, sin tener que buscarla en el navegador.</p>
+      <button class="btn cb-install-cta" id="cbInstallApp" type="button">⇩ Instalar ConectaBus</button>
+      <p class="note" id="cbInstallHint">La opción de instalación aparecerá cuando el navegador la permita. También podés usar el menú ⋮ del navegador.</p>
     </div>
 
     <div class="card cb-animated-skins" id="cbAnimatedSkins">
