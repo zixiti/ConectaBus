@@ -1929,12 +1929,120 @@ html,body{background-color:#050505!important}
   :root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-l94-night-lights{animation:none!important}
 }
 </style>
+
+<style id="cb-backrooms-scene-motion-v4">
+/* Luces de fluorescentes: exclusivas del Nivel 0. Evita halos/rectángulos heredados en otros fondos. */
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-bulb,
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-light,
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-local-dark{
+  display:none!important;visibility:hidden!important;opacity:0!important
+}
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-bulb:before,
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-bulb:after{
+  content:none!important;display:none!important
+}
+/* Movimiento de cámara y ambiente: cada nivel conserva su propio ritmo. */
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop .cb-backrooms-image{animation:cbV4Road 34s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-level399"] #cbBackroomsBackdrop .cb-backrooms-image{animation:cbV4Neon 19s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop .cb-backrooms-image{animation:cbV4Flood 39s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-level38"] #cbBackroomsBackdrop .cb-backrooms-image{animation:cbV4City 31s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-fun"] #cbBackroomsBackdrop .cb-backrooms-image{animation:cbV4Fun 17s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-the-end"] #cbBackroomsBackdrop .cb-backrooms-image{animation:cbV4End 42s ease-in-out infinite alternate!important}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-backrooms-image{
+  animation:cbV4L94Camera 52s ease-in-out infinite alternate!important;
+  background-position:center 52%!important
+}
+@keyframes cbV4Road{0%{transform:scale(1.035) translate3d(-.35%,.15%,0)}100%{transform:scale(1.105) translate3d(.45%,-.35%,0)}}
+@keyframes cbV4Neon{0%{transform:scale(1.04) translateX(-.45%);filter:brightness(.52) saturate(1.18)}100%{transform:scale(1.105) translateX(.5%);filter:brightness(.68) saturate(1.48)}}
+@keyframes cbV4Flood{0%{transform:scale(1.035) translateY(.2%)}100%{transform:scale(1.105) translateY(-.75%)}}
+@keyframes cbV4City{0%{transform:scale(1.04) translateX(-.3%)}100%{transform:scale(1.095) translateX(.45%)}}
+@keyframes cbV4Fun{0%{transform:scale(1.04) translate3d(-.3%,0,0)}100%{transform:scale(1.105) translate3d(.4%,-.7%,0)}}
+@keyframes cbV4End{0%{transform:scale(1.04) translateY(0)}100%{transform:scale(1.105) translateY(-.55%)}}
+@keyframes cbV4L94Camera{0%{transform:scale(1.035) translate3d(-.35%,0,0);background-position:48% 53%}100%{transform:scale(1.105) translate3d(.45%,-.3%,0);background-position:53% 49%}}
+/* Nivel 94: pueblo protagonista, casas con volumen, nubes y ciclo día/noche local. */
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-l94-village{
+  position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden;
+  opacity:1;transition:filter 14s ease
+}
+#cbBackroomsBackdrop .cb-l94-sun{
+  position:absolute;top:8%;right:13%;width:clamp(54px,10vw,112px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 38% 35%,#fff8d7 0 8%,#ffe9a0 36%,rgba(255,213,115,.55) 62%,transparent 74%);
+  filter:blur(.5px);opacity:calc(1 - var(--cb-l94-night));transform:translateY(calc(var(--cb-l94-night)*22px)) scale(calc(1 - var(--cb-l94-night)*.16));
+  transition:opacity 14s ease,transform 14s ease
+}
+#cbBackroomsBackdrop .cb-l94-moon{
+  position:absolute;top:10%;right:16%;width:clamp(42px,7vw,78px);aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#fff 0 8%,#e4e9f4 52%,#aebbd0 74%);
+  box-shadow:0 0 30px rgba(209,225,255,.3);opacity:var(--cb-l94-night);
+  transition:opacity 14s ease
+}
+#cbBackroomsBackdrop .cb-l94-clouds{
+  position:absolute;inset:8% -15% 35%;
+  background:
+    radial-gradient(ellipse 13% 8% at 18% 28%,rgba(255,255,255,.52) 0 55%,transparent 58%),
+    radial-gradient(ellipse 17% 10% at 23% 27%,rgba(255,255,255,.42) 0 55%,transparent 58%),
+    radial-gradient(ellipse 14% 8% at 68% 42%,rgba(255,255,255,.4) 0 55%,transparent 58%),
+    radial-gradient(ellipse 19% 10% at 74% 40%,rgba(255,255,255,.38) 0 55%,transparent 58%);
+  opacity:calc((1 - var(--cb-l94-night))*.78);animation:cbL94CloudTravel 68s linear infinite alternate;
+  transition:opacity 14s ease
+}
+#cbBackroomsBackdrop .cb-l94-village-houses{
+  position:absolute;left:-3%;right:-3%;bottom:-1%;height:37%;
+  background:
+    /* casas lejanas */
+    linear-gradient(150deg,transparent 0 42%,#9d805b 42.5% 44%,transparent 44.5%) 8% 16%/24% 64% no-repeat,
+    linear-gradient(30deg,transparent 0 42%,#8c704f 42.5% 44%,transparent 44.5%) 8% 16%/24% 64% no-repeat,
+    linear-gradient(90deg,#d9b978 0 100%) 8% 46%/24% 45% no-repeat,
+    linear-gradient(150deg,transparent 0 42%,#94714d 42.5% 44%,transparent 44.5%) 39% 7%/27% 76% no-repeat,
+    linear-gradient(30deg,transparent 0 42%,#94714d 42.5% 44%,transparent 44.5%) 39% 7%/27% 76% no-repeat,
+    linear-gradient(90deg,#cba96d 0 100%) 39% 43%/27% 49% no-repeat,
+    linear-gradient(150deg,transparent 0 42%,#82694d 42.5% 44%,transparent 44.5%) 72% 20%/26% 61% no-repeat,
+    linear-gradient(30deg,transparent 0 42%,#82694d 42.5% 44%,transparent 44.5%) 72% 20%/26% 61% no-repeat,
+    linear-gradient(90deg,#d5b77d 0 100%) 72% 48%/26% 42% no-repeat;
+  filter:drop-shadow(0 -8px 13px rgba(30,26,22,.13));
+  opacity:calc(.72 + var(--cb-l94-night)*.22);
+  transform:translateY(calc(var(--cb-l94-night)*2px));
+  transition:opacity 14s ease,filter 14s ease
+}
+#cbBackroomsBackdrop .cb-l94-village-windows{
+  position:absolute;left:0;right:0;bottom:7%;height:24%;
+  background:
+    radial-gradient(ellipse 1.1% 4% at 14% 45%,rgba(255,224,145,.95),transparent 75%),
+    radial-gradient(ellipse 1.1% 4% at 21% 45%,rgba(255,224,145,.95),transparent 75%),
+    radial-gradient(ellipse 1.1% 4% at 47% 40%,rgba(255,224,145,.95),transparent 75%),
+    radial-gradient(ellipse 1.1% 4% at 55% 40%,rgba(255,224,145,.95),transparent 75%),
+    radial-gradient(ellipse 1.1% 4% at 80% 45%,rgba(255,224,145,.95),transparent 75%),
+    radial-gradient(ellipse 1.1% 4% at 88% 45%,rgba(255,224,145,.95),transparent 75%);
+  opacity:var(--cb-l94-night);filter:drop-shadow(0 0 8px rgba(255,190,93,.8));transition:opacity 14s ease
+}
+:root[data-animated-skin="backrooms-level94"][data-l94-phase="night"] #cbBackroomsBackdrop .cb-l94-village-houses,
+:root[data-animated-skin="backrooms-level94"][data-l94-phase="dusk"] #cbBackroomsBackdrop .cb-l94-village-houses{
+  filter:brightness(.57) saturate(.82) drop-shadow(0 -8px 14px rgba(0,0,0,.35))
+}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-l94-night-lights{
+  background:
+    radial-gradient(ellipse 10% 5% at 48% 78%,rgba(255,194,108,.2),transparent 78%),
+    radial-gradient(ellipse at 18% 13%,rgba(13,24,58,.55),transparent 68%)!important
+}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop:after{
+  background:
+    linear-gradient(180deg,rgba(15,27,48,calc(var(--cb-l94-night)*.52)),rgba(9,14,28,calc(var(--cb-l94-night)*.12)) 44%,rgba(4,8,18,calc(var(--cb-l94-night)*.42))),
+    linear-gradient(180deg,rgba(255,219,147,calc((1 - var(--cb-l94-night))*.04)),transparent 54%)!important;
+  transition:background 14s ease
+}
+@keyframes cbL94CloudTravel{0%{transform:translateX(-3%)}100%{transform:translateX(4%)}}
+@media(prefers-reduced-motion:reduce){
+  :root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image,
+  :root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image:before,
+  #cbBackroomsBackdrop .cb-l94-clouds{animation:none!important}
+}
+</style>
 </head>
 <body>
 
 <div id="cbBackroomsBackdrop" aria-hidden="true">
   <div class="cb-backrooms-image"></div>
-  <div class="cb-l94-atmosphere" aria-hidden="true"><span class="cb-l94-day-glow"></span><span class="cb-l94-night-lights"></span></div>
+  <div class="cb-l94-atmosphere" aria-hidden="true"><span class="cb-l94-day-glow"></span><span class="cb-l94-night-lights"></span></div><div class="cb-l94-village" aria-hidden="true"><span class="cb-l94-sun"></span><span class="cb-l94-moon"></span><span class="cb-l94-clouds"></span><span class="cb-l94-village-houses"></span><span class="cb-l94-village-windows"></span></div>
   <div class="cb-backrooms-bulb light-a"></div><div class="cb-backrooms-bulb light-b"></div>
   <div class="cb-backrooms-bulb light-c"></div><div class="cb-backrooms-bulb light-d"></div>
   <div class="cb-backrooms-bulb light-e"></div><div class="cb-backrooms-bulb light-f"></div>
