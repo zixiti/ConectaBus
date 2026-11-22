@@ -1,5 +1,5 @@
 /* ConectaBus · caché de la interfaz para instalaciones HTTPS */
-const CACHE_NAME = "conectabus-shell-v30";
+const CACHE_NAME = "conectabus-shell-v31";
 const INDEX_URL = new URL("./index.html", self.registration.scope).href;
 const CORE_FILES = [INDEX_URL, "./manifest.webmanifest", "./icon.svg", "./icon-192.png", "./icon-512.png", "./assets/backrooms-level0.webp?v=2", "./assets/backrooms-level150.webp", "./assets/backrooms-level150.svg", "./assets/backrooms-level399.svg", "./assets/backrooms-level-minus1.svg", "./assets/backrooms-level38.svg", "./assets/backrooms-fun.svg", "./assets/backrooms-the-end.svg", "./assets/backrooms-level94.webp", "./assets/backrooms-level94.svg", "./assets/backrooms-flower-hall.webp", "./assets/backrooms-the-exit.webp", "./assets/conectabus-flower-bg.webp"];
 self.addEventListener("install", event => {
