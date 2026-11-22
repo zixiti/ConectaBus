@@ -1786,16 +1786,25 @@ html,body{background-color:#050505!important}
 @media(prefers-reduced-motion:reduce){:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image,:root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important;transform:scale(1.025)!important}}
 
 /* CONECTABUS · calles legibles y paneles translúcidos para todas las skins */
-#mapsvg #cbPdfStreetLabels .st{
-  font-size:19px!important;font-weight:850!important;letter-spacing:.35px!important;
-  fill:#273044!important;stroke:rgba(255,255,255,.96)!important;stroke-width:5px!important;
-  stroke-linejoin:round!important;paint-order:stroke fill!important;opacity:1!important;
+/* Calles: contraste cálido sobre el plano claro y oscuro */
+#mapsvg .av-c{stroke:#d2a52e!important;stroke-width:22!important;opacity:.98!important}
+#mapsvg .av-f{stroke:#ffe6a0!important;stroke-width:16!important;opacity:1!important}
+:root[data-theme="dark"] #mapsvg .av-c{stroke:#e5bd55!important}
+:root[data-theme="dark"] #mapsvg .av-f{stroke:#ffe7a3!important}
+/* Los rótulos se mantienen visibles también al alejar el mapa */
+#mapsvg #cbPdfStreetLabels .st,
+#mapsvg.far #cbPdfStreetLabels .st{
+  display:inline!important;visibility:visible!important;opacity:1!important;
+  font-size:26px!important;font-weight:900!important;letter-spacing:.4px!important;
+  fill:#283247!important;stroke:#fff!important;stroke-width:7px!important;
+  stroke-linejoin:round!important;paint-order:stroke fill!important;
 }
-#mapsvg #cbPdfStreetLabels .st.av{
-  font-size:21px!important;font-weight:950!important;fill:#26334a!important;
-  stroke:rgba(255,255,255,.98)!important;stroke-width:6px!important;
+#mapsvg #cbPdfStreetLabels .st.av,
+#mapsvg.far #cbPdfStreetLabels .st.av{
+  font-size:29px!important;font-weight:950!important;fill:#243047!important;
+  stroke:#fff!important;stroke-width:8px!important;
 }
-#mapsvg #cbPdfStreetLabels{opacity:1!important;display:inline!important;visibility:visible!important}
+#mapsvg #cbPdfStreetLabels{opacity:1!important;display:inline!important;visibility:visible!important;pointer-events:none!important}
 :root[data-animated-skin] .card,
 :root[data-animated-skin] .tile,
 :root[data-animated-skin] .dashboard-panel,
@@ -2030,29 +2039,15 @@ html,body{background-color:#050505!important}
               <circle cx="-307" cy="182" r="7" fill="#6b667a"/><circle cx="426" cy="-178" r="7" fill="#6b667a"/>
             </g>
             <g id="cbPdfStreetLabels" aria-label="Calles incorporadas desde el plano municipal de San Rafael">
-              <text class="st av" transform="translate(-920 -120) rotate(-90)">Av. Rivadavia</text>
-              <text class="st av" transform="translate(-444 700) rotate(-90)">Av. 9 de Julio</text>
-              <text class="st av" transform="translate(-172 700) rotate(-90)">Av. Moreno</text>
-              <text class="st av" transform="translate(170 800) rotate(-90)">Av. San Martín</text>
-              <text class="st av" transform="translate(291 800) rotate(-90)">Av. El Libertador</text>
-              <text class="st av" transform="translate(426 800) rotate(-90)">Av. Mitre</text>
-              <text class="st av" transform="translate(558 800) rotate(-90)">Av. Sarmiento</text>
-              <text class="st av" transform="translate(676 800) rotate(-90)">Av. Balloffet</text>
-              <text class="st av" transform="translate(-1041 800) rotate(-90)">Av. Rawson</text>
-              <text class="st av" x="700" y="-310">Av. Zapata</text>
-              <text class="st" x="-760" y="470">Cnel. Suárez</text>
-              <text class="st" x="-760" y="62">Cnel. Day</text>
-              <text class="st" x="-760" y="-53">Gral. Belgrano</text>
-              <text class="st" x="-760" y="-178">Valentín Alsina</text>
-              <text class="st" x="-760" y="182">Chile</text>
-              <text class="st" x="-760" y="600">Corrientes</text>
-              <text class="st" x="-760" y="888">Santa Fe</text>
-              <text class="st" x="-600" y="766">Entre Ríos</text>
-              <text class="st" x="-600" y="1000">Montecaseros</text>
-              <text class="st" x="-600" y="1135">Libertad</text>
-              <text class="st" x="700" y="766">Independencia</text>
-              <text class="st" x="700" y="470">Juan Agustín Maza</text>
-              <text class="st" x="700" y="600">Lorenzo Barcala</text>
+              <!-- Rótulos colocados dentro de la zona urbana visible del plano -->
+              <text class="st av" transform="translate(-444 210) rotate(-90)">Av. 9 de Julio</text>
+              <text class="st av" transform="translate(170 210) rotate(-90)">Av. San Martín</text>
+              <text class="st av" transform="translate(-1045 210) rotate(-90)">Av. Rivadavia</text>
+              <text class="st av" x="-230" y="-310">Av. Zapata</text>
+              <text class="st" x="-410" y="-135">Cnel. Suárez</text>
+              <text class="st" x="-410" y="-20">Cnel. Day</text>
+              <text class="st" x="-410" y="95">Gral. Belgrano</text>
+              <text class="st" x="-410" y="210">Av. Mitre</text>
             </g>           <text class="st av" x="-1000" y="290">Av. Hipólito Yrigoyen</text>
             <text class="st av" x="-650" y="301">Av. Hipólito Yrigoyen</text>
             <text class="st av" x="-250" y="314">Av. Hipólito Yrigoyen</text>
