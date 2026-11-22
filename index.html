@@ -595,7 +595,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--violet);outline-off
 }
 :root[data-animated-skin="backrooms-level0"] .btn:not(.danger){background:var(--violet);color:var(--violet-ink);border-color:rgba(255,236,180,.35)}
 #cbBackroomsBackdrop{display:none;position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#100d05}
-:root[data-animated-skin="backrooms-level0"] #cbBackroomsBackdrop{display:block}
+:root[data-animated-skin] #cbBackroomsBackdrop{display:block}
 #cbBackroomsBackdrop .cb-backrooms-image{
   position:absolute;inset:0;background-image:url("./assets/backrooms-level0.webp?v=2");background-size:cover;background-position:center;
   transform:scale(1.025);transform-origin:52% 48%;filter:brightness(.83) saturate(.86) contrast(1.06);
@@ -3918,7 +3918,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
     },5200+Math.random()*6800);
   }
   function update(){
-    var key="none",on=false,move=false;try{var saved=prefs();saved.animatedSkin="none";localStorage.setItem("cb_prefs",JSON.stringify(saved));}catch(e){}
+    var key=selected(),on=key!=="none",move=on&&motionAllowed();
     if(on)root.setAttribute("data-animated-skin",key);else root.removeAttribute("data-animated-skin");
     root.classList.toggle("cb-backrooms-static",on&&!move);
     var meta=document.querySelector('meta[name="theme-color"]');
