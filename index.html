@@ -3554,10 +3554,29 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   function localToWorld(pt){return [1415+pt[0]*0.9272-pt[1]*0.3746,775+pt[0]*0.3746+pt[1]*0.9272]}
   function pathMetrics(points){var seg=[],total=0;for(var i=1;i<points.length;i++){var a=points[i-1],b=points[i],len=Math.hypot(b[0]-a[0],b[1]-a[1]);seg.push({a:a,b:b,len:len,start:total});total+=len}return {segments:seg,total:total}}
   function atDistance(metrics,d){if(!metrics.segments.length)return [1415,775];d=Math.max(0,Math.min(metrics.total,d));for(var i=0;i<metrics.segments.length;i++){var s=metrics.segments[i];if(d<=s.start+s.len||i===metrics.segments.length-1){var t=s.len?(d-s.start)/s.len:0;return [s.a[0]+(s.b[0]-s.a[0])*t,s.a[1]+(s.b[1]-s.a[1])*t]}}return metrics.segments[metrics.segments.length-1].b}
+  // Ajusta cada tramo a los ejes de calle dibujados en la retícula del plano.
+  // Los giros se realizan en intersecciones y evitan atravesar manzanas.
+  function nearestGrid(value,values){
+    var best=values[0],dist=Math.abs(value-best);
+    for(var i=1;i<values.length;i++){var d=Math.abs(value-values[i]);if(d<dist){best=values[i];dist=d;}}
+    return best;
+  }
+  function snapProfilePoint(pt){return [nearestGrid(pt[0],U),nearestGrid(pt[1],V)];}
+  function snapProfileToRoadGrid(profile){
+    var snapped=profile.map(snapProfilePoint),out=[];
+    function add(p){var last=out[out.length-1];if(!last||last[0]!==p[0]||last[1]!==p[1])out.push(p);}
+    snapped.forEach(function(p,i){
+      if(!i){add(p);return;}
+      var prev=out[out.length-1];
+      if(prev[0]!==p[0]&&prev[1]!==p[1])add([p[0],prev[1]]);
+      add(p);
+    });
+    return out;
+  }
   function drawSelectedRoute(data){
     if(!routeLayer)return;
     routeLayer.innerHTML="";
-    var profile=(urbanProfiles[String(data.r.num)]||urbanProfiles["542"]).slice();
+    var profile=snapProfileToRoadGrid((urbanProfiles[String(data.r.num)]||urbanProfiles["542"]).slice());
     if(selectedDir==="vuelta")profile.reverse();
     simBusProfile=profile.slice();
     var pts=profile.map(localToWorld),metrics=pathMetrics(profile),color=routeColors[String(data.r.num)]||"#6d3fd6";
@@ -3921,8 +3940,23 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
       restoreTimer=setTimeout(function(){restoreTimer=null;restoreLights();scheduleLevel0();},3000+Math.random()*1500);
     },5200+Math.random()*6800);
   }
+  var skinAssets={
+    "backrooms-level0":"./assets/backrooms-level0.webp?v=2",
+    "backrooms-level150":"./assets/backrooms-level150.svg",
+    "backrooms-level399":"./assets/backrooms-level399.svg",
+    "backrooms-level-minus1":"./assets/backrooms-level-minus1.svg",
+    "backrooms-level38":"./assets/backrooms-level38.svg",
+    "backrooms-fun":"./assets/backrooms-fun.svg",
+    "backrooms-the-end":"./assets/backrooms-the-end.svg",
+    "backrooms-level94":"./assets/backrooms-level94.svg"
+  };
+  var backdropImage=document.querySelector("#cbBackroomsBackdrop .cb-backrooms-image");
   function update(){
     var key=selected(),on=key!=="none",move=on&&motionAllowed();
+    if(backdropImage&&on&&skinAssets[key]){
+      backdropImage.style.backgroundImage='url("'+skinAssets[key]+'")';
+      backdropImage.setAttribute("data-skin-image",key);
+    }
     if(on)root.setAttribute("data-animated-skin",key);else root.removeAttribute("data-animated-skin");
     root.classList.toggle("cb-backrooms-static",on&&!move);
     var meta=document.querySelector('meta[name="theme-color"]');
