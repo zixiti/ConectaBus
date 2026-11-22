@@ -2657,18 +2657,11 @@ html,body{background-color:#050505!important}
 
     <div class="card cb-animated-skins" id="cbAnimatedSkins">
       <div class="cb-section-head"><div><span class="cb-kicker">COLECCIÓN ESPECIAL</span><h2>Skins animadas · Backrooms</h2></div><span class="cb-module-icon">◉</span></div>
-      <p class="note">Elegí un nivel para transformar el ambiente de ConectaBus. Cada uno tiene movimiento, iluminación y atmósfera propios. Tu selección queda guardada.</p>
+      <p class="note">Elegí uno de los tres niveles disponibles para transformar el ambiente de ConectaBus. Tu selección queda guardada.</p>
       <div class="cb-level-grid" id="cbBackroomsLevelGrid">
         <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level0"><span class="cb-level-thumb level0"></span><b>Nivel 0</b><small>The Lobby · fluorescentes</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level150"><span class="cb-level-thumb level150"></span><b>Nivel 150</b><small>Pradera de flores · atardecer</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level399"><span class="cb-level-thumb level399"></span><b>Nivel 399</b><small>Paraíso de neón</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level-minus1"><span class="cb-level-thumb levelminus1"></span><b>Nivel -1</b><small>Pasillos en gris</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level38"><span class="cb-level-thumb level38"></span><b>Nivel 38</b><small>Condominios Adoberos · años 90</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-fun"><span class="cb-level-thumb levelfun"></span><b>Level Fun</b><small>Almacén infinito de inflables</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-flower-hall"><span class="cb-level-thumb flowerhall"></span><b>Pasillo Florido</b><small>Jardín interior · nubes y brisa</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-the-exit"><span class="cb-level-thumb theexit"></span><b>The Exit</b><small>Corredor rojo · luces de emergencia</small></button>
-        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-the-end"><span class="cb-level-thumb theend"></span><b>The End</b><small>Biblioteca y terminales CRT</small></button>
         <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level94"><span class="cb-level-thumb level94"></span><b>Nivel 94</b><small>Pueblo de los años 30 y castillo</small></button>
+        <button class="cb-level-pick" type="button" data-backrooms-skin="backrooms-level-minus1"><span class="cb-level-thumb levelminus1"></span><b>Nivel -1</b><small>Pasillos en gris</small></button>
       </div>
       <p class="note" id="cbAnimatedSkinStatus" role="status">No hay ningún fondo Backrooms activado.</p>
       <div class="cb-animated-skin-actions"><button class="btn ghost" type="button" id="cbBackroomsToggle" aria-pressed="false">Desactivar fondo</button></div>
@@ -4351,18 +4344,19 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   var bulbs=Array.prototype.slice.call(document.querySelectorAll("#cbBackroomsBackdrop .cb-backrooms-bulb"));
   var labels={
     "backrooms-level0":"Nivel 0 · El Lobby",
-    "backrooms-level150":"Nivel 150 · Pasillo de flores",
-    "backrooms-level399":"Nivel 399 · Paraíso de neón",
-    "backrooms-level-minus1":"Nivel -1 · Pasillos a escala de grises",
-    "backrooms-level38":"Nivel 38 · Ciudad contaminada",
-    "backrooms-fun":"Level Fun · Fiesta inquietante",
-    "backrooms-flower-hall":"Pasillo Florido · Jardín interior",
-    "backrooms-the-exit":"The Exit · Corredor rojo",
-    "backrooms-the-end":"The End · Biblioteca infinita",
-    "backrooms-level94":"Nivel 94 · Casas del pueblo"
+    "backrooms-level94":"Nivel 94 · Casas del pueblo",
+    "backrooms-level-minus1":"Nivel -1 · Pasillos a escala de grises"
   };
   function prefs(){return window.PR||{};}
-  function selected(){var k=prefs().animatedSkin;return labels[k]?k:"none";}
+  function selected(){
+    var p=prefs(),k=p.animatedSkin;
+    if(labels[k])return k;
+    if(k&&k!=="none"){
+      p.animatedSkin="none";
+      try{localStorage.setItem("cb_prefs",JSON.stringify(p));}catch(e){}
+    }
+    return "none";
+  }
   function active(){return selected()!=="none";}
   function isLevel0(){return selected()==="backrooms-level0";}
   function motionAllowed(){
@@ -4401,15 +4395,8 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
   }
   var skinAssets={
     "backrooms-level0":"./assets/backrooms-level0.webp?v=2",
-    "backrooms-level150":"./assets/backrooms-flower-hall.webp",
-    "backrooms-level399":"./assets/backrooms-level399.svg",
-    "backrooms-level-minus1":"./assets/backrooms-level-minus1.svg",
-    "backrooms-level38":"./assets/backrooms-level38.svg",
-    "backrooms-fun":"./assets/backrooms-fun.svg",
-    "backrooms-the-end":"./assets/backrooms-the-end.svg",
     "backrooms-level94":"./assets/backrooms-level94.webp",
-    "backrooms-flower-hall":"./assets/backrooms-flower-hall.webp",
-    "backrooms-the-exit":"./assets/backrooms-the-exit.webp"
+    "backrooms-level-minus1":"./assets/backrooms-level-minus1.svg"
   };
   var backdropImage=document.querySelector("#cbBackroomsBackdrop .cb-backrooms-image");
   function updateLevel94DayCycle(){
