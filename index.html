@@ -1756,7 +1756,7 @@ html,body{background-color:#050505!important}
 :root[data-animated-skin="backrooms-level38"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.unsplash.com/photo-1632880906599-59908aa9af2f?auto=format&fit=crop&w=1600&q=85")!important;background-position:center 52%!important;filter:brightness(.53) saturate(.58) sepia(.16) contrast(1.18)!important;animation:cbPhoto38 28s ease-in-out infinite alternate!important}
 :root[data-animated-skin="backrooms-fun"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.pexels.com/photos/25359159/pexels-photo-25359159.jpeg?auto=compress&cs=tinysrgb&w=1600")!important;background-position:center 50%!important;filter:brightness(.5) saturate(.78) contrast(1.22)!important;animation:cbPhotoFun 15s ease-in-out infinite alternate!important}
 :root[data-animated-skin="backrooms-the-end"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.stockcake.com/public/8/7/5/875806f1-5b84-4ee3-b772-a3ff110e50f0_medium/endless-liminal-library-stockcake.jpg")!important;background-position:center 50%!important;filter:brightness(.57) saturate(.58) contrast(1.2)!important;animation:cbPhotoEnd 23s ease-in-out infinite alternate!important}
-:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://images.stockcake.com/public/0/f/0/0f074c21-3ebb-4509-9f10-e0a78b4eaeee_medium/floating-enchanted-castle-stockcake.jpg")!important;background-position:center 52%!important;filter:brightness(.62) saturate(.72) contrast(1.14)!important;animation:cbPhoto94 21s steps(7,end) infinite!important}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-backrooms-image{background-image:url("https://cdn.akamai.steamstatic.com/steam/apps/1943950/ss_e28c7dbaaf89268b881dbb6efe453f8063e6d083.1920x1080.jpg?t=1708023314")!important;background-position:center 50%!important;filter:brightness(1.06) saturate(.94) contrast(1.04)!important;animation:cbL94Camera 48s ease-in-out infinite alternate!important}
 :root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop:after{background:linear-gradient(180deg,rgba(6,7,9,.1),rgba(5,5,6,.2) 48%,rgba(0,0,0,.62)),radial-gradient(ellipse at 50% 40%,transparent 12%,rgba(0,0,0,.38) 100%)!important}
 :root[data-animated-skin="backrooms-level399"] #cbBackroomsBackdrop:after{background:linear-gradient(130deg,rgba(37,0,48,.28),rgba(4,9,29,.12) 45%,rgba(0,0,0,.55)),radial-gradient(ellipse at 50% 42%,transparent 12%,rgba(0,0,12,.55) 100%)!important}
 :root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop:after{background:radial-gradient(ellipse at 50% 45%,transparent 5%,rgba(0,0,0,.7) 100%),linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.24))!important}
@@ -1772,7 +1772,7 @@ html,body{background-color:#050505!important}
 .cb-level-thumb.level38{background-image:url("https://images.unsplash.com/photo-1632880906599-59908aa9af2f?auto=format&fit=crop&w=700&q=75")!important}
 .cb-level-thumb.levelfun{background-image:url("https://images.pexels.com/photos/25359159/pexels-photo-25359159.jpeg?auto=compress&cs=tinysrgb&w=700")!important}
 .cb-level-thumb.theend{background-image:url("https://images.stockcake.com/public/8/7/5/875806f1-5b84-4ee3-b772-a3ff110e50f0_medium/endless-liminal-library-stockcake.jpg")!important}
-.cb-level-thumb.level94{background-image:url("https://images.stockcake.com/public/0/f/0/0f074c21-3ebb-4509-9f10-e0a78b4eaeee_medium/floating-enchanted-castle-stockcake.jpg")!important}
+.cb-level-thumb.level94{background-image:url("https://cdn.akamai.steamstatic.com/steam/apps/1943950/ss_e28c7dbaaf89268b881dbb6efe453f8063e6d083.1920x1080.jpg?t=1708023314")!important}
 @keyframes cbPhoto150{0%{transform:scale(1.035) translate3d(-.25%,0,0)}100%{transform:scale(1.095) translate3d(.55%,-.3%,0)}}
 @keyframes cbPhoto399{0%{transform:scale(1.035);filter:brightness(.52) saturate(1.2) hue-rotate(8deg)}100%{transform:scale(1.09);filter:brightness(.68) saturate(1.55) hue-rotate(-8deg)}}
 @keyframes cbPhotoMinus1{0%{transform:scale(1.035) translateY(0)}100%{transform:scale(1.09) translateY(-.65%)}}
@@ -1780,6 +1780,9 @@ html,body{background-color:#050505!important}
 @keyframes cbPhotoFun{0%{transform:scale(1.04) translateY(0)}100%{transform:scale(1.095) translateY(-.8%)}}
 @keyframes cbPhotoEnd{0%,100%{transform:scale(1.04);filter:brightness(.55) saturate(.52)}50%{transform:scale(1.075);filter:brightness(.7) saturate(.65)}}
 @keyframes cbPhoto94{0%,100%{transform:scale(1.04) translateX(0)}50%{transform:scale(1.075) translateX(.35%)}}
+@keyframes cbL94Camera{0%{transform:scale(1.035) translate3d(-.25%,0,0);background-position:48% 50%}100%{transform:scale(1.095) translate3d(.45%,-.35%,0);background-position:52% 48%}}
+@keyframes cbL94Daylight{0%{transform:translateX(-2%) translateY(0);opacity:.46}100%{transform:translateX(2%) translateY(1%);opacity:.72}}
+@keyframes cbL94NightDrift{0%{transform:translateX(-1.5%)}100%{transform:translateX(1.5%)}}
 @keyframes cbPhotoGrain{0%{opacity:.04}50%{opacity:.15}100%{opacity:.07}}
 :root.cb-backrooms-static[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image{animation:none!important;transform:scale(1.025)!important}
 :root.cb-backrooms-static[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-scan{animation:none!important;opacity:0!important}
@@ -1831,11 +1834,107 @@ html,body{background-color:#050505!important}
 }
 
 </style>
+
+<style id="cb-backrooms-scene-motion-v3">
+/* Las lámparas, sus apagones y sus halos pertenecen únicamente al Nivel 0. */
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-bulb,
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-light,
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-local-dark{
+  display:none!important;opacity:0!important;visibility:hidden!important
+}
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-bulb:before,
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]) #cbBackroomsBackdrop .cb-backrooms-bulb:after{
+  content:none!important;display:none!important;opacity:0!important
+}
+:root[data-animated-skin]:not([data-animated-skin="backrooms-level0"]).cb-backrooms-powercut #cbBackroomsBackdrop .cb-backrooms-image{
+  filter:none!important
+}
+/* Volumen ambiental propio de cada escenario; la cámara y las luces ya no son las del Nivel 0. */
+#cbBackroomsBackdrop .cb-backrooms-image{overflow:hidden}
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop .cb-backrooms-image:before,
+:root[data-animated-skin="backrooms-level399"] #cbBackroomsBackdrop .cb-backrooms-image:before,
+:root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop .cb-backrooms-image:before,
+:root[data-animated-skin="backrooms-level38"] #cbBackroomsBackdrop .cb-backrooms-image:before,
+:root[data-animated-skin="backrooms-fun"] #cbBackroomsBackdrop .cb-backrooms-image:before,
+:root[data-animated-skin="backrooms-the-end"] #cbBackroomsBackdrop .cb-backrooms-image:before{
+  content:"";position:absolute;inset:-10%;pointer-events:none;mix-blend-mode:screen;opacity:.58
+}
+:root[data-animated-skin="backrooms-level150"] #cbBackroomsBackdrop .cb-backrooms-image:before{
+  background:radial-gradient(ellipse at 18% 22%,rgba(255,191,117,.28),transparent 40%),linear-gradient(110deg,transparent 35%,rgba(198,204,209,.09) 52%,transparent 72%);
+  animation:cbSceneDust150 27s ease-in-out infinite alternate
+}
+:root[data-animated-skin="backrooms-level399"] #cbBackroomsBackdrop .cb-backrooms-image:before{
+  background:linear-gradient(112deg,transparent 20%,rgba(15,222,255,.22) 44%,transparent 58%),radial-gradient(ellipse at 82% 25%,rgba(255,32,183,.28),transparent 42%);
+  animation:cbSceneNeon399 8s ease-in-out infinite alternate
+}
+:root[data-animated-skin="backrooms-level-minus1"] #cbBackroomsBackdrop .cb-backrooms-image:before{
+  background:radial-gradient(ellipse at 50% 65%,rgba(178,202,216,.18),transparent 56%),linear-gradient(180deg,rgba(5,12,22,.12),transparent 45%);
+  animation:cbSceneMistMinus1 34s ease-in-out infinite alternate
+}
+:root[data-animated-skin="backrooms-level38"] #cbBackroomsBackdrop .cb-backrooms-image:before{
+  background:linear-gradient(105deg,transparent 25%,rgba(255,191,120,.22) 49%,transparent 66%),radial-gradient(ellipse at 75% 25%,rgba(185,116,67,.16),transparent 45%);
+  animation:cbSceneAmber38 29s ease-in-out infinite alternate
+}
+:root[data-animated-skin="backrooms-fun"] #cbBackroomsBackdrop .cb-backrooms-image:before{
+  background:radial-gradient(circle at 18% 24%,rgba(255,83,168,.35),transparent 22%),radial-gradient(circle at 78% 31%,rgba(44,215,255,.28),transparent 25%),linear-gradient(115deg,transparent 38%,rgba(255,225,133,.12),transparent 66%);
+  animation:cbScenePartyFun 12s ease-in-out infinite alternate
+}
+:root[data-animated-skin="backrooms-the-end"] #cbBackroomsBackdrop .cb-backrooms-image:before{
+  background:radial-gradient(ellipse at 50% 30%,rgba(126,193,255,.2),transparent 42%),linear-gradient(90deg,transparent 30%,rgba(95,172,235,.09) 50%,transparent 70%);
+  animation:cbSceneCRTEnd 6s steps(3,end) infinite
+}
+@keyframes cbSceneDust150{0%{transform:translate3d(-2%,0,0);opacity:.35}100%{transform:translate3d(2%,-1%,0);opacity:.68}}
+@keyframes cbSceneNeon399{0%{transform:translateX(-2%);opacity:.3}100%{transform:translateX(2%);opacity:.8}}
+@keyframes cbSceneMistMinus1{0%{transform:translate3d(0,2%,0) scale(1);opacity:.25}100%{transform:translate3d(0,-2%,0) scale(1.08);opacity:.62}}
+@keyframes cbSceneAmber38{0%{transform:translateX(-2%);opacity:.24}100%{transform:translateX(2%);opacity:.58}}
+@keyframes cbScenePartyFun{0%{transform:translate3d(-1%,0,0);opacity:.4}100%{transform:translate3d(1%,1%,0);opacity:.82}}
+@keyframes cbSceneCRTEnd{0%,100%{opacity:.32;filter:brightness(.8)}50%{opacity:.72;filter:brightness(1.3)}}
+
+/* Nivel 94 · pueblo de casas amarillas, colinas y castillo flotante.
+   El ciclo usa la hora local del dispositivo y cambia de día a noche suavemente. */
+:root{--cb-l94-night:0}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-l94-atmosphere{
+  display:block;position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;
+}
+:root:not([data-animated-skin="backrooms-level94"]) #cbBackroomsBackdrop .cb-l94-atmosphere{display:none!important}
+#cbBackroomsBackdrop .cb-l94-day-glow{
+  position:absolute;inset:-12%;
+  background:radial-gradient(ellipse at 77% 14%,rgba(255,236,174,.38),transparent 34%),
+    linear-gradient(180deg,rgba(98,177,255,.07),transparent 52%);
+  opacity:calc(1 - var(--cb-l94-night));animation:cbL94Daylight 42s ease-in-out infinite alternate;
+  transition:opacity 16s ease
+}
+#cbBackroomsBackdrop .cb-l94-night-lights{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 8% 3% at 31% 62%,rgba(255,197,107,.82),transparent 80%),
+    radial-gradient(ellipse 6% 3% at 57% 66%,rgba(255,189,91,.78),transparent 82%),
+    radial-gradient(ellipse 6% 3% at 82% 63%,rgba(255,201,125,.74),transparent 82%),
+    radial-gradient(ellipse 7% 3% at 68% 54%,rgba(255,191,106,.7),transparent 84%),
+    radial-gradient(ellipse at 18% 13%,rgba(13,24,58,.55),transparent 68%);
+  opacity:var(--cb-l94-night);animation:cbL94NightDrift 75s ease-in-out infinite alternate;
+  transition:opacity 16s ease
+}
+:root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop:after{
+  background:linear-gradient(180deg,rgba(12,23,48,calc(var(--cb-l94-night)*.42)),rgba(9,14,28,calc(var(--cb-l94-night)*.16)) 48%,rgba(4,8,18,calc(var(--cb-l94-night)*.34)))!important;
+  transition:background 16s ease
+}
+:root[data-animated-skin="backrooms-level94"] .cb-level-thumb.level94{
+  background-image:url("https://cdn.akamai.steamstatic.com/steam/apps/1943950/ss_e28c7dbaaf89268b881dbb6efe453f8063e6d083.1920x1080.jpg?t=1708023314")!important;
+  background-position:center!important
+}
+@media(prefers-reduced-motion:reduce){
+  :root[data-animated-skin] #cbBackroomsBackdrop .cb-backrooms-image:before,
+  :root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-l94-day-glow,
+  :root[data-animated-skin="backrooms-level94"] #cbBackroomsBackdrop .cb-l94-night-lights{animation:none!important}
+}
+</style>
 </head>
 <body>
 
 <div id="cbBackroomsBackdrop" aria-hidden="true">
   <div class="cb-backrooms-image"></div>
+  <div class="cb-l94-atmosphere" aria-hidden="true"><span class="cb-l94-day-glow"></span><span class="cb-l94-night-lights"></span></div>
   <div class="cb-backrooms-bulb light-a"></div><div class="cb-backrooms-bulb light-b"></div>
   <div class="cb-backrooms-bulb light-c"></div><div class="cb-backrooms-bulb light-d"></div>
   <div class="cb-backrooms-bulb light-e"></div><div class="cb-backrooms-bulb light-f"></div>
@@ -4029,9 +4128,24 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
     "backrooms-level38":"./assets/backrooms-level38.svg",
     "backrooms-fun":"./assets/backrooms-fun.svg",
     "backrooms-the-end":"./assets/backrooms-the-end.svg",
-    "backrooms-level94":"./assets/backrooms-level94.svg"
+    "backrooms-level94":"https://cdn.akamai.steamstatic.com/steam/apps/1943950/ss_e28c7dbaaf89268b881dbb6efe453f8063e6d083.1920x1080.jpg?t=1708023314"
   };
   var backdropImage=document.querySelector("#cbBackroomsBackdrop .cb-backrooms-image");
+  function updateLevel94DayCycle(){
+    if(selected()!=="backrooms-level94"){
+      root.style.removeProperty("--cb-l94-night");
+      root.removeAttribute("data-l94-phase");
+      return;
+    }
+    var now=new Date(),h=now.getHours()+now.getMinutes()/60,night=0,phase="day";
+    if(h<5.5){night=1;phase="night"}
+    else if(h<8){night=1-(h-5.5)/2.5;phase="dawn"}
+    else if(h<17.5){night=0;phase="day"}
+    else if(h<20.5){night=(h-17.5)/3;phase="dusk"}
+    else{night=1;phase="night"}
+    root.style.setProperty("--cb-l94-night",Math.max(0,Math.min(1,night)).toFixed(3));
+    root.setAttribute("data-l94-phase",phase);
+  }
   function update(){
     var key=selected(),on=key!=="none",move=on&&motionAllowed();
     if(backdropImage&&on&&skinAssets[key]){
@@ -4044,6 +4158,7 @@ if(!TRIP.confirmed&&PR.setupReminder!==false){setTimeout(function(){var n=docume
     if(meta)meta.setAttribute("content","#050505");
     stopEffects();
     if(move&&isLevel0())scheduleLevel0();
+    updateLevel94DayCycle();
     var card=document.getElementById("cbAnimatedSkins");if(card)card.classList.toggle("is-active",on);
     document.querySelectorAll("[data-backrooms-skin]").forEach(function(btn){
       var chosen=btn.getAttribute("data-backrooms-skin")===key;
